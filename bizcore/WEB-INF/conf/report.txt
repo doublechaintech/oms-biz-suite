@@ -1,0 +1,28 @@
+
+
+
+=================Execute Report (Model Time 190108T1830) @Tue Jan 08 23:41:21 CST 2019, 14 objects and 111 fields===========================
+
+
+
+ processing: platform
+
+
+**************************************************
+
+platform{
+	fields(5){
+		string	id('ABCDEFGIJK000001'), verb: false, required: true;
+		string	name('Chain eComerce Platform'), verb: false, required: true;
+		string	introduction('new generation of eCommerce platform based on opensource and modern tech'), verb: false, required: true;
+		string	current_version('V1.0'), verb: false, required: true;
+		int	version('2147483647'), verb: false, required: true;
+	}
+	references field(0){
+	}
+} depth=0; isRoot = true
+
+
+
+
+=================================End Report=================================

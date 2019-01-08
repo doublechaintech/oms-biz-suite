@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+	<!-- Enable Annotation based Declarative Transaction Management -->
+	
+	<!-- Creating TransactionManager Bean, since JDBC we are creating of type 
+		DataSourceTransactionManager -->
+	
+	
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" >
+	
+		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+		<property name="url" value="${app.database.jdbcURL}" />
+		<property name="username" value="${app.database.username}" />
+		<property name="password" value="${app.database.password}" />
+		<property name="initialSize" value="${app.database.pool.initialSize}" />
+		<property name="maxActive" value="${app.database.pool.maxActive}" />
+		
+		
+		<property name="testOnBorrow" value="true" />
+		<property name="testWhileIdle" value="true" />
+		<property name="validationQuery" value="SELECT 1" />       
+		<property name="removeAbandonedTimeout" value="55" />
+		<property name="removeAbandoned" value="true"/>
+
+	</bean>
+
+	
+	<bean id="platformDAOBase" class="com.doublechaintech.oms.platform.PlatformJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<bean id="platformDAO" parent="platformDAOBase"></bean>	
+	
+	
+	<bean id="userDomainDAOBase" class="com.doublechaintech.oms.userdomain.UserDomainJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="userWhiteListDAO" ref="userWhiteListDAO" />
+		
+		<property name="secUserDAO" ref="secUserDAO" />
+		
+	</bean>
+	<bean id="userDomainDAO" parent="userDomainDAOBase"></bean>	
+	
+	
+	<bean id="userWhiteListDAOBase" class="com.doublechaintech.oms.userwhitelist.UserWhiteListJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="userDomainDAO" ref="userDomainDAO" />
+	</bean>
+	<bean id="userWhiteListDAO" parent="userWhiteListDAOBase"></bean>	
+	
+	
+	<bean id="secUserDAOBase" class="com.doublechaintech.oms.secuser.SecUserJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="secUserBlockingDAO" ref="secUserBlockingDAO" /><property name="userDomainDAO" ref="userDomainDAO" />
+		<property name="userAppDAO" ref="userAppDAO" />
+		
+		<property name="loginHistoryDAO" ref="loginHistoryDAO" />
+		
+	</bean>
+	<bean id="secUserDAO" parent="secUserDAOBase"></bean>	
+	
+	
+	<bean id="secUserBlockingDAOBase" class="com.doublechaintech.oms.secuserblocking.SecUserBlockingJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="secUserDAO" ref="secUserDAO" />
+		
+	</bean>
+	<bean id="secUserBlockingDAO" parent="secUserBlockingDAOBase"></bean>	
+	
+	
+	<bean id="userAppDAOBase" class="com.doublechaintech.oms.userapp.UserAppJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="secUserDAO" ref="secUserDAO" />
+		<property name="listAccessDAO" ref="listAccessDAO" />
+		
+		<property name="objectAccessDAO" ref="objectAccessDAO" />
+		
+	</bean>
+	<bean id="userAppDAO" parent="userAppDAOBase"></bean>	
+	
+	
+	<bean id="listAccessDAOBase" class="com.doublechaintech.oms.listaccess.ListAccessJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="userAppDAO" ref="userAppDAO" />
+	</bean>
+	<bean id="listAccessDAO" parent="listAccessDAOBase"></bean>	
+	
+	
+	<bean id="objectAccessDAOBase" class="com.doublechaintech.oms.objectaccess.ObjectAccessJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="userAppDAO" ref="userAppDAO" />
+	</bean>
+	<bean id="objectAccessDAO" parent="objectAccessDAOBase"></bean>	
+	
+	
+	<bean id="loginHistoryDAOBase" class="com.doublechaintech.oms.loginhistory.LoginHistoryJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="secUserDAO" ref="secUserDAO" />
+	</bean>
+	<bean id="loginHistoryDAO" parent="loginHistoryDAOBase"></bean>	
+	
+	
+	<bean id="genericFormDAOBase" class="com.doublechaintech.oms.genericform.GenericFormJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="formMessageDAO" ref="formMessageDAO" />
+		
+		<property name="formFieldMessageDAO" ref="formFieldMessageDAO" />
+		
+		<property name="formFieldDAO" ref="formFieldDAO" />
+		
+		<property name="formActionDAO" ref="formActionDAO" />
+		
+	</bean>
+	<bean id="genericFormDAO" parent="genericFormDAOBase"></bean>	
+	
+	
+	<bean id="formMessageDAOBase" class="com.doublechaintech.oms.formmessage.FormMessageJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="genericFormDAO" ref="genericFormDAO" />
+	</bean>
+	<bean id="formMessageDAO" parent="formMessageDAOBase"></bean>	
+	
+	
+	<bean id="formFieldMessageDAOBase" class="com.doublechaintech.oms.formfieldmessage.FormFieldMessageJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="genericFormDAO" ref="genericFormDAO" />
+	</bean>
+	<bean id="formFieldMessageDAO" parent="formFieldMessageDAOBase"></bean>	
+	
+	
+	<bean id="formFieldDAOBase" class="com.doublechaintech.oms.formfield.FormFieldJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="genericFormDAO" ref="genericFormDAO" />
+	</bean>
+	<bean id="formFieldDAO" parent="formFieldDAOBase"></bean>	
+	
+	
+	<bean id="formActionDAOBase" class="com.doublechaintech.oms.formaction.FormActionJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="genericFormDAO" ref="genericFormDAO" />
+	</bean>
+	<bean id="formActionDAO" parent="formActionDAOBase"></bean>	
+	
+
+
+	<bean id="DAOGroupBase" class="com.doublechaintech.oms.DAOGroup">
+		<property name="platformDAO" ref="platformDAO"/>
+		<property name="userDomainDAO" ref="userDomainDAO"/>
+		<property name="userWhiteListDAO" ref="userWhiteListDAO"/>
+		<property name="secUserDAO" ref="secUserDAO"/>
+		<property name="secUserBlockingDAO" ref="secUserBlockingDAO"/>
+		<property name="userAppDAO" ref="userAppDAO"/>
+		<property name="listAccessDAO" ref="listAccessDAO"/>
+		<property name="objectAccessDAO" ref="objectAccessDAO"/>
+		<property name="loginHistoryDAO" ref="loginHistoryDAO"/>
+		<property name="genericFormDAO" ref="genericFormDAO"/>
+		<property name="formMessageDAO" ref="formMessageDAO"/>
+		<property name="formFieldMessageDAO" ref="formFieldMessageDAO"/>
+		<property name="formFieldDAO" ref="formFieldDAO"/>
+		<property name="formActionDAO" ref="formActionDAO"/>
+	</bean>
+	<bean id="DAOGroup" parent="DAOGroupBase"></bean>
+</beans>
+
+
+
+
+
+
+
+
