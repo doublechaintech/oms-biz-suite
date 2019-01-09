@@ -1,7 +1,7 @@
 //savefileifnotexist
 export const SYSTEM_SHORT_NAME = "oms" //Use for requssting different apps
-export const SYSTEM_LOCAL_NAME = "null" 
-export const BUILD_TIIME="Wed Jan 09 22:21:04 CST 2019"
+export const SYSTEM_LOCAL_NAME = "Order Services" 
+export const BUILD_TIIME="Wed Jan 09 23:44:04 CST 2019"
 export const MEDIA_UPLOAD_URL="https://www.doublechaintech.com/mss/upload.html"
 export const MEDIA_PREFIX="https://www.doublechaintech.com/mss/"
 
