@@ -1,5 +1,5 @@
 <?xml version='1.0' ?>
-<root org="doublechaintech">
+<root org="doublechaintech" chinese_name="Order Services" english_name="Order Services">
 
 	<platform
 		name="Chain eComerce Platform"

@@ -77,7 +77,7 @@ public class OmsUserContextImpl extends UserContextImpl implements OmsUserContex
 	public Map<String,String> getLocaleMap(){
 		
 		init();
-		return chineseMap;
+		return englishMap;
 		
 	}
 	
