@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.terapico.caf.viewcomponent.ButtonViewComponent;
 import com.terapico.caf.viewcomponent.FilterTabsViewComponent;
 import com.terapico.caf.viewpage.SerializeScope;
 
@@ -210,6 +211,9 @@ public abstract class BaseViewPage extends HashMap<String, Object> {
 				dataList.remove(dataList.size() - 1);
 				addFieldToOwner(metaData, fieldScope, X_NEXT_PAGE_URL,
 						dataList.valueByKey(X_NEXT_PAGE_URL));
+				if (resultList instanceof List) {
+					((List) resultList).remove(((List) resultList).size() - 1);
+				}
 			} else {
 				metaData.put("hasNextPage", false);
 			}
@@ -229,11 +233,16 @@ public abstract class BaseViewPage extends HashMap<String, Object> {
 		if (object instanceof FilterTabsViewComponent) {
 			return new FilterTabsSerializer();
 		}
+		if (object instanceof BaseOmsFormProcessor) {
+			return new FormProcessorSerializer();
+		}
+		if (object instanceof ButtonViewComponent) {
+			return new ButtonViewComponentSerializer();
+		}
 		return null;
 	}
 
 	protected class FilterTabsSerializer implements CustomSerializer {
-
 		@Override
 		public Object serialize(SerializeScope serializeScope, Object value, String path) {
 			FilterTabsViewComponent tabViewCmpt = (FilterTabsViewComponent) value;
@@ -258,9 +267,34 @@ public abstract class BaseViewPage extends HashMap<String, Object> {
 			}
 			return result;
 		}
-
 	}
 
+	protected class FormProcessorSerializer implements CustomSerializer {
+		@Override
+		public Object serialize(SerializeScope serializeScope, Object value, String path) {
+			BaseOmsFormProcessor form = (BaseOmsFormProcessor) value;
+			if (form == null) {
+				return null;
+			}
+			return form.mapToUiForm(userContext);
+		}
+	}
+	
+	protected class ButtonViewComponentSerializer implements CustomSerializer {
+		@Override
+		public Object serialize(SerializeScope serializeScope, Object value, String path) {
+			ButtonViewComponent btn = (ButtonViewComponent) value;
+			SerializeScope fieldScope = SerializeScope.EXCLUDE();
+			Map<String, Object> resultData = new HashMap<>();
+			addFieldToOwner(resultData, fieldScope, "callbackUrl", btn.getCallbackUrl());
+			addFieldToOwner(resultData, fieldScope, "title", btn.getContent());
+			addFieldToOwner(resultData, fieldScope, "imageUrl", btn.getImageUrl());
+			addFieldToOwner(resultData, fieldScope, "linkToUrl", btn.getLinkToUrl());
+			addFieldToOwner(resultData, fieldScope, "code", btn.getTag());
+			addFieldToOwner(resultData, fieldScope, "type", btn.getType());
+			return resultData;
+		}
+	}
 }
 
 

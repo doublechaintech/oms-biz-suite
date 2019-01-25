@@ -268,8 +268,11 @@ public class BaseChecker {
 	
 	protected void checkDateTime(Date value, Date minDate, Date maxDate, String propertyKey) {
 		this.checkDateRange(value, minDate, maxDate, propertyKey);
-		
 	}
+	protected void checkDateFuture(Date value, Date minDate, Date maxDate, String propertyKey) {
+		this.checkDateRange(value, minDate, maxDate, propertyKey);
+	}
+	
 	protected void checkDateRange(Date value, Date minDate,
 			Date maxDate, String propertyKey) {
 		if(value == null){
