@@ -270,11 +270,13 @@ public abstract class BaseViewPage extends HashMap<String, Object> {
 	protected class FormProcessorSerializer implements CustomSerializer {
 		@Override
 		public Object serialize(SerializeScope serializeScope, Object value, String path) {
+			/*
 			BaseOmsFormProcessor form = (BaseOmsFormProcessor) value;
 			if (form == null) {
 				return null;
 			}
-			return form.mapToUiForm(userContext);
+			return form.mapToUiForm(userContext);*/
+			return null;
 		}
 	}
 	
