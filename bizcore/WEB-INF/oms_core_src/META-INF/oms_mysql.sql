@@ -203,13 +203,13 @@ insert into user_white_list_data values ('UWL000003','clariones','tester;ios-spo
 insert into user_white_list_data values ('UWL000004','13808188512','tester;ios-spokesperson0004','UD000001','1');
 
 	
-insert into sec_user_data values ('SU000001','login','13900000001','','C183EC89F92A462CF45B95504792EC4625E847C90536EEFE512D1C9DB8602E95','0','2019-01-15 15:27:46','2019-01-21 02:04:22','UD000001',NULL,'BLOCKED','1');
-insert into sec_user_data values ('SU000002','login0002','13900000002','suddy_chang@163.com','AC2F95628244C6975EB2C36942EA879ED93D93F5895EF3157733E4629FA86B92','9999999','2019-01-20 19:00:43','2019-01-11 18:09:55','UD000001',NULL,'BLOCKED0002','1');
-insert into sec_user_data values ('SU000003','login0003','13900000003','','1A39AE05E011CF4B6ADE19307698831F4303CEB3FF5A9E21EEC0B21FB19B1050','0','2019-01-09 01:37:38','2019-01-13 17:11:00','UD000001',NULL,'BLOCKED0003','1');
-insert into sec_user_data values ('SU000004','login0004','13900000004','suddy_chang@163.com','331D0B81C261072AB3E01D2D09A3D1F9B03F1E5F095D6BF7284F32BF85135D59','9999999','2019-01-08 00:54:29','2019-01-13 03:25:07','UD000001',NULL,'BLOCKED0004','1');
+insert into sec_user_data values ('SU000001','login','13900000001','','C183EC89F92A462CF45B95504792EC4625E847C90536EEFE512D1C9DB8602E95','0','2019-01-18 07:41:55','2019-01-17 08:07:11','UD000001',NULL,'BLOCKED','1');
+insert into sec_user_data values ('SU000002','login0002','13900000002','suddy_chang@163.com','AC2F95628244C6975EB2C36942EA879ED93D93F5895EF3157733E4629FA86B92','9999999','2019-01-13 21:05:36','2019-01-11 01:19:19','UD000001',NULL,'BLOCKED0002','1');
+insert into sec_user_data values ('SU000003','login0003','13900000003','','1A39AE05E011CF4B6ADE19307698831F4303CEB3FF5A9E21EEC0B21FB19B1050','0','2019-01-11 12:34:02','2019-01-20 01:35:12','UD000001',NULL,'BLOCKED0003','1');
+insert into sec_user_data values ('SU000004','login0004','13900000004','suddy_chang@163.com','331D0B81C261072AB3E01D2D09A3D1F9B03F1E5F095D6BF7284F32BF85135D59','9999999','2019-01-16 20:57:51','2019-01-22 22:49:16','UD000001',NULL,'BLOCKED0004','1');
 
 	
-insert into sec_user_blocking_data values ('SUB000001','currentUser()','2019-01-23 10:23:08','这个用户多次发送违反社区的帖子，现在把他给屏蔽了','1');
+insert into sec_user_blocking_data values ('SUB000001','currentUser()','2019-01-09 18:51:02','这个用户多次发送违反社区的帖子，现在把他给屏蔽了','1');
 
 	
 insert into user_app_data values ('UA000001','审车平台','SU000001','users',1,'MXWR','CarInspectionPlatform','CIP000001','/link/to/app','1');
@@ -362,22 +362,22 @@ insert into object_access_data values ('OA000063','控制访问列表10063','Fra
 insert into object_access_data values ('OA000064','控制访问列表10064','AccountSet','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','levelOneCategoryList','UA000016','1');
 
 	
-insert into login_history_data values ('LH000001','2019-01-04 18:04:08','192.168.1.1','登陆成功','SU000001','1');
-insert into login_history_data values ('LH000002','2019-01-16 10:04:06','192.168.1.2','登陆成功0002','SU000001','1');
-insert into login_history_data values ('LH000003','2019-01-20 15:50:52','192.168.1.1','登陆成功0003','SU000001','1');
-insert into login_history_data values ('LH000004','2019-01-16 05:55:40','192.168.1.2','登陆成功0004','SU000001','1');
-insert into login_history_data values ('LH000005','2019-01-16 09:55:56','192.168.1.1','登陆成功0005','SU000002','1');
-insert into login_history_data values ('LH000006','2019-01-18 21:13:56','192.168.1.2','登陆成功0006','SU000002','1');
-insert into login_history_data values ('LH000007','2019-01-04 12:51:24','192.168.1.1','登陆成功0007','SU000002','1');
-insert into login_history_data values ('LH000008','2019-01-22 08:01:33','192.168.1.2','登陆成功0008','SU000002','1');
-insert into login_history_data values ('LH000009','2019-01-06 04:47:00','192.168.1.1','登陆成功0009','SU000003','1');
-insert into login_history_data values ('LH000010','2019-01-06 05:57:01','192.168.1.2','登陆成功0010','SU000003','1');
-insert into login_history_data values ('LH000011','2019-01-08 05:02:23','192.168.1.1','登陆成功0011','SU000003','1');
-insert into login_history_data values ('LH000012','2019-01-13 07:03:07','192.168.1.2','登陆成功0012','SU000003','1');
-insert into login_history_data values ('LH000013','2019-01-05 11:16:33','192.168.1.1','登陆成功0013','SU000004','1');
-insert into login_history_data values ('LH000014','2019-01-19 18:04:12','192.168.1.2','登陆成功0014','SU000004','1');
-insert into login_history_data values ('LH000015','2019-01-19 17:40:19','192.168.1.1','登陆成功0015','SU000004','1');
-insert into login_history_data values ('LH000016','2019-01-14 17:59:55','192.168.1.2','登陆成功0016','SU000004','1');
+insert into login_history_data values ('LH000001','2019-01-25 16:09:24','192.168.1.1','登陆成功','SU000001','1');
+insert into login_history_data values ('LH000002','2019-01-04 15:50:54','192.168.1.2','登陆成功0002','SU000001','1');
+insert into login_history_data values ('LH000003','2019-01-23 10:10:01','192.168.1.1','登陆成功0003','SU000001','1');
+insert into login_history_data values ('LH000004','2019-01-08 01:33:49','192.168.1.2','登陆成功0004','SU000001','1');
+insert into login_history_data values ('LH000005','2019-01-13 18:16:11','192.168.1.1','登陆成功0005','SU000002','1');
+insert into login_history_data values ('LH000006','2019-01-24 06:06:34','192.168.1.2','登陆成功0006','SU000002','1');
+insert into login_history_data values ('LH000007','2019-01-14 21:13:30','192.168.1.1','登陆成功0007','SU000002','1');
+insert into login_history_data values ('LH000008','2019-01-21 23:52:50','192.168.1.2','登陆成功0008','SU000002','1');
+insert into login_history_data values ('LH000009','2019-01-12 08:59:16','192.168.1.1','登陆成功0009','SU000003','1');
+insert into login_history_data values ('LH000010','2019-01-22 13:01:36','192.168.1.2','登陆成功0010','SU000003','1');
+insert into login_history_data values ('LH000011','2019-01-04 23:00:28','192.168.1.1','登陆成功0011','SU000003','1');
+insert into login_history_data values ('LH000012','2019-01-25 21:08:16','192.168.1.2','登陆成功0012','SU000003','1');
+insert into login_history_data values ('LH000013','2019-01-20 09:58:10','192.168.1.1','登陆成功0013','SU000004','1');
+insert into login_history_data values ('LH000014','2019-01-10 06:05:26','192.168.1.2','登陆成功0014','SU000004','1');
+insert into login_history_data values ('LH000015','2019-01-21 21:21:20','192.168.1.1','登陆成功0015','SU000004','1');
+insert into login_history_data values ('LH000016','2019-01-20 22:00:44','192.168.1.2','登陆成功0016','SU000004','1');
 
 	
 insert into generic_form_data values ('GF000001','登记输入单','姓名就是你身份证上的名字','1');
@@ -518,13 +518,13 @@ delete from user_app_data;
 
 */
 
-insert into sec_user_data values('SU000001','u000001','13900000001','1000001@qq.com','258D9BB89BBC1F2A6CDDD3A4CB300E6CD9B83F3FC9984619DF1A59F6051F1F44','9292993','2019-09-09 09:09:09','2019-09-09 09:09:09','UD000001',NULL,'INIT',1);
+insert into sec_user_data values('SU000001','User000001','13900000001','1000001@qq.com','258D9BB89BBC1F2A6CDDD3A4CB300E6CD9B83F3FC9984619DF1A59F6051F1F44','9292993','2019-09-09 09:09:09','2019-09-09 09:09:09','UD000001',NULL,'INIT',1);
 insert into user_app_data values('UA000001','Platform','SU000001','at',1,'MXWR','Platform','P000001','/link/to/app','1'); -- REFER COUNT: 0
 insert into user_app_data values('UA000002','My Account','SU000001','lock',1,'MXWR','SecUser','SU000001','/link/to/app','1'); -- REFER COUNT: 0
-insert into sec_user_data values('SU000002','u000002','13900000002','1000002@qq.com','7FEABCC19D638787655F9FFC2C22755D5771184D85D000147D643D22F6617F7B','9292993','2019-09-09 09:09:09','2019-09-09 09:09:09','UD000001',NULL,'INIT',1);
+insert into sec_user_data values('SU000002','User000002','13900000002','1000002@qq.com','7FEABCC19D638787655F9FFC2C22755D5771184D85D000147D643D22F6617F7B','9292993','2019-09-09 09:09:09','2019-09-09 09:09:09','UD000001',NULL,'INIT',1);
 insert into user_app_data values('UA000003','User Domain','SU000002','user',1,'MXWR','UserDomain','UD000001','/link/to/app','1'); -- REFER COUNT: 2
 insert into user_app_data values('UA000004','My Account','SU000002','lock',1,'MXWR','SecUser','SU000002','/link/to/app','1'); -- REFER COUNT: 2
-insert into sec_user_data values('SU000003','u000003','13900000003','1000003@qq.com','8169C17063461B0B0CC210CE5EF682E9517A19170F7DCA3C76170229D765DE7A','9292993','2019-09-09 09:09:09','2019-09-09 09:09:09','UD000001',NULL,'INIT',1);
+insert into sec_user_data values('SU000003','User000003','13900000003','1000003@qq.com','8169C17063461B0B0CC210CE5EF682E9517A19170F7DCA3C76170229D765DE7A','9292993','2019-09-09 09:09:09','2019-09-09 09:09:09','UD000001',NULL,'INIT',1);
 insert into user_app_data values('UA000005','Sec User Blocking','SU000003','user',1,'MXWR','SecUserBlocking','SUB000001','/link/to/app','1'); -- REFER COUNT: 1
 insert into user_app_data values('UA000006','My Account','SU000003','lock',1,'MXWR','SecUser','SU000003','/link/to/app','1'); -- REFER COUNT: 1
 
