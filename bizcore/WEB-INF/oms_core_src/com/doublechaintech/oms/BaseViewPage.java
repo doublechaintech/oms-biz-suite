@@ -233,7 +233,11 @@ public abstract class BaseViewPage extends HashMap<String, Object> {
 		if (object instanceof FilterTabsViewComponent) {
 			return new FilterTabsSerializer();
 		}
-
+		/*
+		if (object instanceof BaseOmsFormProcessor) {
+			return new FormProcessorSerializer();
+		}
+		*/
 		if (object instanceof ButtonViewComponent) {
 			return new ButtonViewComponentSerializer();
 		}
