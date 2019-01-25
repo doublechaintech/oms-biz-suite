@@ -31,6 +31,7 @@ import GlobalFooter from '../../components/GlobalFooter';
 import GlobalComponents from '../../custcomponents';
 
 import PermissionSettingService from '../../permission/PermissionSetting.service'
+import appLocaleName from '../../common/Locale.tool'
 
 const  {  filterForMenuPermission } = PermissionSettingService
 
@@ -76,9 +77,7 @@ const query = {
 class UserDomainBizApp extends React.PureComponent {
   constructor(props) {
     super(props)
-    // 把一级 Layout 的 children 作为菜单项
-    // this.menus = getNavData().reduce((arr, current) => arr.concat(current.children), [])
-    this.state = {
+     this.state = {
       openKeys: this.getDefaultCollapsedSubMenus(props),
     }
   }
@@ -117,7 +116,7 @@ class UserDomainBizApp extends React.PureComponent {
     const menuData = sessionObject('menuData')
     const targetApp = sessionObject('targetApp')
 	const {objectId}=targetApp;
-  
+  	const userContext = null
     return (
       
 		  <Menu
@@ -133,22 +132,22 @@ class UserDomainBizApp extends React.PureComponent {
            
 
              <Menu.Item key="dashboard">
-               <Link to={`/userDomain/${this.props.userDomain.id}/dashboard`}><Icon type="dashboard" /><span>仪表板</span></Link>
+               <Link to={`/userDomain/${this.props.userDomain.id}/dashboard`}><Icon type="dashboard" /><span>{appLocaleName(userContext,"Dashboard")}</span></Link>
              </Menu.Item>
              
 		 <Menu.Item key="homepage">
-               <Link to={"/home"}><Icon type="home" /><span>回到主页</span></Link>
+               <Link to={"/home"}><Icon type="home" /><span>{appLocaleName(userContext,"Home")}</span></Link>
              </Menu.Item>
              
              
          {filteredMenuItems(targetObject,this).map((item)=>(<Menu.Item key={item.name}>
-          <Link to={`/${menuData.menuFor}/${objectId}/list/${item.name}/${item.displayName}列表`}>
+          <Link to={`/${menuData.menuFor}/${objectId}/list/${item.name}/${item.displayName}${appLocaleName(userContext,"List")}`}>
           <Icon type="bars" /><span>{item.displayName}</span>
           </Link>
         </Menu.Item>))}
        
        <Menu.Item key="preference">
-               <Link to={`/userDomain/${this.props.userDomain.id}/preference`}><Icon type="setting" /><span>设置</span></Link>
+               <Link to={`/userDomain/${this.props.userDomain.id}/preference`}><Icon type="setting" /><span>{appLocaleName(userContext,"Preference")}</span></Link>
              </Menu.Item>
       
            </Menu>
@@ -160,6 +159,7 @@ class UserDomainBizApp extends React.PureComponent {
 
   getUserWhiteListSearch = () => {
     const {UserWhiteListSearch} = GlobalComponents;
+    const userContext = null
     return connect(state => ({
       rule: state.rule,
       name: "User White List",
@@ -176,11 +176,12 @@ class UserDomainBizApp extends React.PureComponent {
       owner: { type: '_userDomain', id: state._userDomain.id, 
       referenceName: 'domain', 
       listName: 'userWhiteListList', ref:state._userDomain, 
-      listDisplayName: 'User White List列表' }, // this is for model namespace and
+      listDisplayName: appLocaleName(userContext,"List") }, // this is for model namespace and
     }))(UserWhiteListSearch)
   }
   getUserWhiteListCreateForm = () => {
    	const {UserWhiteListCreateForm} = GlobalComponents;
+   	const userContext = null
     return connect(state => ({
       rule: state.rule,
       role: "userWhiteList",
@@ -190,22 +191,24 @@ class UserDomainBizApp extends React.PureComponent {
       currentPage: state._userDomain.userWhiteListCurrentPageNumber,
       searchFormParameters: state._userDomain.userWhiteListSearchFormParameters,
       loading: state._userDomain.loading,
-      owner: { type: '_userDomain', id: state._userDomain.id, referenceName: 'domain', listName: 'userWhiteListList', ref:state._userDomain, listDisplayName: 'User White List列表'}, // this is for model namespace and
+      owner: { type: '_userDomain', id: state._userDomain.id, referenceName: 'domain', listName: 'userWhiteListList', ref:state._userDomain, listDisplayName: appLocaleName(userContext,"List")}, // this is for model namespace and
     }))(UserWhiteListCreateForm)
   }
   
   getUserWhiteListUpdateForm = () => {
+    const userContext = null
   	const {UserWhiteListUpdateForm} = GlobalComponents;
     return connect(state => ({
       selectedRows: state._userDomain.selectedRows,
       role: "userWhiteList",
       currentUpdateIndex: state._userDomain.currentUpdateIndex,
-      owner: { type: '_userDomain', id: state._userDomain.id, listName: 'userWhiteListList', ref:state._userDomain, listDisplayName: 'User White List列表' }, // this is for model namespace and
+      owner: { type: '_userDomain', id: state._userDomain.id, listName: 'userWhiteListList', ref:state._userDomain, listDisplayName: appLocaleName(userContext,"List") }, // this is for model namespace and
     }))(UserWhiteListUpdateForm)
   }
 
   getSecUserSearch = () => {
     const {SecUserSearch} = GlobalComponents;
+    const userContext = null
     return connect(state => ({
       rule: state.rule,
       name: "Sec User",
@@ -222,11 +225,12 @@ class UserDomainBizApp extends React.PureComponent {
       owner: { type: '_userDomain', id: state._userDomain.id, 
       referenceName: 'domain', 
       listName: 'secUserList', ref:state._userDomain, 
-      listDisplayName: 'Sec User列表' }, // this is for model namespace and
+      listDisplayName: appLocaleName(userContext,"List") }, // this is for model namespace and
     }))(SecUserSearch)
   }
   getSecUserCreateForm = () => {
    	const {SecUserCreateForm} = GlobalComponents;
+   	const userContext = null
     return connect(state => ({
       rule: state.rule,
       role: "secUser",
@@ -236,17 +240,18 @@ class UserDomainBizApp extends React.PureComponent {
       currentPage: state._userDomain.secUserCurrentPageNumber,
       searchFormParameters: state._userDomain.secUserSearchFormParameters,
       loading: state._userDomain.loading,
-      owner: { type: '_userDomain', id: state._userDomain.id, referenceName: 'domain', listName: 'secUserList', ref:state._userDomain, listDisplayName: 'Sec User列表'}, // this is for model namespace and
+      owner: { type: '_userDomain', id: state._userDomain.id, referenceName: 'domain', listName: 'secUserList', ref:state._userDomain, listDisplayName: appLocaleName(userContext,"List")}, // this is for model namespace and
     }))(SecUserCreateForm)
   }
   
   getSecUserUpdateForm = () => {
+    const userContext = null
   	const {SecUserUpdateForm} = GlobalComponents;
     return connect(state => ({
       selectedRows: state._userDomain.selectedRows,
       role: "secUser",
       currentUpdateIndex: state._userDomain.currentUpdateIndex,
-      owner: { type: '_userDomain', id: state._userDomain.id, listName: 'secUserList', ref:state._userDomain, listDisplayName: 'Sec User列表' }, // this is for model namespace and
+      owner: { type: '_userDomain', id: state._userDomain.id, listName: 'secUserList', ref:state._userDomain, listDisplayName: appLocaleName(userContext,"List") }, // this is for model namespace and
     }))(SecUserUpdateForm)
   }
 
@@ -315,16 +320,11 @@ class UserDomainBizApp extends React.PureComponent {
      // const { collapsed, fetchingNotices,loading } = this.props
      const { collapsed } = this.props
      const { breadcrumb }  = this.props
-
-     //const {UserDomainEditDetail} = GlobalComponents
-     //const {UserDomainViewDetail} = GlobalComponents
-     
-     
+  
      const targetApp = sessionObject('targetApp')
      const currentBreadcrumb =sessionObject(targetApp.id)
+     const userContext = null
      
-     
-     // Don't show popup menu when it is been collapsed
      const menuProps = collapsed ? {} : {
        openKeys: this.state.openKeys,
      }
@@ -346,7 +346,7 @@ class UserDomainBizApp extends React.PureComponent {
          </div>
           <div className={styles.right}  >
           <Button type="primary"  icon="logout" onClick={()=>this.logout()}>
-          退出</Button>
+          {appLocaleName(userContext,"Exit")}</Button>
           </div>
           
         </Header>

@@ -20,7 +20,7 @@ import DescriptionList from '../../components/DescriptionList';
 import ImagePreview from '../../components/ImagePreview';
 import GlobalComponents from '../../custcomponents';
 import DashboardTool from '../../common/Dashboard.tool'
-
+import appLocaleName from '../../common/Locale.tool'
 
 const {aggregateDataset,calcKey, defaultHideCloseTrans,
   defaultImageListOf,defaultSettingListOf,defaultBuildTransferModal,
@@ -81,13 +81,13 @@ const internalSummaryOf = (listAccess,targetComponent) =>{
 	
 	
 	const {ListAccessService} = GlobalComponents
-	
+	const userContext = null
 	return (
 	<DescriptionList className={styles.headerList} size="small" col="4">
 <Description term="Id">{listAccess.id}</Description> 
 <Description term="Name">{listAccess.name}</Description> 
 <Description term="Internal Name">{listAccess.internalName}</Description> 
-<Description term="App">{listAccess.app==null?"未分配":listAccess.app.displayName}
+<Description term="App">{listAccess.app==null?appLocaleName(userContext,"NotAssigned"):listAccess.app.displayName}
  <Icon type="swap" onClick={()=>
   showTransferModel(targetComponent,"App","userApp",ListAccessService.requestCandidateApp,
 	      ListAccessService.transferToAnotherApp,"anotherAppId",listAccess.app?listAccess.app.id:"")} 
@@ -108,7 +108,7 @@ class ListAccessDashboard extends Component {
     candidateReferenceList: {},
     candidateServiceName:"",
     candidateObjectType:"city",
-    targetLocalName:"城市",
+    targetLocalName:"",
     transferServiceName:"",
     currentValue:"",
     transferTargetParameterName:"",  
@@ -135,7 +135,6 @@ class ListAccessDashboard extends Component {
     
       	],
   	};
-    //下面各个渲染方法都可以定制，只要在每个模型的里面的_features="custom"就可以得到定制的例子
     
     const renderExtraHeader = this.props.renderExtraHeader || internalRenderExtraHeader
     const settingListOf = this.props.settingListOf || internalSettingListOf
