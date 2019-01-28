@@ -1,7 +1,7 @@
 
 export const SYSTEM_SHORT_NAME = "oms" //Use for requssting different apps
 export const SYSTEM_LOCAL_NAME = "Order Services" 
-export const BUILD_TIIME="Fri Jan 25 22:14:38 CST 2019"
+export const BUILD_TIIME="Mon Jan 28 12:16:48 CST 2019"
 export const MEDIA_UPLOAD_URL="https://www.doublechaintech.com/mss/upload.html"
 export const MEDIA_PREFIX="https://www.doublechaintech.com/mss/"
 

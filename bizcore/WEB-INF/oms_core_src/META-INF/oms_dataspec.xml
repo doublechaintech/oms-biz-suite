@@ -11,6 +11,93 @@
 		</fields>
 	</table>
 
+	<table name="profile_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="5" max="64" description="Id" />
+			<field name="name" type="string" checkType="StringLengthRange" min="6" max="72" description="Name" />
+			<field name="age" type="int" checkType="IntegerRange" min="0" max="40" description="Age" />
+			<field name="gender" type="string_gender" checkType="Gender" min="2" max="24" description="Gender" />
+			<field name="last_update_time" type="date_time_update" checkType="DateTimeUpdate" min="1900-01-01T00:00:00" max="updateTime()" description="Last Update Time" />
+			<field name="platform" type="reference" checkType="exist(platform)" description="Platform" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="Version" />
+		</fields>
+	</table>
+
+	<table name="user_order_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="5" max="64" description="Id" />
+			<field name="title" type="string" checkType="StringLengthRange" min="5" max="64" description="Title" />
+			<field name="total_adjustment" type="money" checkType="MoneyAmount" min="0.0" max="100.12" description="Total Adjustment" />
+			<field name="total_amount" type="money" checkType="MoneyAmount" min="0.0" max="10020.12" description="Total Amount" />
+			<field name="user" type="reference" checkType="exist(profile)" description="User" />
+			<field name="platform" type="reference" checkType="exist(platform)" description="Platform" />
+			<field name="last_update_time" type="string" checkType="StringLengthRange" min="5" max="64" description="Last Update Time" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="Version" />
+		</fields>
+	</table>
+
+	<table name="line_item_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="5" max="64" description="Id" />
+			<field name="name" type="string" checkType="StringLengthRange" min="4" max="52" description="Name" />
+			<field name="quantity" type="int" checkType="IntegerRange" min="0" max="12" description="Quantity" />
+			<field name="price" type="money" checkType="MoneyAmount" min="0.0" max="102.99" description="Price" />
+			<field name="discount_price" type="money" checkType="MoneyAmount" min="0.0" max="11.03" description="Discount Price" />
+			<field name="user_order" type="reference" checkType="exist(user_order)" description="User Order" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="Version" />
+		</fields>
+	</table>
+
+	<table name="order_promotion_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="5" max="64" description="Id" />
+			<field name="name" type="string" checkType="StringLengthRange" min="4" max="60" description="Name" />
+			<field name="amount" type="int" checkType="IntegerRange" min="0" max="1231" description="Amount" />
+			<field name="thread_hold" type="int" checkType="IntegerRange" min="0" max="1230" description="Thread Hold" />
+			<field name="type" type="string" checkType="StringLengthRange" min="4" max="44" description="Type" />
+			<field name="user_order" type="reference" checkType="exist(user_order)" description="User Order" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="Version" />
+		</fields>
+	</table>
+
+	<table name="manual_adjustment_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="5" max="64" description="Id" />
+			<field name="name" type="string" checkType="StringLengthRange" min="4" max="60" description="Name" />
+			<field name="amount" type="int" checkType="IntegerRange" min="0" max="1231" description="Amount" />
+			<field name="thread_hold" type="int" checkType="IntegerRange" min="0" max="1230" description="Thread Hold" />
+			<field name="type" type="string" checkType="StringLengthRange" min="1" max="36" description="Type" />
+			<field name="user_order" type="reference" checkType="exist(user_order)" description="User Order" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="Version" />
+		</fields>
+	</table>
+
+	<table name="shipping_group_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="5" max="64" description="Id" />
+			<field name="name" type="string" checkType="StringLengthRange" min="4" max="48" description="Name" />
+			<field name="line1" type="string" checkType="StringLengthRange" min="7" max="100" description="Line1" />
+			<field name="line2" type="string" checkType="StringLengthRange" min="4" max="48" description="Line2" />
+			<field name="city" type="string" checkType="StringLengthRange" min="4" max="60" description="City" />
+			<field name="state" type="string" checkType="StringLengthRange" min="1" max="8" description="State" />
+			<field name="zip_code" type="int" checkType="IntegerRange" min="0" max="980087" description="Zip Code" />
+			<field name="country" type="string_country_code" checkType="CountryCode" min="1" max="8" description="Country" />
+			<field name="user_order" type="reference" checkType="exist(user_order)" description="User Order" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="Version" />
+		</fields>
+	</table>
+
+	<table name="payment_group_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="5" max="64" description="Id" />
+			<field name="name" type="string" checkType="StringLengthRange" min="4" max="52" description="Name" />
+			<field name="amount" type="money" checkType="MoneyAmount" min="0.0" max="123.00" description="Amount" />
+			<field name="user_order" type="reference" checkType="exist(user_order)" description="User Order" />
+			<field name="status" type="string" checkType="StringLengthRange" min="2" max="28" description="Status" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="Version" />
+		</fields>
+	</table>
+
 	<table name="user_domain_data">
 		<fields>
 			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="5" max="64" description="Id" />

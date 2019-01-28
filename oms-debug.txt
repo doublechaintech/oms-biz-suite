@@ -5,6 +5,65 @@ Name|Name
 Introduction|Introduction
 Current Version|Current Version
 Version|Version
+Profile|Profile
+Id|Id
+Name|Name
+Age|Age
+Gender|Gender
+Last Update Time|Last Update Time
+Platform|Platform
+Version|Version
+User Order|User Order
+Id|Id
+Title|Title
+Total Adjustment|Total Adjustment
+Total Amount|Total Amount
+User|User
+Platform|Platform
+Last Update Time|Last Update Time
+Version|Version
+Line Item|Line Item
+Id|Id
+Name|Name
+Quantity|Quantity
+Price|Price
+Discount Price|Discount Price
+User Order|User Order
+Version|Version
+Order Promotion|Order Promotion
+Id|Id
+Name|Name
+Amount|Amount
+Thread Hold|Thread Hold
+Type|Type
+User Order|User Order
+Version|Version
+Manual Adjustment|Manual Adjustment
+Id|Id
+Name|Name
+Amount|Amount
+Thread Hold|Thread Hold
+Type|Type
+User Order|User Order
+Version|Version
+Shipping Group|Shipping Group
+Id|Id
+Name|Name
+Line1|Line1
+Line2|Line2
+City|City
+State|State
+Zip Code|Zip Code
+Country|Country
+User Order|User Order
+Version|Version
+Payment Group|Payment Group
+Id|Id
+Name|Name
+Amount|Amount
+User Order|User Order
+Status|Status
+Version|Version
 User Domain|User Domain
 Id|Id
 Name|Name
@@ -126,6 +185,13 @@ Url|Url
 Form|Form
 Version|Version
 Transfer to Another Platform|Transfer to Another Platform
+Transfer to Another Profile|Transfer to Another Profile
+Transfer to Another User Order|Transfer to Another User Order
+Transfer to Another Line Item|Transfer to Another Line Item
+Transfer to Another Order Promotion|Transfer to Another Order Promotion
+Transfer to Another Manual Adjustment|Transfer to Another Manual Adjustment
+Transfer to Another Shipping Group|Transfer to Another Shipping Group
+Transfer to Another Payment Group|Transfer to Another Payment Group
 Transfer to Another User Domain|Transfer to Another User Domain
 Transfer to Another User White List|Transfer to Another User White List
 Transfer to Another Sec User|Transfer to Another Sec User

@@ -7,6 +7,8 @@ import com.doublechaintech.oms.BaseEntity;
 import com.doublechaintech.oms.SmartList;
 import com.doublechaintech.oms.MultipleAccessKey;
 import com.doublechaintech.oms.OmsUserContext;
+import com.doublechaintech.oms.profile.ProfileDAO;
+import com.doublechaintech.oms.userorder.UserOrderDAO;
 
 
 public interface PlatformDAO{
@@ -37,7 +39,25 @@ public interface PlatformDAO{
 	public Platform disconnectFromAll(String platformId, int version) throws Exception;
 	public int deleteAll() throws Exception;
 
+	public ProfileDAO getProfileDAO();
+		
+	public UserOrderDAO getUserOrderDAO();
+		
 	
+ 	public SmartList<Platform> requestCandidatePlatformForProfile(OmsUserContext userContext, String ownerClass, String id, String filterKey, int pageNo, int pageSize) throws Exception;
+		
+ 	public SmartList<Platform> requestCandidatePlatformForUserOrder(OmsUserContext userContext, String ownerClass, String id, String filterKey, int pageNo, int pageSize) throws Exception;
+		
+	
+	public Platform planToRemoveProfileList(Platform platform, String profileIds[], Map<String,Object> options)throws Exception;
+
+
+	public Platform planToRemoveUserOrderList(Platform platform, String userOrderIds[], Map<String,Object> options)throws Exception;
+
+
+	//disconnect Platform with user in UserOrder
+	public Platform planToRemoveUserOrderListWithUser(Platform platform, String userId, Map<String,Object> options)throws Exception;
+	public int countUserOrderListWithUser(String platformId, String userId, Map<String,Object> options)throws Exception;
 	
 	
 	public SmartList<Platform> queryList(String sql, Object ... parmeters);

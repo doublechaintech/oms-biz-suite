@@ -11,6 +11,27 @@
 	<bean id="platformManagerBase" class="com.doublechaintech.oms.platform.PlatformManagerImpl"/>
 	<bean id="platformManager" class="com.doublechaintech.oms.platform.PlatformManagerImpl" parent="platformManagerBase" ></bean>
 	
+	<bean id="profileManagerBase" class="com.doublechaintech.oms.profile.ProfileManagerImpl"/>
+	<bean id="profileManager" class="com.doublechaintech.oms.profile.ProfileManagerImpl" parent="profileManagerBase" ></bean>
+	
+	<bean id="userOrderManagerBase" class="com.doublechaintech.oms.userorder.UserOrderManagerImpl"/>
+	<bean id="userOrderManager" class="com.doublechaintech.oms.userorder.UserOrderCustomManagerImpl" parent="userOrderManagerBase" ></bean>
+	
+	<bean id="lineItemManagerBase" class="com.doublechaintech.oms.lineitem.LineItemManagerImpl"/>
+	<bean id="lineItemManager" class="com.doublechaintech.oms.lineitem.LineItemManagerImpl" parent="lineItemManagerBase" ></bean>
+	
+	<bean id="orderPromotionManagerBase" class="com.doublechaintech.oms.orderpromotion.OrderPromotionManagerImpl"/>
+	<bean id="orderPromotionManager" class="com.doublechaintech.oms.orderpromotion.OrderPromotionManagerImpl" parent="orderPromotionManagerBase" ></bean>
+	
+	<bean id="manualAdjustmentManagerBase" class="com.doublechaintech.oms.manualadjustment.ManualAdjustmentManagerImpl"/>
+	<bean id="manualAdjustmentManager" class="com.doublechaintech.oms.manualadjustment.ManualAdjustmentManagerImpl" parent="manualAdjustmentManagerBase" ></bean>
+	
+	<bean id="shippingGroupManagerBase" class="com.doublechaintech.oms.shippinggroup.ShippingGroupManagerImpl"/>
+	<bean id="shippingGroupManager" class="com.doublechaintech.oms.shippinggroup.ShippingGroupManagerImpl" parent="shippingGroupManagerBase" ></bean>
+	
+	<bean id="paymentGroupManagerBase" class="com.doublechaintech.oms.paymentgroup.PaymentGroupManagerImpl"/>
+	<bean id="paymentGroupManager" class="com.doublechaintech.oms.paymentgroup.PaymentGroupManagerImpl" parent="paymentGroupManagerBase" ></bean>
+	
 	<bean id="userDomainManagerBase" class="com.doublechaintech.oms.userdomain.UserDomainManagerImpl"/>
 	<bean id="userDomainManager" class="com.doublechaintech.oms.userdomain.UserDomainManagerImpl" parent="userDomainManagerBase" ></bean>
 	
@@ -53,6 +74,13 @@
 
 	<bean id="managerGroupBase" class="com.doublechaintech.oms.ManagerGroup">
 		<property name="platformManager" ref="platformManager"/>
+		<property name="profileManager" ref="profileManager"/>
+		<property name="userOrderManager" ref="userOrderManager"/>
+		<property name="lineItemManager" ref="lineItemManager"/>
+		<property name="orderPromotionManager" ref="orderPromotionManager"/>
+		<property name="manualAdjustmentManager" ref="manualAdjustmentManager"/>
+		<property name="shippingGroupManager" ref="shippingGroupManager"/>
+		<property name="paymentGroupManager" ref="paymentGroupManager"/>
 		<property name="userDomainManager" ref="userDomainManager"/>
 		<property name="userWhiteListManager" ref="userWhiteListManager"/>
 		<property name="secUserManager" ref="secUserManager"/>

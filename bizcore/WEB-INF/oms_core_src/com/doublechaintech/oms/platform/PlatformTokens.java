@@ -62,7 +62,9 @@ public class PlatformTokens extends CommonTokens{
 	
 	protected static PlatformTokens allTokens(){
 		
-		return start();
+		return start()
+			.withProfileList()
+			.withUserOrderList();
 	
 	}
 	public static PlatformTokens withoutListsTokens(){
@@ -81,9 +83,135 @@ public class PlatformTokens extends CommonTokens{
 		return start().done();
 	}
 
+	protected static final String PROFILE_LIST = "profileList";
+	public String getProfileList(){
+		return PROFILE_LIST;
+	}
+	public PlatformTokens withProfileList(){		
+		addSimpleOptions(PROFILE_LIST);
+		return this;
+	}
+	public PlatformTokens analyzeProfileList(){		
+		addSimpleOptions(PROFILE_LIST+".anaylze");
+		return this;
+	}
+	public boolean analyzeProfileListEnabled(){		
+		
+		return checkOptions(this.options(), PROFILE_LIST+".anaylze");
+	}
+	public PlatformTokens extractMoreFromProfileList(String idsSeperatedWithComma){		
+		addSimpleOptions(PROFILE_LIST+".extractIds", idsSeperatedWithComma);
+		return this;
+	}
+	
+	
+	
+	
+	private int profileListSortCounter = 0;
+	public PlatformTokens sortProfileListWith(String field, String descOrAsc){		
+		addSortMoreOptions(PROFILE_LIST,profileListSortCounter++, field, descOrAsc);
+		return this;
+	}
+	private int profileListSearchCounter = 0;
+	public PlatformTokens searchProfileListWith(String field, String verb, String value){		
+		addSearchMoreOptions(PROFILE_LIST,profileListSearchCounter++, field, verb, value);
+		return this;
+	}
+	
+	public PlatformTokens searchAllTextOfProfileList(String verb, String value){	
+		String field = "id|name|gender";
+		addSearchMoreOptions(PROFILE_LIST,profileListSearchCounter++, field, verb, value);
+		return this;
+	}
+	
+	
+	
+	public PlatformTokens rowsPerPageOfProfileList(int rowsPerPage){		
+		addSimpleOptions(PROFILE_LIST+"RowsPerPage",rowsPerPage);
+		return this;
+	}
+	public PlatformTokens currentPageNumberOfProfileList(int currentPageNumber){		
+		addSimpleOptions(PROFILE_LIST+"CurrentPage",currentPageNumber);
+		return this;
+	}
+	public PlatformTokens retainColumnsOfProfileList(String[] columns){		
+		addSimpleOptions(PROFILE_LIST+"RetainColumns",columns);
+		return this;
+	}
+	public PlatformTokens excludeColumnsOfProfileList(String[] columns){		
+		addSimpleOptions(PROFILE_LIST+"ExcludeColumns",columns);
+		return this;
+	}
+	
+	
+		
+	protected static final String USER_ORDER_LIST = "userOrderList";
+	public String getUserOrderList(){
+		return USER_ORDER_LIST;
+	}
+	public PlatformTokens withUserOrderList(){		
+		addSimpleOptions(USER_ORDER_LIST);
+		return this;
+	}
+	public PlatformTokens analyzeUserOrderList(){		
+		addSimpleOptions(USER_ORDER_LIST+".anaylze");
+		return this;
+	}
+	public boolean analyzeUserOrderListEnabled(){		
+		
+		return checkOptions(this.options(), USER_ORDER_LIST+".anaylze");
+	}
+	public PlatformTokens extractMoreFromUserOrderList(String idsSeperatedWithComma){		
+		addSimpleOptions(USER_ORDER_LIST+".extractIds", idsSeperatedWithComma);
+		return this;
+	}
+	
+	
+	
+	
+	private int userOrderListSortCounter = 0;
+	public PlatformTokens sortUserOrderListWith(String field, String descOrAsc){		
+		addSortMoreOptions(USER_ORDER_LIST,userOrderListSortCounter++, field, descOrAsc);
+		return this;
+	}
+	private int userOrderListSearchCounter = 0;
+	public PlatformTokens searchUserOrderListWith(String field, String verb, String value){		
+		addSearchMoreOptions(USER_ORDER_LIST,userOrderListSearchCounter++, field, verb, value);
+		return this;
+	}
+	
+	public PlatformTokens searchAllTextOfUserOrderList(String verb, String value){	
+		String field = "id|title|lastUpdateTime";
+		addSearchMoreOptions(USER_ORDER_LIST,userOrderListSearchCounter++, field, verb, value);
+		return this;
+	}
+	
+	
+	
+	public PlatformTokens rowsPerPageOfUserOrderList(int rowsPerPage){		
+		addSimpleOptions(USER_ORDER_LIST+"RowsPerPage",rowsPerPage);
+		return this;
+	}
+	public PlatformTokens currentPageNumberOfUserOrderList(int currentPageNumber){		
+		addSimpleOptions(USER_ORDER_LIST+"CurrentPage",currentPageNumber);
+		return this;
+	}
+	public PlatformTokens retainColumnsOfUserOrderList(String[] columns){		
+		addSimpleOptions(USER_ORDER_LIST+"RetainColumns",columns);
+		return this;
+	}
+	public PlatformTokens excludeColumnsOfUserOrderList(String[] columns){		
+		addSimpleOptions(USER_ORDER_LIST+"ExcludeColumns",columns);
+		return this;
+	}
+	
+	
+		
 	
 	public  PlatformTokens searchEntireObjectText(String verb, String value){
 		
+		searchAllTextOfProfileList(verb, value);	
+		searchAllTextOfUserOrderList(verb, value);	
 		return this;
 	}
 }

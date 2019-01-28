@@ -20,8 +20,12 @@ import com.doublechaintech.oms.OmsUserContext;
 import com.doublechaintech.oms.OmsCheckerManager;
 import com.doublechaintech.oms.CustomOmsCheckerManager;
 
+import com.doublechaintech.oms.userorder.UserOrder;
+import com.doublechaintech.oms.profile.Profile;
 
 
+import com.doublechaintech.oms.profile.Profile;
+import com.doublechaintech.oms.platform.Platform;
 
 
 
@@ -146,6 +150,14 @@ public class PlatformManagerImpl extends CustomOmsCheckerManager implements Plat
 		addAction(userContext, platform, tokens,"@update","updatePlatform","updatePlatform/"+platform.getId()+"/","main","primary");
 		addAction(userContext, platform, tokens,"@copy","clonePlatform","clonePlatform/"+platform.getId()+"/","main","primary");
 		
+		addAction(userContext, platform, tokens,"platform.addProfile","addProfile","addProfile/"+platform.getId()+"/","profileList","primary");
+		addAction(userContext, platform, tokens,"platform.removeProfile","removeProfile","removeProfile/"+platform.getId()+"/","profileList","primary");
+		addAction(userContext, platform, tokens,"platform.updateProfile","updateProfile","updateProfile/"+platform.getId()+"/","profileList","primary");
+		addAction(userContext, platform, tokens,"platform.copyProfileFrom","copyProfileFrom","copyProfileFrom/"+platform.getId()+"/","profileList","primary");
+		addAction(userContext, platform, tokens,"platform.addUserOrder","addUserOrder","addUserOrder/"+platform.getId()+"/","userOrderList","primary");
+		addAction(userContext, platform, tokens,"platform.removeUserOrder","removeUserOrder","removeUserOrder/"+platform.getId()+"/","userOrderList","primary");
+		addAction(userContext, platform, tokens,"platform.updateUserOrder","updateUserOrder","updateUserOrder/"+platform.getId()+"/","userOrderList","primary");
+		addAction(userContext, platform, tokens,"platform.copyUserOrderFrom","copyUserOrderFrom","copyUserOrderFrom/"+platform.getId()+"/","userOrderList","primary");
 	
 		
 		
@@ -307,6 +319,8 @@ public class PlatformManagerImpl extends CustomOmsCheckerManager implements Plat
 	}
 	protected Map<String,Object> viewTokens(){
 		return tokens().allTokens()
+		.sortProfileListWith("id","desc")
+		.sortUserOrderListWith("id","desc")
 		.done();
 
 	}
@@ -355,11 +369,548 @@ public class PlatformManagerImpl extends CustomOmsCheckerManager implements Plat
 	}
 
 
+	//disconnect Platform with user in UserOrder
+	protected Platform breakWithUserOrderByUser(OmsUserContext userContext, String platformId, String userId,  String [] tokensExpr)
+		 throws Exception{
+			
+			//TODO add check code here
+			
+			Platform platform = loadPlatform(userContext, platformId, allTokens());
+
+			synchronized(platform){ 
+				//Will be good when the thread loaded from this JVM process cache.
+				//Also good when there is a RAM based DAO implementation
+				
+				userContext.getDAOGroup().getPlatformDAO().planToRemoveUserOrderListWithUser(platform, userId, this.emptyOptions());
+
+				platform = savePlatform(userContext, platform, tokens().withUserOrderList().done());
+				return platform;
+			}
+	}
 	
 	
 	
 	
 	
+
+	protected void checkParamsForAddingProfile(OmsUserContext userContext, String platformId, String name, int age, String gender,String [] tokensExpr) throws Exception{
+		
+		
+
+		
+		
+		userContext.getChecker().checkIdOfPlatform(platformId);
+
+		
+		userContext.getChecker().checkNameOfProfile(name);
+		
+		userContext.getChecker().checkAgeOfProfile(age);
+		
+		userContext.getChecker().checkGenderOfProfile(gender);
+	
+		userContext.getChecker().throwExceptionIfHasErrors(PlatformManagerException.class);
+
+	
+	}
+	public  Platform addProfile(OmsUserContext userContext, String platformId, String name, int age, String gender, String [] tokensExpr) throws Exception
+	{	
+		
+		checkParamsForAddingProfile(userContext,platformId,name, age, gender,tokensExpr);
+		
+		Profile profile = createProfile(userContext,name, age, gender);
+		
+		Platform platform = loadPlatform(userContext, platformId, allTokens());
+		synchronized(platform){ 
+			//Will be good when the platform loaded from this JVM process cache.
+			//Also good when there is a RAM based DAO implementation
+			platform.addProfile( profile );		
+			platform = savePlatform(userContext, platform, tokens().withProfileList().done());
+			
+			userContext.getManagerGroup().getProfileManager().onNewInstanceCreated(userContext, profile);
+			return present(userContext,platform, mergedAllTokens(tokensExpr));
+		}
+	}
+	protected void checkParamsForUpdatingProfileProperties(OmsUserContext userContext, String platformId,String id,String name,int age,String gender,String [] tokensExpr) throws Exception {
+		
+		userContext.getChecker().checkIdOfPlatform(platformId);
+		userContext.getChecker().checkIdOfProfile(id);
+		
+		userContext.getChecker().checkNameOfProfile( name);
+		userContext.getChecker().checkAgeOfProfile( age);
+		userContext.getChecker().checkGenderOfProfile( gender);
+
+		userContext.getChecker().throwExceptionIfHasErrors(PlatformManagerException.class);
+		
+	}
+	public  Platform updateProfileProperties(OmsUserContext userContext, String platformId, String id,String name,int age,String gender, String [] tokensExpr) throws Exception
+	{	
+		checkParamsForUpdatingProfileProperties(userContext,platformId,id,name,age,gender,tokensExpr);
+
+		Map<String, Object> options = tokens()
+				.allTokens()
+				//.withProfileListList()
+				.searchProfileListWith(Profile.ID_PROPERTY, "is", id).done();
+		
+		Platform platformToUpdate = loadPlatform(userContext, platformId, options);
+		
+		if(platformToUpdate.getProfileList().isEmpty()){
+			throw new PlatformManagerException("Profile is NOT FOUND with id: '"+id+"'");
+		}
+		
+		Profile item = platformToUpdate.getProfileList().first();
+		
+		item.updateName( name );
+		item.updateAge( age );
+		item.updateGender( gender );
+
+		
+		//checkParamsForAddingProfile(userContext,platformId,name, code, used,tokensExpr);
+		Platform platform = savePlatform(userContext, platformToUpdate, tokens().withProfileList().done());
+		synchronized(platform){ 
+			return present(userContext,platform, mergedAllTokens(tokensExpr));
+		}
+	}
+	
+	
+	protected Profile createProfile(OmsUserContext userContext, String name, int age, String gender) throws Exception{
+
+		Profile profile = new Profile();
+		
+		
+		profile.setName(name);		
+		profile.setAge(age);		
+		profile.setGender(gender);		
+		profile.setLastUpdateTime(userContext.now());
+	
+		
+		return profile;
+	
+		
+	}
+	
+	protected Profile createIndexedProfile(String id, int version){
+
+		Profile profile = new Profile();
+		profile.setId(id);
+		profile.setVersion(version);
+		return profile;			
+		
+	}
+	
+	protected void checkParamsForRemovingProfileList(OmsUserContext userContext, String platformId, 
+			String profileIds[],String [] tokensExpr) throws Exception {
+		
+		userContext.getChecker().checkIdOfPlatform(platformId);
+		for(String profileId: profileIds){
+			userContext.getChecker().checkIdOfProfile(profileId);
+		}
+		
+		userContext.getChecker().throwExceptionIfHasErrors(PlatformManagerException.class);
+		
+	}
+	public  Platform removeProfileList(OmsUserContext userContext, String platformId, 
+			String profileIds[],String [] tokensExpr) throws Exception{
+			
+			checkParamsForRemovingProfileList(userContext, platformId,  profileIds, tokensExpr);
+			
+			
+			Platform platform = loadPlatform(userContext, platformId, allTokens());
+			synchronized(platform){ 
+				//Will be good when the platform loaded from this JVM process cache.
+				//Also good when there is a RAM based DAO implementation
+				userContext.getDAOGroup().getPlatformDAO().planToRemoveProfileList(platform, profileIds, allTokens());
+				platform = savePlatform(userContext, platform, tokens().withProfileList().done());
+				deleteRelationListInGraph(userContext, platform.getProfileList());
+				return present(userContext,platform, mergedAllTokens(tokensExpr));
+			}
+	}
+	
+	protected void checkParamsForRemovingProfile(OmsUserContext userContext, String platformId, 
+		String profileId, int profileVersion,String [] tokensExpr) throws Exception{
+		
+		userContext.getChecker().checkIdOfPlatform( platformId);
+		userContext.getChecker().checkIdOfProfile(profileId);
+		userContext.getChecker().checkVersionOfProfile(profileVersion);
+		userContext.getChecker().throwExceptionIfHasErrors(PlatformManagerException.class);
+	
+	}
+	public  Platform removeProfile(OmsUserContext userContext, String platformId, 
+		String profileId, int profileVersion,String [] tokensExpr) throws Exception{
+		
+		checkParamsForRemovingProfile(userContext,platformId, profileId, profileVersion,tokensExpr);
+		
+		Profile profile = createIndexedProfile(profileId, profileVersion);
+		Platform platform = loadPlatform(userContext, platformId, allTokens());
+		synchronized(platform){ 
+			//Will be good when the platform loaded from this JVM process cache.
+			//Also good when there is a RAM based DAO implementation
+			platform.removeProfile( profile );		
+			platform = savePlatform(userContext, platform, tokens().withProfileList().done());
+			deleteRelationInGraph(userContext, profile);
+			return present(userContext,platform, mergedAllTokens(tokensExpr));
+		}
+		
+		
+	}
+	protected void checkParamsForCopyingProfile(OmsUserContext userContext, String platformId, 
+		String profileId, int profileVersion,String [] tokensExpr) throws Exception{
+		
+		userContext.getChecker().checkIdOfPlatform( platformId);
+		userContext.getChecker().checkIdOfProfile(profileId);
+		userContext.getChecker().checkVersionOfProfile(profileVersion);
+		userContext.getChecker().throwExceptionIfHasErrors(PlatformManagerException.class);
+	
+	}
+	public  Platform copyProfileFrom(OmsUserContext userContext, String platformId, 
+		String profileId, int profileVersion,String [] tokensExpr) throws Exception{
+		
+		checkParamsForCopyingProfile(userContext,platformId, profileId, profileVersion,tokensExpr);
+		
+		Profile profile = createIndexedProfile(profileId, profileVersion);
+		Platform platform = loadPlatform(userContext, platformId, allTokens());
+		synchronized(platform){ 
+			//Will be good when the platform loaded from this JVM process cache.
+			//Also good when there is a RAM based DAO implementation
+			
+			profile.updateLastUpdateTime(userContext.now());
+			
+			platform.copyProfileFrom( profile );		
+			platform = savePlatform(userContext, platform, tokens().withProfileList().done());
+			
+			userContext.getManagerGroup().getProfileManager().onNewInstanceCreated(userContext, (Profile)platform.getFlexiableObjects().get(BaseEntity.COPIED_CHILD));
+			return present(userContext,platform, mergedAllTokens(tokensExpr));
+		}
+		
+	}
+	
+	protected void checkParamsForUpdatingProfile(OmsUserContext userContext, String platformId, String profileId, int profileVersion, String property, String newValueExpr,String [] tokensExpr) throws Exception{
+		
+
+		
+		userContext.getChecker().checkIdOfPlatform(platformId);
+		userContext.getChecker().checkIdOfProfile(profileId);
+		userContext.getChecker().checkVersionOfProfile(profileVersion);
+		
+
+		if(Profile.NAME_PROPERTY.equals(property)){
+			userContext.getChecker().checkNameOfProfile(parseString(newValueExpr));
+		}
+		
+		if(Profile.AGE_PROPERTY.equals(property)){
+			userContext.getChecker().checkAgeOfProfile(parseInt(newValueExpr));
+		}
+		
+		if(Profile.GENDER_PROPERTY.equals(property)){
+			userContext.getChecker().checkGenderOfProfile(parseString(newValueExpr));
+		}
+		
+	
+		userContext.getChecker().throwExceptionIfHasErrors(PlatformManagerException.class);
+	
+	}
+	
+	public  Platform updateProfile(OmsUserContext userContext, String platformId, String profileId, int profileVersion, String property, String newValueExpr,String [] tokensExpr)
+			throws Exception{
+		
+		checkParamsForUpdatingProfile(userContext, platformId, profileId, profileVersion, property, newValueExpr,  tokensExpr);
+		
+		Map<String,Object> loadTokens = this.tokens().withProfileList().searchProfileListWith(Profile.ID_PROPERTY, "eq", profileId).done();
+		
+		
+		
+		Platform platform = loadPlatform(userContext, platformId, loadTokens);
+		
+		synchronized(platform){ 
+			//Will be good when the platform loaded from this JVM process cache.
+			//Also good when there is a RAM based DAO implementation
+			//platform.removeProfile( profile );	
+			//make changes to AcceleraterAccount.
+			Profile profileIndex = createIndexedProfile(profileId, profileVersion);
+		
+			Profile profile = platform.findTheProfile(profileIndex);
+			if(profile == null){
+				throw new PlatformManagerException(profile+" is NOT FOUND" );
+			}
+			
+			profile.changeProperty(property, newValueExpr);
+			profile.updateLastUpdateTime(userContext.now());
+			platform = savePlatform(userContext, platform, tokens().withProfileList().done());
+			return present(userContext,platform, mergedAllTokens(tokensExpr));
+		}
+
+	}
+	/*
+
+	*/
+	
+
+
+
+	protected void checkParamsForAddingUserOrder(OmsUserContext userContext, String platformId, String title, BigDecimal totalAdjustment, BigDecimal totalAmount, String userId, String lastUpdateTime,String [] tokensExpr) throws Exception{
+		
+		
+
+		
+		
+		userContext.getChecker().checkIdOfPlatform(platformId);
+
+		
+		userContext.getChecker().checkTitleOfUserOrder(title);
+		
+		userContext.getChecker().checkTotalAdjustmentOfUserOrder(totalAdjustment);
+		
+		userContext.getChecker().checkTotalAmountOfUserOrder(totalAmount);
+		
+		userContext.getChecker().checkUserIdOfUserOrder(userId);
+		
+		userContext.getChecker().checkLastUpdateTimeOfUserOrder(lastUpdateTime);
+	
+		userContext.getChecker().throwExceptionIfHasErrors(PlatformManagerException.class);
+
+	
+	}
+	public  Platform addUserOrder(OmsUserContext userContext, String platformId, String title, BigDecimal totalAdjustment, BigDecimal totalAmount, String userId, String lastUpdateTime, String [] tokensExpr) throws Exception
+	{	
+		
+		checkParamsForAddingUserOrder(userContext,platformId,title, totalAdjustment, totalAmount, userId, lastUpdateTime,tokensExpr);
+		
+		UserOrder userOrder = createUserOrder(userContext,title, totalAdjustment, totalAmount, userId, lastUpdateTime);
+		
+		Platform platform = loadPlatform(userContext, platformId, allTokens());
+		synchronized(platform){ 
+			//Will be good when the platform loaded from this JVM process cache.
+			//Also good when there is a RAM based DAO implementation
+			platform.addUserOrder( userOrder );		
+			platform = savePlatform(userContext, platform, tokens().withUserOrderList().done());
+			
+			userContext.getManagerGroup().getUserOrderManager().onNewInstanceCreated(userContext, userOrder);
+			return present(userContext,platform, mergedAllTokens(tokensExpr));
+		}
+	}
+	protected void checkParamsForUpdatingUserOrderProperties(OmsUserContext userContext, String platformId,String id,String title,BigDecimal totalAdjustment,BigDecimal totalAmount,String lastUpdateTime,String [] tokensExpr) throws Exception {
+		
+		userContext.getChecker().checkIdOfPlatform(platformId);
+		userContext.getChecker().checkIdOfUserOrder(id);
+		
+		userContext.getChecker().checkTitleOfUserOrder( title);
+		userContext.getChecker().checkTotalAdjustmentOfUserOrder( totalAdjustment);
+		userContext.getChecker().checkTotalAmountOfUserOrder( totalAmount);
+		userContext.getChecker().checkLastUpdateTimeOfUserOrder( lastUpdateTime);
+
+		userContext.getChecker().throwExceptionIfHasErrors(PlatformManagerException.class);
+		
+	}
+	public  Platform updateUserOrderProperties(OmsUserContext userContext, String platformId, String id,String title,BigDecimal totalAdjustment,BigDecimal totalAmount,String lastUpdateTime, String [] tokensExpr) throws Exception
+	{	
+		checkParamsForUpdatingUserOrderProperties(userContext,platformId,id,title,totalAdjustment,totalAmount,lastUpdateTime,tokensExpr);
+
+		Map<String, Object> options = tokens()
+				.allTokens()
+				//.withUserOrderListList()
+				.searchUserOrderListWith(UserOrder.ID_PROPERTY, "is", id).done();
+		
+		Platform platformToUpdate = loadPlatform(userContext, platformId, options);
+		
+		if(platformToUpdate.getUserOrderList().isEmpty()){
+			throw new PlatformManagerException("UserOrder is NOT FOUND with id: '"+id+"'");
+		}
+		
+		UserOrder item = platformToUpdate.getUserOrderList().first();
+		
+		item.updateTitle( title );
+		item.updateTotalAdjustment( totalAdjustment );
+		item.updateTotalAmount( totalAmount );
+		item.updateLastUpdateTime( lastUpdateTime );
+
+		
+		//checkParamsForAddingUserOrder(userContext,platformId,name, code, used,tokensExpr);
+		Platform platform = savePlatform(userContext, platformToUpdate, tokens().withUserOrderList().done());
+		synchronized(platform){ 
+			return present(userContext,platform, mergedAllTokens(tokensExpr));
+		}
+	}
+	
+	
+	protected UserOrder createUserOrder(OmsUserContext userContext, String title, BigDecimal totalAdjustment, BigDecimal totalAmount, String userId, String lastUpdateTime) throws Exception{
+
+		UserOrder userOrder = new UserOrder();
+		
+		
+		userOrder.setTitle(title);		
+		userOrder.setTotalAdjustment(totalAdjustment);		
+		userOrder.setTotalAmount(totalAmount);		
+		Profile  user = new Profile();
+		user.setId(userId);		
+		userOrder.setUser(user);		
+		userOrder.setLastUpdateTime(lastUpdateTime);
+	
+		
+		return userOrder;
+	
+		
+	}
+	
+	protected UserOrder createIndexedUserOrder(String id, int version){
+
+		UserOrder userOrder = new UserOrder();
+		userOrder.setId(id);
+		userOrder.setVersion(version);
+		return userOrder;			
+		
+	}
+	
+	protected void checkParamsForRemovingUserOrderList(OmsUserContext userContext, String platformId, 
+			String userOrderIds[],String [] tokensExpr) throws Exception {
+		
+		userContext.getChecker().checkIdOfPlatform(platformId);
+		for(String userOrderId: userOrderIds){
+			userContext.getChecker().checkIdOfUserOrder(userOrderId);
+		}
+		
+		userContext.getChecker().throwExceptionIfHasErrors(PlatformManagerException.class);
+		
+	}
+	public  Platform removeUserOrderList(OmsUserContext userContext, String platformId, 
+			String userOrderIds[],String [] tokensExpr) throws Exception{
+			
+			checkParamsForRemovingUserOrderList(userContext, platformId,  userOrderIds, tokensExpr);
+			
+			
+			Platform platform = loadPlatform(userContext, platformId, allTokens());
+			synchronized(platform){ 
+				//Will be good when the platform loaded from this JVM process cache.
+				//Also good when there is a RAM based DAO implementation
+				userContext.getDAOGroup().getPlatformDAO().planToRemoveUserOrderList(platform, userOrderIds, allTokens());
+				platform = savePlatform(userContext, platform, tokens().withUserOrderList().done());
+				deleteRelationListInGraph(userContext, platform.getUserOrderList());
+				return present(userContext,platform, mergedAllTokens(tokensExpr));
+			}
+	}
+	
+	protected void checkParamsForRemovingUserOrder(OmsUserContext userContext, String platformId, 
+		String userOrderId, int userOrderVersion,String [] tokensExpr) throws Exception{
+		
+		userContext.getChecker().checkIdOfPlatform( platformId);
+		userContext.getChecker().checkIdOfUserOrder(userOrderId);
+		userContext.getChecker().checkVersionOfUserOrder(userOrderVersion);
+		userContext.getChecker().throwExceptionIfHasErrors(PlatformManagerException.class);
+	
+	}
+	public  Platform removeUserOrder(OmsUserContext userContext, String platformId, 
+		String userOrderId, int userOrderVersion,String [] tokensExpr) throws Exception{
+		
+		checkParamsForRemovingUserOrder(userContext,platformId, userOrderId, userOrderVersion,tokensExpr);
+		
+		UserOrder userOrder = createIndexedUserOrder(userOrderId, userOrderVersion);
+		Platform platform = loadPlatform(userContext, platformId, allTokens());
+		synchronized(platform){ 
+			//Will be good when the platform loaded from this JVM process cache.
+			//Also good when there is a RAM based DAO implementation
+			platform.removeUserOrder( userOrder );		
+			platform = savePlatform(userContext, platform, tokens().withUserOrderList().done());
+			deleteRelationInGraph(userContext, userOrder);
+			return present(userContext,platform, mergedAllTokens(tokensExpr));
+		}
+		
+		
+	}
+	protected void checkParamsForCopyingUserOrder(OmsUserContext userContext, String platformId, 
+		String userOrderId, int userOrderVersion,String [] tokensExpr) throws Exception{
+		
+		userContext.getChecker().checkIdOfPlatform( platformId);
+		userContext.getChecker().checkIdOfUserOrder(userOrderId);
+		userContext.getChecker().checkVersionOfUserOrder(userOrderVersion);
+		userContext.getChecker().throwExceptionIfHasErrors(PlatformManagerException.class);
+	
+	}
+	public  Platform copyUserOrderFrom(OmsUserContext userContext, String platformId, 
+		String userOrderId, int userOrderVersion,String [] tokensExpr) throws Exception{
+		
+		checkParamsForCopyingUserOrder(userContext,platformId, userOrderId, userOrderVersion,tokensExpr);
+		
+		UserOrder userOrder = createIndexedUserOrder(userOrderId, userOrderVersion);
+		Platform platform = loadPlatform(userContext, platformId, allTokens());
+		synchronized(platform){ 
+			//Will be good when the platform loaded from this JVM process cache.
+			//Also good when there is a RAM based DAO implementation
+			
+			
+			
+			platform.copyUserOrderFrom( userOrder );		
+			platform = savePlatform(userContext, platform, tokens().withUserOrderList().done());
+			
+			userContext.getManagerGroup().getUserOrderManager().onNewInstanceCreated(userContext, (UserOrder)platform.getFlexiableObjects().get(BaseEntity.COPIED_CHILD));
+			return present(userContext,platform, mergedAllTokens(tokensExpr));
+		}
+		
+	}
+	
+	protected void checkParamsForUpdatingUserOrder(OmsUserContext userContext, String platformId, String userOrderId, int userOrderVersion, String property, String newValueExpr,String [] tokensExpr) throws Exception{
+		
+
+		
+		userContext.getChecker().checkIdOfPlatform(platformId);
+		userContext.getChecker().checkIdOfUserOrder(userOrderId);
+		userContext.getChecker().checkVersionOfUserOrder(userOrderVersion);
+		
+
+		if(UserOrder.TITLE_PROPERTY.equals(property)){
+			userContext.getChecker().checkTitleOfUserOrder(parseString(newValueExpr));
+		}
+		
+		if(UserOrder.TOTAL_ADJUSTMENT_PROPERTY.equals(property)){
+			userContext.getChecker().checkTotalAdjustmentOfUserOrder(parseBigDecimal(newValueExpr));
+		}
+		
+		if(UserOrder.TOTAL_AMOUNT_PROPERTY.equals(property)){
+			userContext.getChecker().checkTotalAmountOfUserOrder(parseBigDecimal(newValueExpr));
+		}
+		
+		if(UserOrder.LAST_UPDATE_TIME_PROPERTY.equals(property)){
+			userContext.getChecker().checkLastUpdateTimeOfUserOrder(parseString(newValueExpr));
+		}
+		
+	
+		userContext.getChecker().throwExceptionIfHasErrors(PlatformManagerException.class);
+	
+	}
+	
+	public  Platform updateUserOrder(OmsUserContext userContext, String platformId, String userOrderId, int userOrderVersion, String property, String newValueExpr,String [] tokensExpr)
+			throws Exception{
+		
+		checkParamsForUpdatingUserOrder(userContext, platformId, userOrderId, userOrderVersion, property, newValueExpr,  tokensExpr);
+		
+		Map<String,Object> loadTokens = this.tokens().withUserOrderList().searchUserOrderListWith(UserOrder.ID_PROPERTY, "eq", userOrderId).done();
+		
+		
+		
+		Platform platform = loadPlatform(userContext, platformId, loadTokens);
+		
+		synchronized(platform){ 
+			//Will be good when the platform loaded from this JVM process cache.
+			//Also good when there is a RAM based DAO implementation
+			//platform.removeUserOrder( userOrder );	
+			//make changes to AcceleraterAccount.
+			UserOrder userOrderIndex = createIndexedUserOrder(userOrderId, userOrderVersion);
+		
+			UserOrder userOrder = platform.findTheUserOrder(userOrderIndex);
+			if(userOrder == null){
+				throw new PlatformManagerException(userOrder+" is NOT FOUND" );
+			}
+			
+			userOrder.changeProperty(property, newValueExpr);
+			
+			platform = savePlatform(userContext, platform, tokens().withUserOrderList().done());
+			return present(userContext,platform, mergedAllTokens(tokensExpr));
+		}
+
+	}
+	/*
+
+	*/
+	
+
+
 
 	public void onNewInstanceCreated(OmsUserContext userContext, Platform newCreated) throws Exception{
 		ensureRelationInGraph(userContext, newCreated);

@@ -49,6 +49,414 @@ public class OmsCheckerManager extends BaseManagerImpl {
 		
 	}	 			
 	
+	public static final String  ID_OF_PROFILE ="profile.id";
+	protected void checkIdOfProfile(OmsUserContext userContext, String id, List<Message> messageList)
+	{
+		
+	 	checkStringLengthRange(id,5, 64,ID_OF_PROFILE, messageList); 		
+		
+	}	 			
+	
+	public static final String  NAME_OF_PROFILE ="profile.name";
+	protected void checkNameOfProfile(OmsUserContext userContext, String name, List<Message> messageList)
+	{
+		
+	 	checkStringLengthRange(name,6, 72,NAME_OF_PROFILE, messageList); 		
+		
+	}	 			
+	
+	public static final String  AGE_OF_PROFILE ="profile.age";
+	protected void checkAgeOfProfile(OmsUserContext userContext, int age, List<Message> messageList)
+	{
+		
+	 	checkIntegerRange(age,0, 40,AGE_OF_PROFILE, messageList); 		
+		
+	}	 			
+	
+	public static final String  GENDER_OF_PROFILE ="profile.gender";
+	protected void checkGenderOfProfile(OmsUserContext userContext, String gender, List<Message> messageList)
+	{
+		
+	 	checkGender(gender,2, 24,GENDER_OF_PROFILE, messageList); 		
+		
+	}	 			
+	
+	public static final String  PLATFORM_OF_PROFILE ="profile.platform";
+	protected void checkPlatformIdOfProfile(OmsUserContext userContext, String platformId, List<Message> messageList)
+	{
+		
+	 	checkIdOfProfile(userContext,platformId, messageList); 		
+		
+	}	 			
+	
+	public static final String  VERSION_OF_PROFILE ="profile.version";
+	protected void checkVersionOfProfile(OmsUserContext userContext, int version, List<Message> messageList)
+	{
+		
+	 	checkIntegerRange(version,0, Integer.MAX_VALUE,VERSION_OF_PROFILE, messageList); 		
+		
+	}	 			
+	
+	public static final String  ID_OF_USER_ORDER ="user_order.id";
+	protected void checkIdOfUserOrder(OmsUserContext userContext, String id, List<Message> messageList)
+	{
+		
+	 	checkStringLengthRange(id,5, 64,ID_OF_USER_ORDER, messageList); 		
+		
+	}	 			
+	
+	public static final String  TITLE_OF_USER_ORDER ="user_order.title";
+	protected void checkTitleOfUserOrder(OmsUserContext userContext, String title, List<Message> messageList)
+	{
+		
+	 	checkStringLengthRange(title,5, 64,TITLE_OF_USER_ORDER, messageList); 		
+		
+	}	 			
+	
+	public static final String  TOTAL_ADJUSTMENT_OF_USER_ORDER ="user_order.total_adjustment";
+	protected void checkTotalAdjustmentOfUserOrder(OmsUserContext userContext, BigDecimal totalAdjustment, List<Message> messageList)
+	{
+		
+	 	checkMoneyAmount(totalAdjustment,0.00, 100.12,TOTAL_ADJUSTMENT_OF_USER_ORDER, messageList); 		
+		
+	}	 			
+	
+	public static final String  TOTAL_AMOUNT_OF_USER_ORDER ="user_order.total_amount";
+	protected void checkTotalAmountOfUserOrder(OmsUserContext userContext, BigDecimal totalAmount, List<Message> messageList)
+	{
+		
+	 	checkMoneyAmount(totalAmount,0.00, 10020.12,TOTAL_AMOUNT_OF_USER_ORDER, messageList); 		
+		
+	}	 			
+	
+	public static final String  USER_OF_USER_ORDER ="user_order.user";
+	protected void checkUserIdOfUserOrder(OmsUserContext userContext, String userId, List<Message> messageList)
+	{
+		
+	 	checkIdOfUserOrder(userContext,userId, messageList); 		
+		
+	}	 			
+	
+	public static final String  PLATFORM_OF_USER_ORDER ="user_order.platform";
+	protected void checkPlatformIdOfUserOrder(OmsUserContext userContext, String platformId, List<Message> messageList)
+	{
+		
+	 	checkIdOfUserOrder(userContext,platformId, messageList); 		
+		
+	}	 			
+	
+	public static final String  LAST_UPDATE_TIME_OF_USER_ORDER ="user_order.last_update_time";
+	protected void checkLastUpdateTimeOfUserOrder(OmsUserContext userContext, String lastUpdateTime, List<Message> messageList)
+	{
+		
+	 	checkStringLengthRange(lastUpdateTime,5, 64,LAST_UPDATE_TIME_OF_USER_ORDER, messageList); 		
+		
+	}	 			
+	
+	public static final String  VERSION_OF_USER_ORDER ="user_order.version";
+	protected void checkVersionOfUserOrder(OmsUserContext userContext, int version, List<Message> messageList)
+	{
+		
+	 	checkIntegerRange(version,0, Integer.MAX_VALUE,VERSION_OF_USER_ORDER, messageList); 		
+		
+	}	 			
+	
+	public static final String  ID_OF_LINE_ITEM ="line_item.id";
+	protected void checkIdOfLineItem(OmsUserContext userContext, String id, List<Message> messageList)
+	{
+		
+	 	checkStringLengthRange(id,5, 64,ID_OF_LINE_ITEM, messageList); 		
+		
+	}	 			
+	
+	public static final String  NAME_OF_LINE_ITEM ="line_item.name";
+	protected void checkNameOfLineItem(OmsUserContext userContext, String name, List<Message> messageList)
+	{
+		
+	 	checkStringLengthRange(name,4, 52,NAME_OF_LINE_ITEM, messageList); 		
+		
+	}	 			
+	
+	public static final String  QUANTITY_OF_LINE_ITEM ="line_item.quantity";
+	protected void checkQuantityOfLineItem(OmsUserContext userContext, int quantity, List<Message> messageList)
+	{
+		
+	 	checkIntegerRange(quantity,0, 12,QUANTITY_OF_LINE_ITEM, messageList); 		
+		
+	}	 			
+	
+	public static final String  PRICE_OF_LINE_ITEM ="line_item.price";
+	protected void checkPriceOfLineItem(OmsUserContext userContext, BigDecimal price, List<Message> messageList)
+	{
+		
+	 	checkMoneyAmount(price,0.00, 102.99,PRICE_OF_LINE_ITEM, messageList); 		
+		
+	}	 			
+	
+	public static final String  DISCOUNT_PRICE_OF_LINE_ITEM ="line_item.discount_price";
+	protected void checkDiscountPriceOfLineItem(OmsUserContext userContext, BigDecimal discountPrice, List<Message> messageList)
+	{
+		
+	 	checkMoneyAmount(discountPrice,0.00, 11.03,DISCOUNT_PRICE_OF_LINE_ITEM, messageList); 		
+		
+	}	 			
+	
+	public static final String  USER_ORDER_OF_LINE_ITEM ="line_item.user_order";
+	protected void checkUserOrderIdOfLineItem(OmsUserContext userContext, String userOrderId, List<Message> messageList)
+	{
+		
+	 	checkIdOfLineItem(userContext,userOrderId, messageList); 		
+		
+	}	 			
+	
+	public static final String  VERSION_OF_LINE_ITEM ="line_item.version";
+	protected void checkVersionOfLineItem(OmsUserContext userContext, int version, List<Message> messageList)
+	{
+		
+	 	checkIntegerRange(version,0, Integer.MAX_VALUE,VERSION_OF_LINE_ITEM, messageList); 		
+		
+	}	 			
+	
+	public static final String  ID_OF_ORDER_PROMOTION ="order_promotion.id";
+	protected void checkIdOfOrderPromotion(OmsUserContext userContext, String id, List<Message> messageList)
+	{
+		
+	 	checkStringLengthRange(id,5, 64,ID_OF_ORDER_PROMOTION, messageList); 		
+		
+	}	 			
+	
+	public static final String  NAME_OF_ORDER_PROMOTION ="order_promotion.name";
+	protected void checkNameOfOrderPromotion(OmsUserContext userContext, String name, List<Message> messageList)
+	{
+		
+	 	checkStringLengthRange(name,4, 60,NAME_OF_ORDER_PROMOTION, messageList); 		
+		
+	}	 			
+	
+	public static final String  AMOUNT_OF_ORDER_PROMOTION ="order_promotion.amount";
+	protected void checkAmountOfOrderPromotion(OmsUserContext userContext, int amount, List<Message> messageList)
+	{
+		
+	 	checkIntegerRange(amount,0, 1231,AMOUNT_OF_ORDER_PROMOTION, messageList); 		
+		
+	}	 			
+	
+	public static final String  THREAD_HOLD_OF_ORDER_PROMOTION ="order_promotion.thread_hold";
+	protected void checkThreadHoldOfOrderPromotion(OmsUserContext userContext, int threadHold, List<Message> messageList)
+	{
+		
+	 	checkIntegerRange(threadHold,0, 1230,THREAD_HOLD_OF_ORDER_PROMOTION, messageList); 		
+		
+	}	 			
+	
+	public static final String  TYPE_OF_ORDER_PROMOTION ="order_promotion.type";
+	protected void checkTypeOfOrderPromotion(OmsUserContext userContext, String type, List<Message> messageList)
+	{
+		
+	 	checkStringLengthRange(type,4, 44,TYPE_OF_ORDER_PROMOTION, messageList); 		
+		
+	}	 			
+	
+	public static final String  USER_ORDER_OF_ORDER_PROMOTION ="order_promotion.user_order";
+	protected void checkUserOrderIdOfOrderPromotion(OmsUserContext userContext, String userOrderId, List<Message> messageList)
+	{
+		
+	 	checkIdOfOrderPromotion(userContext,userOrderId, messageList); 		
+		
+	}	 			
+	
+	public static final String  VERSION_OF_ORDER_PROMOTION ="order_promotion.version";
+	protected void checkVersionOfOrderPromotion(OmsUserContext userContext, int version, List<Message> messageList)
+	{
+		
+	 	checkIntegerRange(version,0, Integer.MAX_VALUE,VERSION_OF_ORDER_PROMOTION, messageList); 		
+		
+	}	 			
+	
+	public static final String  ID_OF_MANUAL_ADJUSTMENT ="manual_adjustment.id";
+	protected void checkIdOfManualAdjustment(OmsUserContext userContext, String id, List<Message> messageList)
+	{
+		
+	 	checkStringLengthRange(id,5, 64,ID_OF_MANUAL_ADJUSTMENT, messageList); 		
+		
+	}	 			
+	
+	public static final String  NAME_OF_MANUAL_ADJUSTMENT ="manual_adjustment.name";
+	protected void checkNameOfManualAdjustment(OmsUserContext userContext, String name, List<Message> messageList)
+	{
+		
+	 	checkStringLengthRange(name,4, 60,NAME_OF_MANUAL_ADJUSTMENT, messageList); 		
+		
+	}	 			
+	
+	public static final String  AMOUNT_OF_MANUAL_ADJUSTMENT ="manual_adjustment.amount";
+	protected void checkAmountOfManualAdjustment(OmsUserContext userContext, int amount, List<Message> messageList)
+	{
+		
+	 	checkIntegerRange(amount,0, 1231,AMOUNT_OF_MANUAL_ADJUSTMENT, messageList); 		
+		
+	}	 			
+	
+	public static final String  THREAD_HOLD_OF_MANUAL_ADJUSTMENT ="manual_adjustment.thread_hold";
+	protected void checkThreadHoldOfManualAdjustment(OmsUserContext userContext, int threadHold, List<Message> messageList)
+	{
+		
+	 	checkIntegerRange(threadHold,0, 1230,THREAD_HOLD_OF_MANUAL_ADJUSTMENT, messageList); 		
+		
+	}	 			
+	
+	public static final String  TYPE_OF_MANUAL_ADJUSTMENT ="manual_adjustment.type";
+	protected void checkTypeOfManualAdjustment(OmsUserContext userContext, String type, List<Message> messageList)
+	{
+		
+	 	checkStringLengthRange(type,1, 36,TYPE_OF_MANUAL_ADJUSTMENT, messageList); 		
+		
+	}	 			
+	
+	public static final String  USER_ORDER_OF_MANUAL_ADJUSTMENT ="manual_adjustment.user_order";
+	protected void checkUserOrderIdOfManualAdjustment(OmsUserContext userContext, String userOrderId, List<Message> messageList)
+	{
+		
+	 	checkIdOfManualAdjustment(userContext,userOrderId, messageList); 		
+		
+	}	 			
+	
+	public static final String  VERSION_OF_MANUAL_ADJUSTMENT ="manual_adjustment.version";
+	protected void checkVersionOfManualAdjustment(OmsUserContext userContext, int version, List<Message> messageList)
+	{
+		
+	 	checkIntegerRange(version,0, Integer.MAX_VALUE,VERSION_OF_MANUAL_ADJUSTMENT, messageList); 		
+		
+	}	 			
+	
+	public static final String  ID_OF_SHIPPING_GROUP ="shipping_group.id";
+	protected void checkIdOfShippingGroup(OmsUserContext userContext, String id, List<Message> messageList)
+	{
+		
+	 	checkStringLengthRange(id,5, 64,ID_OF_SHIPPING_GROUP, messageList); 		
+		
+	}	 			
+	
+	public static final String  NAME_OF_SHIPPING_GROUP ="shipping_group.name";
+	protected void checkNameOfShippingGroup(OmsUserContext userContext, String name, List<Message> messageList)
+	{
+		
+	 	checkStringLengthRange(name,4, 48,NAME_OF_SHIPPING_GROUP, messageList); 		
+		
+	}	 			
+	
+	public static final String  LINE1_OF_SHIPPING_GROUP ="shipping_group.line1";
+	protected void checkLine1OfShippingGroup(OmsUserContext userContext, String line1, List<Message> messageList)
+	{
+		
+	 	checkStringLengthRange(line1,7, 100,LINE1_OF_SHIPPING_GROUP, messageList); 		
+		
+	}	 			
+	
+	public static final String  LINE2_OF_SHIPPING_GROUP ="shipping_group.line2";
+	protected void checkLine2OfShippingGroup(OmsUserContext userContext, String line2, List<Message> messageList)
+	{
+		
+	 	checkStringLengthRange(line2,4, 48,LINE2_OF_SHIPPING_GROUP, messageList); 		
+		
+	}	 			
+	
+	public static final String  CITY_OF_SHIPPING_GROUP ="shipping_group.city";
+	protected void checkCityOfShippingGroup(OmsUserContext userContext, String city, List<Message> messageList)
+	{
+		
+	 	checkStringLengthRange(city,4, 60,CITY_OF_SHIPPING_GROUP, messageList); 		
+		
+	}	 			
+	
+	public static final String  STATE_OF_SHIPPING_GROUP ="shipping_group.state";
+	protected void checkStateOfShippingGroup(OmsUserContext userContext, String state, List<Message> messageList)
+	{
+		
+	 	checkStringLengthRange(state,1, 8,STATE_OF_SHIPPING_GROUP, messageList); 		
+		
+	}	 			
+	
+	public static final String  ZIP_CODE_OF_SHIPPING_GROUP ="shipping_group.zip_code";
+	protected void checkZipCodeOfShippingGroup(OmsUserContext userContext, int zipCode, List<Message> messageList)
+	{
+		
+	 	checkIntegerRange(zipCode,0, 980087,ZIP_CODE_OF_SHIPPING_GROUP, messageList); 		
+		
+	}	 			
+	
+	public static final String  COUNTRY_OF_SHIPPING_GROUP ="shipping_group.country";
+	protected void checkCountryOfShippingGroup(OmsUserContext userContext, String country, List<Message> messageList)
+	{
+		
+	 	checkCountryCode(country,1, 8,COUNTRY_OF_SHIPPING_GROUP, messageList); 		
+		
+	}	 			
+	
+	public static final String  USER_ORDER_OF_SHIPPING_GROUP ="shipping_group.user_order";
+	protected void checkUserOrderIdOfShippingGroup(OmsUserContext userContext, String userOrderId, List<Message> messageList)
+	{
+		
+	 	checkIdOfShippingGroup(userContext,userOrderId, messageList); 		
+		
+	}	 			
+	
+	public static final String  VERSION_OF_SHIPPING_GROUP ="shipping_group.version";
+	protected void checkVersionOfShippingGroup(OmsUserContext userContext, int version, List<Message> messageList)
+	{
+		
+	 	checkIntegerRange(version,0, Integer.MAX_VALUE,VERSION_OF_SHIPPING_GROUP, messageList); 		
+		
+	}	 			
+	
+	public static final String  ID_OF_PAYMENT_GROUP ="payment_group.id";
+	protected void checkIdOfPaymentGroup(OmsUserContext userContext, String id, List<Message> messageList)
+	{
+		
+	 	checkStringLengthRange(id,5, 64,ID_OF_PAYMENT_GROUP, messageList); 		
+		
+	}	 			
+	
+	public static final String  NAME_OF_PAYMENT_GROUP ="payment_group.name";
+	protected void checkNameOfPaymentGroup(OmsUserContext userContext, String name, List<Message> messageList)
+	{
+		
+	 	checkStringLengthRange(name,4, 52,NAME_OF_PAYMENT_GROUP, messageList); 		
+		
+	}	 			
+	
+	public static final String  AMOUNT_OF_PAYMENT_GROUP ="payment_group.amount";
+	protected void checkAmountOfPaymentGroup(OmsUserContext userContext, BigDecimal amount, List<Message> messageList)
+	{
+		
+	 	checkMoneyAmount(amount,0.00, 123.00,AMOUNT_OF_PAYMENT_GROUP, messageList); 		
+		
+	}	 			
+	
+	public static final String  USER_ORDER_OF_PAYMENT_GROUP ="payment_group.user_order";
+	protected void checkUserOrderIdOfPaymentGroup(OmsUserContext userContext, String userOrderId, List<Message> messageList)
+	{
+		
+	 	checkIdOfPaymentGroup(userContext,userOrderId, messageList); 		
+		
+	}	 			
+	
+	public static final String  STATUS_OF_PAYMENT_GROUP ="payment_group.status";
+	protected void checkStatusOfPaymentGroup(OmsUserContext userContext, String status, List<Message> messageList)
+	{
+		
+	 	checkStringLengthRange(status,2, 28,STATUS_OF_PAYMENT_GROUP, messageList); 		
+		
+	}	 			
+	
+	public static final String  VERSION_OF_PAYMENT_GROUP ="payment_group.version";
+	protected void checkVersionOfPaymentGroup(OmsUserContext userContext, int version, List<Message> messageList)
+	{
+		
+	 	checkIntegerRange(version,0, Integer.MAX_VALUE,VERSION_OF_PAYMENT_GROUP, messageList); 		
+		
+	}	 			
+	
 	public static final String  ID_OF_USER_DOMAIN ="user_domain.id";
 	protected void checkIdOfUserDomain(OmsUserContext userContext, String id, List<Message> messageList)
 	{

@@ -301,7 +301,7 @@ class PlatformPreference extends Component {
 
   render() {
     // eslint-disable-next-line max-len
-    const { id,displayName,  } = this.props.platform
+    const { id,displayName, profileCount, userOrderCount } = this.props.platform
     const cardsData = {cardsName:"Platform",cardsFor: "platform",cardsSource: this.props.platform,
   		subItems: [
     
