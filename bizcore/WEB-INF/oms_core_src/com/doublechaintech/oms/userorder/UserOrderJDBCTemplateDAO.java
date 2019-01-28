@@ -828,7 +828,14 @@ public class UserOrderJDBCTemplateDAO extends OmsNamingServiceDAO implements Use
  		
  		StatsInfo info = new StatsInfo();
  		
- 		
+ 
+		StatsItem lastUpdateTimeStatsItem = new StatsItem();
+		//UserOrder.LAST_UPDATE_TIME_PROPERTY
+		lastUpdateTimeStatsItem.setDisplayName("User Order");
+		lastUpdateTimeStatsItem.setInternalName(formatKeyForDateLine(UserOrder.LAST_UPDATE_TIME_PROPERTY));
+		lastUpdateTimeStatsItem.setResult(statsWithGroup(DateKey.class,wrapWithDate(UserOrder.LAST_UPDATE_TIME_PROPERTY),filterKey,emptyOptions));
+		info.addItem(lastUpdateTimeStatsItem);
+ 				
  		resultList.setStatsInfo(info);
 
  	
@@ -871,7 +878,14 @@ public class UserOrderJDBCTemplateDAO extends OmsNamingServiceDAO implements Use
  		
  		StatsInfo info = new StatsInfo();
  		
- 		
+ 
+		StatsItem lastUpdateTimeStatsItem = new StatsItem();
+		//UserOrder.LAST_UPDATE_TIME_PROPERTY
+		lastUpdateTimeStatsItem.setDisplayName("User Order");
+		lastUpdateTimeStatsItem.setInternalName(formatKeyForDateLine(UserOrder.LAST_UPDATE_TIME_PROPERTY));
+		lastUpdateTimeStatsItem.setResult(statsWithGroup(DateKey.class,wrapWithDate(UserOrder.LAST_UPDATE_TIME_PROPERTY),filterKey,emptyOptions));
+		info.addItem(lastUpdateTimeStatsItem);
+ 				
  		resultList.setStatsInfo(info);
 
  	

@@ -270,7 +270,7 @@ const internalSummaryOf = (userOrder,targetComponent) =>{
 	      "transferToAnotherUser","anotherUserId",userOrder.user?userOrder.user.id:"")} 
   style={{fontSize: 20,color:"red"}} />
 </Description>
-<Description term="Last Update Time">{userOrder.lastUpdateTime}</Description> 
+<Description term="Last Update Time">{ moment(userOrder.lastUpdateTime).format('YYYY-MM-DD')}</Description> 
 	
         {buildTransferModal(userOrder,targetComponent)}
       </DescriptionList>

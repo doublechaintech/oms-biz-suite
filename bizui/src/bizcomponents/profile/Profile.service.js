@@ -39,14 +39,14 @@ const transferToAnotherPlatform = (id, parameters) => {
 
 
 const addUserOrder = (targetObjectId, parameters) => {
-  const url = `${PREFIX}profileManager/addUserOrder/profileId/title/totalAdjustment/totalAmount/platformId/lastUpdateTime/tokensExpr/`
+  const url = `${PREFIX}profileManager/addUserOrder/profileId/title/totalAdjustment/totalAmount/platformId/tokensExpr/`
   const profileId = targetObjectId
   const requestParameters = { ...parameters, profileId, tokensExpr: 'none' }
   return postForm({ url,requestParameters})
 }
 
 const updateUserOrder = (targetObjectId, parameters) => {
-  const url = `${PREFIX}profileManager/updateUserOrderProperties/profileId/id/title/totalAdjustment/totalAmount/lastUpdateTime/tokensExpr/`
+  const url = `${PREFIX}profileManager/updateUserOrderProperties/profileId/id/title/totalAdjustment/totalAmount/tokensExpr/`
   const profileId = targetObjectId
   const requestParameters = { ...parameters, profileId, tokensExpr: 'none' }
   return postForm({ url,requestParameters})

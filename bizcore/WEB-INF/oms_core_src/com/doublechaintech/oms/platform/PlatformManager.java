@@ -37,9 +37,9 @@ public interface PlatformManager{
 
 	*/
 
-	//public  UserOrderManager getUserOrderManager(OmsUserContext userContext, String platformId, String title, BigDecimal totalAdjustment, BigDecimal totalAmount, String userId, String lastUpdateTime ,String [] tokensExpr)  throws Exception;
+	//public  UserOrderManager getUserOrderManager(OmsUserContext userContext, String platformId, String title, BigDecimal totalAdjustment, BigDecimal totalAmount, String userId ,String [] tokensExpr)  throws Exception;
 	
-	public  Platform addUserOrder(OmsUserContext userContext, String platformId, String title, BigDecimal totalAdjustment, BigDecimal totalAmount, String userId, String lastUpdateTime , String [] tokensExpr)  throws Exception;
+	public  Platform addUserOrder(OmsUserContext userContext, String platformId, String title, BigDecimal totalAdjustment, BigDecimal totalAmount, String userId , String [] tokensExpr)  throws Exception;
 	public  Platform removeUserOrder(OmsUserContext userContext, String platformId, String userOrderId, int userOrderVersion,String [] tokensExpr)  throws Exception;
 	public  Platform updateUserOrder(OmsUserContext userContext, String platformId, String userOrderId, int userOrderVersion, String property, String newValueExpr,String [] tokensExpr)  throws Exception;
 

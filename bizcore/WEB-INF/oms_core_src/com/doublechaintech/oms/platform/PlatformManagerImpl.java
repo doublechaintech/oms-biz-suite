@@ -646,7 +646,7 @@ public class PlatformManagerImpl extends CustomOmsCheckerManager implements Plat
 
 
 
-	protected void checkParamsForAddingUserOrder(OmsUserContext userContext, String platformId, String title, BigDecimal totalAdjustment, BigDecimal totalAmount, String userId, String lastUpdateTime,String [] tokensExpr) throws Exception{
+	protected void checkParamsForAddingUserOrder(OmsUserContext userContext, String platformId, String title, BigDecimal totalAdjustment, BigDecimal totalAmount, String userId,String [] tokensExpr) throws Exception{
 		
 		
 
@@ -662,19 +662,17 @@ public class PlatformManagerImpl extends CustomOmsCheckerManager implements Plat
 		userContext.getChecker().checkTotalAmountOfUserOrder(totalAmount);
 		
 		userContext.getChecker().checkUserIdOfUserOrder(userId);
-		
-		userContext.getChecker().checkLastUpdateTimeOfUserOrder(lastUpdateTime);
 	
 		userContext.getChecker().throwExceptionIfHasErrors(PlatformManagerException.class);
 
 	
 	}
-	public  Platform addUserOrder(OmsUserContext userContext, String platformId, String title, BigDecimal totalAdjustment, BigDecimal totalAmount, String userId, String lastUpdateTime, String [] tokensExpr) throws Exception
+	public  Platform addUserOrder(OmsUserContext userContext, String platformId, String title, BigDecimal totalAdjustment, BigDecimal totalAmount, String userId, String [] tokensExpr) throws Exception
 	{	
 		
-		checkParamsForAddingUserOrder(userContext,platformId,title, totalAdjustment, totalAmount, userId, lastUpdateTime,tokensExpr);
+		checkParamsForAddingUserOrder(userContext,platformId,title, totalAdjustment, totalAmount, userId,tokensExpr);
 		
-		UserOrder userOrder = createUserOrder(userContext,title, totalAdjustment, totalAmount, userId, lastUpdateTime);
+		UserOrder userOrder = createUserOrder(userContext,title, totalAdjustment, totalAmount, userId);
 		
 		Platform platform = loadPlatform(userContext, platformId, allTokens());
 		synchronized(platform){ 
@@ -687,7 +685,7 @@ public class PlatformManagerImpl extends CustomOmsCheckerManager implements Plat
 			return present(userContext,platform, mergedAllTokens(tokensExpr));
 		}
 	}
-	protected void checkParamsForUpdatingUserOrderProperties(OmsUserContext userContext, String platformId,String id,String title,BigDecimal totalAdjustment,BigDecimal totalAmount,String lastUpdateTime,String [] tokensExpr) throws Exception {
+	protected void checkParamsForUpdatingUserOrderProperties(OmsUserContext userContext, String platformId,String id,String title,BigDecimal totalAdjustment,BigDecimal totalAmount,String [] tokensExpr) throws Exception {
 		
 		userContext.getChecker().checkIdOfPlatform(platformId);
 		userContext.getChecker().checkIdOfUserOrder(id);
@@ -695,14 +693,13 @@ public class PlatformManagerImpl extends CustomOmsCheckerManager implements Plat
 		userContext.getChecker().checkTitleOfUserOrder( title);
 		userContext.getChecker().checkTotalAdjustmentOfUserOrder( totalAdjustment);
 		userContext.getChecker().checkTotalAmountOfUserOrder( totalAmount);
-		userContext.getChecker().checkLastUpdateTimeOfUserOrder( lastUpdateTime);
 
 		userContext.getChecker().throwExceptionIfHasErrors(PlatformManagerException.class);
 		
 	}
-	public  Platform updateUserOrderProperties(OmsUserContext userContext, String platformId, String id,String title,BigDecimal totalAdjustment,BigDecimal totalAmount,String lastUpdateTime, String [] tokensExpr) throws Exception
+	public  Platform updateUserOrderProperties(OmsUserContext userContext, String platformId, String id,String title,BigDecimal totalAdjustment,BigDecimal totalAmount, String [] tokensExpr) throws Exception
 	{	
-		checkParamsForUpdatingUserOrderProperties(userContext,platformId,id,title,totalAdjustment,totalAmount,lastUpdateTime,tokensExpr);
+		checkParamsForUpdatingUserOrderProperties(userContext,platformId,id,title,totalAdjustment,totalAmount,tokensExpr);
 
 		Map<String, Object> options = tokens()
 				.allTokens()
@@ -720,7 +717,6 @@ public class PlatformManagerImpl extends CustomOmsCheckerManager implements Plat
 		item.updateTitle( title );
 		item.updateTotalAdjustment( totalAdjustment );
 		item.updateTotalAmount( totalAmount );
-		item.updateLastUpdateTime( lastUpdateTime );
 
 		
 		//checkParamsForAddingUserOrder(userContext,platformId,name, code, used,tokensExpr);
@@ -731,7 +727,7 @@ public class PlatformManagerImpl extends CustomOmsCheckerManager implements Plat
 	}
 	
 	
-	protected UserOrder createUserOrder(OmsUserContext userContext, String title, BigDecimal totalAdjustment, BigDecimal totalAmount, String userId, String lastUpdateTime) throws Exception{
+	protected UserOrder createUserOrder(OmsUserContext userContext, String title, BigDecimal totalAdjustment, BigDecimal totalAmount, String userId) throws Exception{
 
 		UserOrder userOrder = new UserOrder();
 		
@@ -742,7 +738,7 @@ public class PlatformManagerImpl extends CustomOmsCheckerManager implements Plat
 		Profile  user = new Profile();
 		user.setId(userId);		
 		userOrder.setUser(user);		
-		userOrder.setLastUpdateTime(lastUpdateTime);
+		userOrder.setLastUpdateTime(userContext.now());
 	
 		
 		return userOrder;
@@ -834,7 +830,7 @@ public class PlatformManagerImpl extends CustomOmsCheckerManager implements Plat
 			//Will be good when the platform loaded from this JVM process cache.
 			//Also good when there is a RAM based DAO implementation
 			
-			
+			userOrder.updateLastUpdateTime(userContext.now());
 			
 			platform.copyUserOrderFrom( userOrder );		
 			platform = savePlatform(userContext, platform, tokens().withUserOrderList().done());
@@ -866,10 +862,6 @@ public class PlatformManagerImpl extends CustomOmsCheckerManager implements Plat
 			userContext.getChecker().checkTotalAmountOfUserOrder(parseBigDecimal(newValueExpr));
 		}
 		
-		if(UserOrder.LAST_UPDATE_TIME_PROPERTY.equals(property)){
-			userContext.getChecker().checkLastUpdateTimeOfUserOrder(parseString(newValueExpr));
-		}
-		
 	
 		userContext.getChecker().throwExceptionIfHasErrors(PlatformManagerException.class);
 	
@@ -899,7 +891,7 @@ public class PlatformManagerImpl extends CustomOmsCheckerManager implements Plat
 			}
 			
 			userOrder.changeProperty(property, newValueExpr);
-			
+			userOrder.updateLastUpdateTime(userContext.now());
 			platform = savePlatform(userContext, platform, tokens().withUserOrderList().done());
 			return present(userContext,platform, mergedAllTokens(tokensExpr));
 		}

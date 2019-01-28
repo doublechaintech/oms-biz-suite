@@ -1,7 +1,7 @@
 
 
 
-=================Execute Report (Model Time 190128T1215) @Mon Jan 28 12:16:47 CST 2019, 21 objects and 163 fields===========================
+=================Execute Report (Model Time 190128T1225) @Mon Jan 28 12:25:36 CST 2019, 21 objects and 163 fields===========================
 
 
 
@@ -116,7 +116,7 @@ user_order{
 		money	total_amount('$10020.12'), verb: false, required: true;
 		profile	user('$(object)'), verb: false, required: true, referenceBy: userOrderList;
 		platform	platform('$(object)'), verb: false, required: true, referenceBy: userOrderList;
-		string	last_update_time('lastUpdateTime()'), verb: false, required: true;
+		date_time_update	last_update_time('updateTime()'), verb: false, required: true;
 		int	version('2147483647'), verb: false, required: true;
 	}
 	references field(5){
@@ -237,7 +237,7 @@ user_order{
 		money	total_amount('$10020.12'), verb: false, required: true;
 		profile	user('$(object)'), verb: false, required: true, referenceBy: userOrderList;
 		platform	platform('$(object)'), verb: false, required: true, referenceBy: userOrderList;
-		string	last_update_time('lastUpdateTime()'), verb: false, required: true;
+		date_time_update	last_update_time('updateTime()'), verb: false, required: true;
 		int	version('2147483647'), verb: false, required: true;
 	}
 	references field(5){

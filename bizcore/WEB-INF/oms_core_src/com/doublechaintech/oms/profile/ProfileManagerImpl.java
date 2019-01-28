@@ -457,7 +457,7 @@ public class ProfileManagerImpl extends CustomOmsCheckerManager implements Profi
 	
 	
 
-	protected void checkParamsForAddingUserOrder(OmsUserContext userContext, String profileId, String title, BigDecimal totalAdjustment, BigDecimal totalAmount, String platformId, String lastUpdateTime,String [] tokensExpr) throws Exception{
+	protected void checkParamsForAddingUserOrder(OmsUserContext userContext, String profileId, String title, BigDecimal totalAdjustment, BigDecimal totalAmount, String platformId,String [] tokensExpr) throws Exception{
 		
 		
 
@@ -473,19 +473,17 @@ public class ProfileManagerImpl extends CustomOmsCheckerManager implements Profi
 		userContext.getChecker().checkTotalAmountOfUserOrder(totalAmount);
 		
 		userContext.getChecker().checkPlatformIdOfUserOrder(platformId);
-		
-		userContext.getChecker().checkLastUpdateTimeOfUserOrder(lastUpdateTime);
 	
 		userContext.getChecker().throwExceptionIfHasErrors(ProfileManagerException.class);
 
 	
 	}
-	public  Profile addUserOrder(OmsUserContext userContext, String profileId, String title, BigDecimal totalAdjustment, BigDecimal totalAmount, String platformId, String lastUpdateTime, String [] tokensExpr) throws Exception
+	public  Profile addUserOrder(OmsUserContext userContext, String profileId, String title, BigDecimal totalAdjustment, BigDecimal totalAmount, String platformId, String [] tokensExpr) throws Exception
 	{	
 		
-		checkParamsForAddingUserOrder(userContext,profileId,title, totalAdjustment, totalAmount, platformId, lastUpdateTime,tokensExpr);
+		checkParamsForAddingUserOrder(userContext,profileId,title, totalAdjustment, totalAmount, platformId,tokensExpr);
 		
-		UserOrder userOrder = createUserOrder(userContext,title, totalAdjustment, totalAmount, platformId, lastUpdateTime);
+		UserOrder userOrder = createUserOrder(userContext,title, totalAdjustment, totalAmount, platformId);
 		
 		Profile profile = loadProfile(userContext, profileId, allTokens());
 		synchronized(profile){ 
@@ -498,7 +496,7 @@ public class ProfileManagerImpl extends CustomOmsCheckerManager implements Profi
 			return present(userContext,profile, mergedAllTokens(tokensExpr));
 		}
 	}
-	protected void checkParamsForUpdatingUserOrderProperties(OmsUserContext userContext, String profileId,String id,String title,BigDecimal totalAdjustment,BigDecimal totalAmount,String lastUpdateTime,String [] tokensExpr) throws Exception {
+	protected void checkParamsForUpdatingUserOrderProperties(OmsUserContext userContext, String profileId,String id,String title,BigDecimal totalAdjustment,BigDecimal totalAmount,String [] tokensExpr) throws Exception {
 		
 		userContext.getChecker().checkIdOfProfile(profileId);
 		userContext.getChecker().checkIdOfUserOrder(id);
@@ -506,14 +504,13 @@ public class ProfileManagerImpl extends CustomOmsCheckerManager implements Profi
 		userContext.getChecker().checkTitleOfUserOrder( title);
 		userContext.getChecker().checkTotalAdjustmentOfUserOrder( totalAdjustment);
 		userContext.getChecker().checkTotalAmountOfUserOrder( totalAmount);
-		userContext.getChecker().checkLastUpdateTimeOfUserOrder( lastUpdateTime);
 
 		userContext.getChecker().throwExceptionIfHasErrors(ProfileManagerException.class);
 		
 	}
-	public  Profile updateUserOrderProperties(OmsUserContext userContext, String profileId, String id,String title,BigDecimal totalAdjustment,BigDecimal totalAmount,String lastUpdateTime, String [] tokensExpr) throws Exception
+	public  Profile updateUserOrderProperties(OmsUserContext userContext, String profileId, String id,String title,BigDecimal totalAdjustment,BigDecimal totalAmount, String [] tokensExpr) throws Exception
 	{	
-		checkParamsForUpdatingUserOrderProperties(userContext,profileId,id,title,totalAdjustment,totalAmount,lastUpdateTime,tokensExpr);
+		checkParamsForUpdatingUserOrderProperties(userContext,profileId,id,title,totalAdjustment,totalAmount,tokensExpr);
 
 		Map<String, Object> options = tokens()
 				.allTokens()
@@ -531,7 +528,6 @@ public class ProfileManagerImpl extends CustomOmsCheckerManager implements Profi
 		item.updateTitle( title );
 		item.updateTotalAdjustment( totalAdjustment );
 		item.updateTotalAmount( totalAmount );
-		item.updateLastUpdateTime( lastUpdateTime );
 
 		
 		//checkParamsForAddingUserOrder(userContext,profileId,name, code, used,tokensExpr);
@@ -542,7 +538,7 @@ public class ProfileManagerImpl extends CustomOmsCheckerManager implements Profi
 	}
 	
 	
-	protected UserOrder createUserOrder(OmsUserContext userContext, String title, BigDecimal totalAdjustment, BigDecimal totalAmount, String platformId, String lastUpdateTime) throws Exception{
+	protected UserOrder createUserOrder(OmsUserContext userContext, String title, BigDecimal totalAdjustment, BigDecimal totalAmount, String platformId) throws Exception{
 
 		UserOrder userOrder = new UserOrder();
 		
@@ -553,7 +549,7 @@ public class ProfileManagerImpl extends CustomOmsCheckerManager implements Profi
 		Platform  platform = new Platform();
 		platform.setId(platformId);		
 		userOrder.setPlatform(platform);		
-		userOrder.setLastUpdateTime(lastUpdateTime);
+		userOrder.setLastUpdateTime(userContext.now());
 	
 		
 		return userOrder;
@@ -645,7 +641,7 @@ public class ProfileManagerImpl extends CustomOmsCheckerManager implements Profi
 			//Will be good when the profile loaded from this JVM process cache.
 			//Also good when there is a RAM based DAO implementation
 			
-			
+			userOrder.updateLastUpdateTime(userContext.now());
 			
 			profile.copyUserOrderFrom( userOrder );		
 			profile = saveProfile(userContext, profile, tokens().withUserOrderList().done());
@@ -677,10 +673,6 @@ public class ProfileManagerImpl extends CustomOmsCheckerManager implements Profi
 			userContext.getChecker().checkTotalAmountOfUserOrder(parseBigDecimal(newValueExpr));
 		}
 		
-		if(UserOrder.LAST_UPDATE_TIME_PROPERTY.equals(property)){
-			userContext.getChecker().checkLastUpdateTimeOfUserOrder(parseString(newValueExpr));
-		}
-		
 	
 		userContext.getChecker().throwExceptionIfHasErrors(ProfileManagerException.class);
 	
@@ -710,7 +702,7 @@ public class ProfileManagerImpl extends CustomOmsCheckerManager implements Profi
 			}
 			
 			userOrder.changeProperty(property, newValueExpr);
-			
+			userOrder.updateLastUpdateTime(userContext.now());
 			profile = saveProfile(userContext, profile, tokens().withUserOrderList().done());
 			return present(userContext,profile, mergedAllTokens(tokensExpr));
 		}

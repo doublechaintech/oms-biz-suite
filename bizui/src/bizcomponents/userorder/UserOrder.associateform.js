@@ -19,9 +19,8 @@ const testValues = {};
 /*
 const testValues = {
   title: 'a consumer order',
-  totalAdjustment: '84.34',
-  totalAmount: '9473.88',
-  lastUpdateTime: 'lastUpdateTime()',
+  totalAdjustment: '80.81',
+  totalAmount: '7304.20',
   userId: 'P000001',
   platformId: 'P000001',
 }
@@ -168,16 +167,6 @@ class UserOrderAssociateForm extends Component {
                     rules: [{ required: true, message: appLocaleName(userContext,"PleaseInput") }],
                   })(
                     <Input placeholder="请输入Total Amount" />
-                  )}
-                </Form.Item>
-              </Col>
-
-              <Col lg={12} md={12} sm={12}>
-                <Form.Item label={fieldLabels.lastUpdateTime} {...formItemLayout}>
-                  {getFieldDecorator('lastUpdateTime', {
-                    rules: [{ required: true, message: appLocaleName(userContext,"PleaseInput") }],
-                  })(
-                    <Input placeholder="请输入Last Update Time" />
                   )}
                 </Form.Item>
               </Col>

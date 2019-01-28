@@ -63,7 +63,7 @@ public class UserOrder extends BaseEntity implements  java.io.Serializable{
 	protected		BigDecimal          	mTotalAmount        ;
 	protected		Profile             	mUser               ;
 	protected		Platform            	mPlatform           ;
-	protected		String              	mLastUpdateTime     ;
+	protected		DateTime            	mLastUpdateTime     ;
 	protected		int                 	mVersion            ;
 	
 	
@@ -85,7 +85,7 @@ public class UserOrder extends BaseEntity implements  java.io.Serializable{
 		this.changed = true;
 	}
 	
-	public 	UserOrder(String title, BigDecimal totalAdjustment, BigDecimal totalAmount, Profile user, Platform platform, String lastUpdateTime)
+	public 	UserOrder(String title, BigDecimal totalAdjustment, BigDecimal totalAmount, Profile user, Platform platform, DateTime lastUpdateTime)
 	{
 		setTitle(title);
 		setTotalAdjustment(totalAdjustment);
@@ -168,9 +168,9 @@ public class UserOrder extends BaseEntity implements  java.io.Serializable{
 			
 			
 	protected void changeLastUpdateTimeProperty(String newValueExpr){
-		String oldValue = getLastUpdateTime();
-		String newValue = parseString(newValueExpr);
-		if(equalsString(oldValue , newValue)){
+		DateTime oldValue = getLastUpdateTime();
+		DateTime newValue = parseTimestamp(newValueExpr);
+		if(equalsTimestamp(oldValue , newValue)){
 			return;//they can be both null, or exact the same object, this is much faster than equals function
 		}
 		//they are surely different each other
@@ -275,14 +275,14 @@ public class UserOrder extends BaseEntity implements  java.io.Serializable{
 		this.changed = true;
 	}
 	
-	public void setLastUpdateTime(String lastUpdateTime){
-		this.mLastUpdateTime = trimString(lastUpdateTime);;
+	public void setLastUpdateTime(DateTime lastUpdateTime){
+		this.mLastUpdateTime = lastUpdateTime;;
 	}
-	public String getLastUpdateTime(){
+	public DateTime getLastUpdateTime(){
 		return this.mLastUpdateTime;
 	}
-	public UserOrder updateLastUpdateTime(String lastUpdateTime){
-		this.mLastUpdateTime = trimString(lastUpdateTime);;
+	public UserOrder updateLastUpdateTime(DateTime lastUpdateTime){
+		this.mLastUpdateTime = lastUpdateTime;;
 		this.changed = true;
 		return this;
 	}
