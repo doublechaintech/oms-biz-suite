@@ -81,6 +81,188 @@ public class PlatformForm extends BaseForm {
 	
 
 
+
+	public PlatformForm profileIdFieldForProfile(String parameterName, String initValue){
+		FormField field =  idFromProfile(parameterName, initValue);		
+		this.addFormField(field);
+		return this;
+	}
+	
+	public PlatformForm profileIdFieldForProfile(String initValue){
+		return profileIdFieldForProfile("profileId",initValue);
+	}
+	public PlatformForm profileIdFieldForProfile(){
+		return profileIdFieldForProfile("profileId","");
+	}
+
+
+	public PlatformForm nameFieldForProfile(String parameterName, String initValue){
+		FormField field =  nameFromProfile(parameterName, initValue);		
+		this.addFormField(field);
+		return this;
+	}
+	
+	public PlatformForm nameFieldForProfile(String initValue){
+		return nameFieldForProfile("name",initValue);
+	}
+	public PlatformForm nameFieldForProfile(){
+		return nameFieldForProfile("name","");
+	}
+
+
+	public PlatformForm ageFieldForProfile(String parameterName, String initValue){
+		FormField field =  ageFromProfile(parameterName, initValue);		
+		this.addFormField(field);
+		return this;
+	}
+	
+	public PlatformForm ageFieldForProfile(String initValue){
+		return ageFieldForProfile("age",initValue);
+	}
+	public PlatformForm ageFieldForProfile(){
+		return ageFieldForProfile("age","");
+	}
+
+
+	public PlatformForm genderFieldForProfile(String parameterName, String initValue){
+		FormField field =  genderFromProfile(parameterName, initValue);		
+		this.addFormField(field);
+		return this;
+	}
+	
+	public PlatformForm genderFieldForProfile(String initValue){
+		return genderFieldForProfile("gender",initValue);
+	}
+	public PlatformForm genderFieldForProfile(){
+		return genderFieldForProfile("gender","");
+	}
+
+
+	public PlatformForm lastUpdateTimeFieldForProfile(String parameterName, String initValue){
+		FormField field =  lastUpdateTimeFromProfile(parameterName, initValue);		
+		this.addFormField(field);
+		return this;
+	}
+	
+	public PlatformForm lastUpdateTimeFieldForProfile(String initValue){
+		return lastUpdateTimeFieldForProfile("lastUpdateTime",initValue);
+	}
+	public PlatformForm lastUpdateTimeFieldForProfile(){
+		return lastUpdateTimeFieldForProfile("lastUpdateTime","");
+	}
+
+
+	public PlatformForm platformIdFieldForProfile(String parameterName, String initValue){
+		FormField field =  platformIdFromProfile(parameterName, initValue);		
+		this.addFormField(field);
+		return this;
+	}
+	
+	public PlatformForm platformIdFieldForProfile(String initValue){
+		return platformIdFieldForProfile("platformId",initValue);
+	}
+	public PlatformForm platformIdFieldForProfile(){
+		return platformIdFieldForProfile("platformId","");
+	}
+
+
+	public PlatformForm userOrderIdFieldForUserOrder(String parameterName, String initValue){
+		FormField field =  idFromUserOrder(parameterName, initValue);		
+		this.addFormField(field);
+		return this;
+	}
+	
+	public PlatformForm userOrderIdFieldForUserOrder(String initValue){
+		return userOrderIdFieldForUserOrder("userOrderId",initValue);
+	}
+	public PlatformForm userOrderIdFieldForUserOrder(){
+		return userOrderIdFieldForUserOrder("userOrderId","");
+	}
+
+
+	public PlatformForm titleFieldForUserOrder(String parameterName, String initValue){
+		FormField field =  titleFromUserOrder(parameterName, initValue);		
+		this.addFormField(field);
+		return this;
+	}
+	
+	public PlatformForm titleFieldForUserOrder(String initValue){
+		return titleFieldForUserOrder("title",initValue);
+	}
+	public PlatformForm titleFieldForUserOrder(){
+		return titleFieldForUserOrder("title","");
+	}
+
+
+	public PlatformForm totalAdjustmentFieldForUserOrder(String parameterName, String initValue){
+		FormField field =  totalAdjustmentFromUserOrder(parameterName, initValue);		
+		this.addFormField(field);
+		return this;
+	}
+	
+	public PlatformForm totalAdjustmentFieldForUserOrder(String initValue){
+		return totalAdjustmentFieldForUserOrder("totalAdjustment",initValue);
+	}
+	public PlatformForm totalAdjustmentFieldForUserOrder(){
+		return totalAdjustmentFieldForUserOrder("totalAdjustment","");
+	}
+
+
+	public PlatformForm totalAmountFieldForUserOrder(String parameterName, String initValue){
+		FormField field =  totalAmountFromUserOrder(parameterName, initValue);		
+		this.addFormField(field);
+		return this;
+	}
+	
+	public PlatformForm totalAmountFieldForUserOrder(String initValue){
+		return totalAmountFieldForUserOrder("totalAmount",initValue);
+	}
+	public PlatformForm totalAmountFieldForUserOrder(){
+		return totalAmountFieldForUserOrder("totalAmount","");
+	}
+
+
+	public PlatformForm userIdFieldForUserOrder(String parameterName, String initValue){
+		FormField field =  userIdFromUserOrder(parameterName, initValue);		
+		this.addFormField(field);
+		return this;
+	}
+	
+	public PlatformForm userIdFieldForUserOrder(String initValue){
+		return userIdFieldForUserOrder("userId",initValue);
+	}
+	public PlatformForm userIdFieldForUserOrder(){
+		return userIdFieldForUserOrder("userId","");
+	}
+
+
+	public PlatformForm platformIdFieldForUserOrder(String parameterName, String initValue){
+		FormField field =  platformIdFromUserOrder(parameterName, initValue);		
+		this.addFormField(field);
+		return this;
+	}
+	
+	public PlatformForm platformIdFieldForUserOrder(String initValue){
+		return platformIdFieldForUserOrder("platformId",initValue);
+	}
+	public PlatformForm platformIdFieldForUserOrder(){
+		return platformIdFieldForUserOrder("platformId","");
+	}
+
+
+	public PlatformForm lastUpdateTimeFieldForUserOrder(String parameterName, String initValue){
+		FormField field =  lastUpdateTimeFromUserOrder(parameterName, initValue);		
+		this.addFormField(field);
+		return this;
+	}
+	
+	public PlatformForm lastUpdateTimeFieldForUserOrder(String initValue){
+		return lastUpdateTimeFieldForUserOrder("lastUpdateTime",initValue);
+	}
+	public PlatformForm lastUpdateTimeFieldForUserOrder(){
+		return lastUpdateTimeFieldForUserOrder("lastUpdateTime","");
+	}
+
 	
 
 

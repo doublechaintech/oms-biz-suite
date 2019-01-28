@@ -34,8 +34,66 @@
 	
 	<bean id="platformDAOBase" class="com.doublechaintech.oms.platform.PlatformJDBCTemplateDAO">
 		<property name="dataSource" ref="dataSource" />
+		<property name="profileDAO" ref="profileDAO" />
+		
+		<property name="userOrderDAO" ref="userOrderDAO" />
+		
 	</bean>
 	<bean id="platformDAO" parent="platformDAOBase"></bean>	
+	
+	
+	<bean id="profileDAOBase" class="com.doublechaintech.oms.profile.ProfileJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="platformDAO" ref="platformDAO" />
+		<property name="userOrderDAO" ref="userOrderDAO" />
+		
+	</bean>
+	<bean id="profileDAO" parent="profileDAOBase"></bean>	
+	
+	
+	<bean id="userOrderDAOBase" class="com.doublechaintech.oms.userorder.UserOrderJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="profileDAO" ref="profileDAO" /><property name="platformDAO" ref="platformDAO" />
+		<property name="lineItemDAO" ref="lineItemDAO" />
+		
+		<property name="orderPromotionDAO" ref="orderPromotionDAO" />
+		
+		<property name="manualAdjustmentDAO" ref="manualAdjustmentDAO" />
+		
+		<property name="shippingGroupDAO" ref="shippingGroupDAO" />
+		
+		<property name="paymentGroupDAO" ref="paymentGroupDAO" />
+		
+	</bean>
+	<bean id="userOrderDAO" parent="userOrderDAOBase"></bean>	
+	
+	
+	<bean id="lineItemDAOBase" class="com.doublechaintech.oms.lineitem.LineItemJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="userOrderDAO" ref="userOrderDAO" />
+	</bean>
+	<bean id="lineItemDAO" parent="lineItemDAOBase"></bean>	
+	
+	
+	<bean id="orderPromotionDAOBase" class="com.doublechaintech.oms.orderpromotion.OrderPromotionJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="userOrderDAO" ref="userOrderDAO" />
+	</bean>
+	<bean id="orderPromotionDAO" parent="orderPromotionDAOBase"></bean>	
+	
+	
+	<bean id="manualAdjustmentDAOBase" class="com.doublechaintech.oms.manualadjustment.ManualAdjustmentJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="userOrderDAO" ref="userOrderDAO" />
+	</bean>
+	<bean id="manualAdjustmentDAO" parent="manualAdjustmentDAOBase"></bean>	
+	
+	
+	<bean id="shippingGroupDAOBase" class="com.doublechaintech.oms.shippinggroup.ShippingGroupJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="userOrderDAO" ref="userOrderDAO" />
+	</bean>
+	<bean id="shippingGroupDAO" parent="shippingGroupDAOBase"></bean>	
+	
+	
+	<bean id="paymentGroupDAOBase" class="com.doublechaintech.oms.paymentgroup.PaymentGroupJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="userOrderDAO" ref="userOrderDAO" />
+	</bean>
+	<bean id="paymentGroupDAO" parent="paymentGroupDAOBase"></bean>	
 	
 	
 	<bean id="userDomainDAOBase" class="com.doublechaintech.oms.userdomain.UserDomainJDBCTemplateDAO">
@@ -141,6 +199,13 @@
 
 	<bean id="DAOGroupBase" class="com.doublechaintech.oms.DAOGroup">
 		<property name="platformDAO" ref="platformDAO"/>
+		<property name="profileDAO" ref="profileDAO"/>
+		<property name="userOrderDAO" ref="userOrderDAO"/>
+		<property name="lineItemDAO" ref="lineItemDAO"/>
+		<property name="orderPromotionDAO" ref="orderPromotionDAO"/>
+		<property name="manualAdjustmentDAO" ref="manualAdjustmentDAO"/>
+		<property name="shippingGroupDAO" ref="shippingGroupDAO"/>
+		<property name="paymentGroupDAO" ref="paymentGroupDAO"/>
 		<property name="userDomainDAO" ref="userDomainDAO"/>
 		<property name="userWhiteListDAO" ref="userWhiteListDAO"/>
 		<property name="secUserDAO" ref="secUserDAO"/>

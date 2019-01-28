@@ -68,6 +68,465 @@ public class OmsChecker extends BaseChecker{
 		return this;
 	}	 			
 
+	public static final String  ID_OF_PROFILE ="profile.id";
+	public OmsChecker checkIdOfProfile(String id)
+	{
+		
+	 	checkStringLengthRange(id,5, 64,ID_OF_PROFILE ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  NAME_OF_PROFILE ="profile.name";
+	public OmsChecker checkNameOfProfile(String name)
+	{
+		
+	 	checkStringLengthRange(name,6, 72,NAME_OF_PROFILE ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  AGE_OF_PROFILE ="profile.age";
+	public OmsChecker checkAgeOfProfile(int age)
+	{
+		
+	 	checkIntegerRange(age,0, 40,AGE_OF_PROFILE ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  GENDER_OF_PROFILE ="profile.gender";
+	public OmsChecker checkGenderOfProfile(String gender)
+	{
+		
+	 	checkGender(gender,2, 24,GENDER_OF_PROFILE ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  PLATFORM_OF_PROFILE ="profile.platform";
+	public OmsChecker checkPlatformIdOfProfile(String platformId)
+	{
+		
+	 	checkIdOfProfile(platformId ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  VERSION_OF_PROFILE ="profile.version";
+	public OmsChecker checkVersionOfProfile(int version)
+	{
+		
+	 	checkIntegerRange(version,0, Integer.MAX_VALUE,VERSION_OF_PROFILE ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  ID_OF_USER_ORDER ="user_order.id";
+	public OmsChecker checkIdOfUserOrder(String id)
+	{
+		
+	 	checkStringLengthRange(id,5, 64,ID_OF_USER_ORDER ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  TITLE_OF_USER_ORDER ="user_order.title";
+	public OmsChecker checkTitleOfUserOrder(String title)
+	{
+		
+	 	checkStringLengthRange(title,5, 64,TITLE_OF_USER_ORDER ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  TOTAL_ADJUSTMENT_OF_USER_ORDER ="user_order.total_adjustment";
+	public OmsChecker checkTotalAdjustmentOfUserOrder(BigDecimal totalAdjustment)
+	{
+		
+	 	checkMoneyAmount(totalAdjustment,0.00, 100.12,TOTAL_ADJUSTMENT_OF_USER_ORDER ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  TOTAL_AMOUNT_OF_USER_ORDER ="user_order.total_amount";
+	public OmsChecker checkTotalAmountOfUserOrder(BigDecimal totalAmount)
+	{
+		
+	 	checkMoneyAmount(totalAmount,0.00, 10020.12,TOTAL_AMOUNT_OF_USER_ORDER ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  USER_OF_USER_ORDER ="user_order.user";
+	public OmsChecker checkUserIdOfUserOrder(String userId)
+	{
+		
+	 	checkIdOfUserOrder(userId ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  PLATFORM_OF_USER_ORDER ="user_order.platform";
+	public OmsChecker checkPlatformIdOfUserOrder(String platformId)
+	{
+		
+	 	checkIdOfUserOrder(platformId ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  LAST_UPDATE_TIME_OF_USER_ORDER ="user_order.last_update_time";
+	public OmsChecker checkLastUpdateTimeOfUserOrder(String lastUpdateTime)
+	{
+		
+	 	checkStringLengthRange(lastUpdateTime,5, 64,LAST_UPDATE_TIME_OF_USER_ORDER ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  VERSION_OF_USER_ORDER ="user_order.version";
+	public OmsChecker checkVersionOfUserOrder(int version)
+	{
+		
+	 	checkIntegerRange(version,0, Integer.MAX_VALUE,VERSION_OF_USER_ORDER ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  ID_OF_LINE_ITEM ="line_item.id";
+	public OmsChecker checkIdOfLineItem(String id)
+	{
+		
+	 	checkStringLengthRange(id,5, 64,ID_OF_LINE_ITEM ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  NAME_OF_LINE_ITEM ="line_item.name";
+	public OmsChecker checkNameOfLineItem(String name)
+	{
+		
+	 	checkStringLengthRange(name,4, 52,NAME_OF_LINE_ITEM ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  QUANTITY_OF_LINE_ITEM ="line_item.quantity";
+	public OmsChecker checkQuantityOfLineItem(int quantity)
+	{
+		
+	 	checkIntegerRange(quantity,0, 12,QUANTITY_OF_LINE_ITEM ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  PRICE_OF_LINE_ITEM ="line_item.price";
+	public OmsChecker checkPriceOfLineItem(BigDecimal price)
+	{
+		
+	 	checkMoneyAmount(price,0.00, 102.99,PRICE_OF_LINE_ITEM ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  DISCOUNT_PRICE_OF_LINE_ITEM ="line_item.discount_price";
+	public OmsChecker checkDiscountPriceOfLineItem(BigDecimal discountPrice)
+	{
+		
+	 	checkMoneyAmount(discountPrice,0.00, 11.03,DISCOUNT_PRICE_OF_LINE_ITEM ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  USER_ORDER_OF_LINE_ITEM ="line_item.user_order";
+	public OmsChecker checkUserOrderIdOfLineItem(String userOrderId)
+	{
+		
+	 	checkIdOfLineItem(userOrderId ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  VERSION_OF_LINE_ITEM ="line_item.version";
+	public OmsChecker checkVersionOfLineItem(int version)
+	{
+		
+	 	checkIntegerRange(version,0, Integer.MAX_VALUE,VERSION_OF_LINE_ITEM ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  ID_OF_ORDER_PROMOTION ="order_promotion.id";
+	public OmsChecker checkIdOfOrderPromotion(String id)
+	{
+		
+	 	checkStringLengthRange(id,5, 64,ID_OF_ORDER_PROMOTION ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  NAME_OF_ORDER_PROMOTION ="order_promotion.name";
+	public OmsChecker checkNameOfOrderPromotion(String name)
+	{
+		
+	 	checkStringLengthRange(name,4, 60,NAME_OF_ORDER_PROMOTION ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  AMOUNT_OF_ORDER_PROMOTION ="order_promotion.amount";
+	public OmsChecker checkAmountOfOrderPromotion(int amount)
+	{
+		
+	 	checkIntegerRange(amount,0, 1231,AMOUNT_OF_ORDER_PROMOTION ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  THREAD_HOLD_OF_ORDER_PROMOTION ="order_promotion.thread_hold";
+	public OmsChecker checkThreadHoldOfOrderPromotion(int threadHold)
+	{
+		
+	 	checkIntegerRange(threadHold,0, 1230,THREAD_HOLD_OF_ORDER_PROMOTION ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  TYPE_OF_ORDER_PROMOTION ="order_promotion.type";
+	public OmsChecker checkTypeOfOrderPromotion(String type)
+	{
+		
+	 	checkStringLengthRange(type,4, 44,TYPE_OF_ORDER_PROMOTION ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  USER_ORDER_OF_ORDER_PROMOTION ="order_promotion.user_order";
+	public OmsChecker checkUserOrderIdOfOrderPromotion(String userOrderId)
+	{
+		
+	 	checkIdOfOrderPromotion(userOrderId ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  VERSION_OF_ORDER_PROMOTION ="order_promotion.version";
+	public OmsChecker checkVersionOfOrderPromotion(int version)
+	{
+		
+	 	checkIntegerRange(version,0, Integer.MAX_VALUE,VERSION_OF_ORDER_PROMOTION ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  ID_OF_MANUAL_ADJUSTMENT ="manual_adjustment.id";
+	public OmsChecker checkIdOfManualAdjustment(String id)
+	{
+		
+	 	checkStringLengthRange(id,5, 64,ID_OF_MANUAL_ADJUSTMENT ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  NAME_OF_MANUAL_ADJUSTMENT ="manual_adjustment.name";
+	public OmsChecker checkNameOfManualAdjustment(String name)
+	{
+		
+	 	checkStringLengthRange(name,4, 60,NAME_OF_MANUAL_ADJUSTMENT ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  AMOUNT_OF_MANUAL_ADJUSTMENT ="manual_adjustment.amount";
+	public OmsChecker checkAmountOfManualAdjustment(int amount)
+	{
+		
+	 	checkIntegerRange(amount,0, 1231,AMOUNT_OF_MANUAL_ADJUSTMENT ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  THREAD_HOLD_OF_MANUAL_ADJUSTMENT ="manual_adjustment.thread_hold";
+	public OmsChecker checkThreadHoldOfManualAdjustment(int threadHold)
+	{
+		
+	 	checkIntegerRange(threadHold,0, 1230,THREAD_HOLD_OF_MANUAL_ADJUSTMENT ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  TYPE_OF_MANUAL_ADJUSTMENT ="manual_adjustment.type";
+	public OmsChecker checkTypeOfManualAdjustment(String type)
+	{
+		
+	 	checkStringLengthRange(type,1, 36,TYPE_OF_MANUAL_ADJUSTMENT ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  USER_ORDER_OF_MANUAL_ADJUSTMENT ="manual_adjustment.user_order";
+	public OmsChecker checkUserOrderIdOfManualAdjustment(String userOrderId)
+	{
+		
+	 	checkIdOfManualAdjustment(userOrderId ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  VERSION_OF_MANUAL_ADJUSTMENT ="manual_adjustment.version";
+	public OmsChecker checkVersionOfManualAdjustment(int version)
+	{
+		
+	 	checkIntegerRange(version,0, Integer.MAX_VALUE,VERSION_OF_MANUAL_ADJUSTMENT ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  ID_OF_SHIPPING_GROUP ="shipping_group.id";
+	public OmsChecker checkIdOfShippingGroup(String id)
+	{
+		
+	 	checkStringLengthRange(id,5, 64,ID_OF_SHIPPING_GROUP ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  NAME_OF_SHIPPING_GROUP ="shipping_group.name";
+	public OmsChecker checkNameOfShippingGroup(String name)
+	{
+		
+	 	checkStringLengthRange(name,4, 48,NAME_OF_SHIPPING_GROUP ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  LINE1_OF_SHIPPING_GROUP ="shipping_group.line1";
+	public OmsChecker checkLine1OfShippingGroup(String line1)
+	{
+		
+	 	checkStringLengthRange(line1,7, 100,LINE1_OF_SHIPPING_GROUP ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  LINE2_OF_SHIPPING_GROUP ="shipping_group.line2";
+	public OmsChecker checkLine2OfShippingGroup(String line2)
+	{
+		
+	 	checkStringLengthRange(line2,4, 48,LINE2_OF_SHIPPING_GROUP ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  CITY_OF_SHIPPING_GROUP ="shipping_group.city";
+	public OmsChecker checkCityOfShippingGroup(String city)
+	{
+		
+	 	checkStringLengthRange(city,4, 60,CITY_OF_SHIPPING_GROUP ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  STATE_OF_SHIPPING_GROUP ="shipping_group.state";
+	public OmsChecker checkStateOfShippingGroup(String state)
+	{
+		
+	 	checkStringLengthRange(state,1, 8,STATE_OF_SHIPPING_GROUP ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  ZIP_CODE_OF_SHIPPING_GROUP ="shipping_group.zip_code";
+	public OmsChecker checkZipCodeOfShippingGroup(int zipCode)
+	{
+		
+	 	checkIntegerRange(zipCode,0, 980087,ZIP_CODE_OF_SHIPPING_GROUP ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  COUNTRY_OF_SHIPPING_GROUP ="shipping_group.country";
+	public OmsChecker checkCountryOfShippingGroup(String country)
+	{
+		
+	 	checkCountryCode(country,1, 8,COUNTRY_OF_SHIPPING_GROUP ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  USER_ORDER_OF_SHIPPING_GROUP ="shipping_group.user_order";
+	public OmsChecker checkUserOrderIdOfShippingGroup(String userOrderId)
+	{
+		
+	 	checkIdOfShippingGroup(userOrderId ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  VERSION_OF_SHIPPING_GROUP ="shipping_group.version";
+	public OmsChecker checkVersionOfShippingGroup(int version)
+	{
+		
+	 	checkIntegerRange(version,0, Integer.MAX_VALUE,VERSION_OF_SHIPPING_GROUP ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  ID_OF_PAYMENT_GROUP ="payment_group.id";
+	public OmsChecker checkIdOfPaymentGroup(String id)
+	{
+		
+	 	checkStringLengthRange(id,5, 64,ID_OF_PAYMENT_GROUP ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  NAME_OF_PAYMENT_GROUP ="payment_group.name";
+	public OmsChecker checkNameOfPaymentGroup(String name)
+	{
+		
+	 	checkStringLengthRange(name,4, 52,NAME_OF_PAYMENT_GROUP ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  AMOUNT_OF_PAYMENT_GROUP ="payment_group.amount";
+	public OmsChecker checkAmountOfPaymentGroup(BigDecimal amount)
+	{
+		
+	 	checkMoneyAmount(amount,0.00, 123.00,AMOUNT_OF_PAYMENT_GROUP ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  USER_ORDER_OF_PAYMENT_GROUP ="payment_group.user_order";
+	public OmsChecker checkUserOrderIdOfPaymentGroup(String userOrderId)
+	{
+		
+	 	checkIdOfPaymentGroup(userOrderId ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  STATUS_OF_PAYMENT_GROUP ="payment_group.status";
+	public OmsChecker checkStatusOfPaymentGroup(String status)
+	{
+		
+	 	checkStringLengthRange(status,2, 28,STATUS_OF_PAYMENT_GROUP ); 		
+		
+		return this;
+	}	 			
+
+	public static final String  VERSION_OF_PAYMENT_GROUP ="payment_group.version";
+	public OmsChecker checkVersionOfPaymentGroup(int version)
+	{
+		
+	 	checkIntegerRange(version,0, Integer.MAX_VALUE,VERSION_OF_PAYMENT_GROUP ); 		
+		
+		return this;
+	}	 			
+
 	public static final String  ID_OF_USER_DOMAIN ="user_domain.id";
 	public OmsChecker checkIdOfUserDomain(String id)
 	{

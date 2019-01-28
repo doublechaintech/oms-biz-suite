@@ -3,6 +3,20 @@ package com.doublechaintech.oms;
 
 import com.doublechaintech.oms.platform.PlatformManager;
 
+import com.doublechaintech.oms.profile.ProfileManager;
+
+import com.doublechaintech.oms.userorder.UserOrderManager;
+
+import com.doublechaintech.oms.lineitem.LineItemManager;
+
+import com.doublechaintech.oms.orderpromotion.OrderPromotionManager;
+
+import com.doublechaintech.oms.manualadjustment.ManualAdjustmentManager;
+
+import com.doublechaintech.oms.shippinggroup.ShippingGroupManager;
+
+import com.doublechaintech.oms.paymentgroup.PaymentGroupManager;
+
 import com.doublechaintech.oms.userdomain.UserDomainManager;
 
 import com.doublechaintech.oms.userwhitelist.UserWhiteListManager;
@@ -33,6 +47,20 @@ import com.doublechaintech.oms.formaction.FormActionManager;
 public class ManagerGroup {
 
 	protected PlatformManager platformManager;
+
+	protected ProfileManager profileManager;
+
+	protected UserOrderManager userOrderManager;
+
+	protected LineItemManager lineItemManager;
+
+	protected OrderPromotionManager orderPromotionManager;
+
+	protected ManualAdjustmentManager manualAdjustmentManager;
+
+	protected ShippingGroupManager shippingGroupManager;
+
+	protected PaymentGroupManager paymentGroupManager;
 
 	protected UserDomainManager userDomainManager;
 
@@ -67,6 +95,62 @@ public class ManagerGroup {
 	}
 	public void setPlatformManager(PlatformManager manager){
 		this.platformManager = manager;
+	}
+
+
+	public ProfileManager getProfileManager(){
+		return this.profileManager;
+	}
+	public void setProfileManager(ProfileManager manager){
+		this.profileManager = manager;
+	}
+
+
+	public UserOrderManager getUserOrderManager(){
+		return this.userOrderManager;
+	}
+	public void setUserOrderManager(UserOrderManager manager){
+		this.userOrderManager = manager;
+	}
+
+
+	public LineItemManager getLineItemManager(){
+		return this.lineItemManager;
+	}
+	public void setLineItemManager(LineItemManager manager){
+		this.lineItemManager = manager;
+	}
+
+
+	public OrderPromotionManager getOrderPromotionManager(){
+		return this.orderPromotionManager;
+	}
+	public void setOrderPromotionManager(OrderPromotionManager manager){
+		this.orderPromotionManager = manager;
+	}
+
+
+	public ManualAdjustmentManager getManualAdjustmentManager(){
+		return this.manualAdjustmentManager;
+	}
+	public void setManualAdjustmentManager(ManualAdjustmentManager manager){
+		this.manualAdjustmentManager = manager;
+	}
+
+
+	public ShippingGroupManager getShippingGroupManager(){
+		return this.shippingGroupManager;
+	}
+	public void setShippingGroupManager(ShippingGroupManager manager){
+		this.shippingGroupManager = manager;
+	}
+
+
+	public PaymentGroupManager getPaymentGroupManager(){
+		return this.paymentGroupManager;
+	}
+	public void setPaymentGroupManager(PaymentGroupManager manager){
+		this.paymentGroupManager = manager;
 	}
 
 

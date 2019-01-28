@@ -15,6 +15,97 @@ import PlatformAssociateForm from './platform/Platform.associateform';
 import PlatformTable from './platform/Platform.table';
 import PlatformService from './platform/Platform.service';
 import PlatformUpdateForm from './platform/Platform.updateform';
+import ProfileBase from './profile/Profile.base';
+import ProfileBizApp from './profile/Profile.app';
+import ProfileModel from './profile/Profile.model';
+import ProfileDashboard from './profile/Profile.dashboard';
+import ProfilePreference from './profile/Profile.preference';
+import ProfileModalTable from './profile/Profile.modaltable';
+import ProfileSearch from './profile/Profile.search';
+import ProfileSearchForm from './profile/Profile.searchform';
+import ProfileCreateForm from './profile/Profile.createform';
+import ProfileAssociateForm from './profile/Profile.associateform';
+import ProfileTable from './profile/Profile.table';
+import ProfileService from './profile/Profile.service';
+import ProfileUpdateForm from './profile/Profile.updateform';
+import UserOrderBase from './userorder/UserOrder.base';
+import UserOrderBizApp from './userorder/UserOrder.app';
+import UserOrderModel from './userorder/UserOrder.model';
+import UserOrderDashboard from './userorder/UserOrder.dashboard';
+import UserOrderPreference from './userorder/UserOrder.preference';
+import UserOrderModalTable from './userorder/UserOrder.modaltable';
+import UserOrderSearch from './userorder/UserOrder.search';
+import UserOrderSearchForm from './userorder/UserOrder.searchform';
+import UserOrderCreateForm from './userorder/UserOrder.createform';
+import UserOrderAssociateForm from './userorder/UserOrder.associateform';
+import UserOrderTable from './userorder/UserOrder.table';
+import UserOrderService from './userorder/UserOrder.service';
+import UserOrderUpdateForm from './userorder/UserOrder.updateform';
+import LineItemBase from './lineitem/LineItem.base';
+import LineItemBizApp from './lineitem/LineItem.app';
+import LineItemModel from './lineitem/LineItem.model';
+import LineItemDashboard from './lineitem/LineItem.dashboard';
+import LineItemPreference from './lineitem/LineItem.preference';
+import LineItemModalTable from './lineitem/LineItem.modaltable';
+import LineItemSearch from './lineitem/LineItem.search';
+import LineItemSearchForm from './lineitem/LineItem.searchform';
+import LineItemCreateForm from './lineitem/LineItem.createform';
+import LineItemAssociateForm from './lineitem/LineItem.associateform';
+import LineItemTable from './lineitem/LineItem.table';
+import LineItemService from './lineitem/LineItem.service';
+import LineItemUpdateForm from './lineitem/LineItem.updateform';
+import OrderPromotionBase from './orderpromotion/OrderPromotion.base';
+import OrderPromotionBizApp from './orderpromotion/OrderPromotion.app';
+import OrderPromotionModel from './orderpromotion/OrderPromotion.model';
+import OrderPromotionDashboard from './orderpromotion/OrderPromotion.dashboard';
+import OrderPromotionPreference from './orderpromotion/OrderPromotion.preference';
+import OrderPromotionModalTable from './orderpromotion/OrderPromotion.modaltable';
+import OrderPromotionSearch from './orderpromotion/OrderPromotion.search';
+import OrderPromotionSearchForm from './orderpromotion/OrderPromotion.searchform';
+import OrderPromotionCreateForm from './orderpromotion/OrderPromotion.createform';
+import OrderPromotionAssociateForm from './orderpromotion/OrderPromotion.associateform';
+import OrderPromotionTable from './orderpromotion/OrderPromotion.table';
+import OrderPromotionService from './orderpromotion/OrderPromotion.service';
+import OrderPromotionUpdateForm from './orderpromotion/OrderPromotion.updateform';
+import ManualAdjustmentBase from './manualadjustment/ManualAdjustment.base';
+import ManualAdjustmentBizApp from './manualadjustment/ManualAdjustment.app';
+import ManualAdjustmentModel from './manualadjustment/ManualAdjustment.model';
+import ManualAdjustmentDashboard from './manualadjustment/ManualAdjustment.dashboard';
+import ManualAdjustmentPreference from './manualadjustment/ManualAdjustment.preference';
+import ManualAdjustmentModalTable from './manualadjustment/ManualAdjustment.modaltable';
+import ManualAdjustmentSearch from './manualadjustment/ManualAdjustment.search';
+import ManualAdjustmentSearchForm from './manualadjustment/ManualAdjustment.searchform';
+import ManualAdjustmentCreateForm from './manualadjustment/ManualAdjustment.createform';
+import ManualAdjustmentAssociateForm from './manualadjustment/ManualAdjustment.associateform';
+import ManualAdjustmentTable from './manualadjustment/ManualAdjustment.table';
+import ManualAdjustmentService from './manualadjustment/ManualAdjustment.service';
+import ManualAdjustmentUpdateForm from './manualadjustment/ManualAdjustment.updateform';
+import ShippingGroupBase from './shippinggroup/ShippingGroup.base';
+import ShippingGroupBizApp from './shippinggroup/ShippingGroup.app';
+import ShippingGroupModel from './shippinggroup/ShippingGroup.model';
+import ShippingGroupDashboard from './shippinggroup/ShippingGroup.dashboard';
+import ShippingGroupPreference from './shippinggroup/ShippingGroup.preference';
+import ShippingGroupModalTable from './shippinggroup/ShippingGroup.modaltable';
+import ShippingGroupSearch from './shippinggroup/ShippingGroup.search';
+import ShippingGroupSearchForm from './shippinggroup/ShippingGroup.searchform';
+import ShippingGroupCreateForm from './shippinggroup/ShippingGroup.createform';
+import ShippingGroupAssociateForm from './shippinggroup/ShippingGroup.associateform';
+import ShippingGroupTable from './shippinggroup/ShippingGroup.table';
+import ShippingGroupService from './shippinggroup/ShippingGroup.service';
+import ShippingGroupUpdateForm from './shippinggroup/ShippingGroup.updateform';
+import PaymentGroupBase from './paymentgroup/PaymentGroup.base';
+import PaymentGroupBizApp from './paymentgroup/PaymentGroup.app';
+import PaymentGroupModel from './paymentgroup/PaymentGroup.model';
+import PaymentGroupDashboard from './paymentgroup/PaymentGroup.dashboard';
+import PaymentGroupPreference from './paymentgroup/PaymentGroup.preference';
+import PaymentGroupModalTable from './paymentgroup/PaymentGroup.modaltable';
+import PaymentGroupSearch from './paymentgroup/PaymentGroup.search';
+import PaymentGroupSearchForm from './paymentgroup/PaymentGroup.searchform';
+import PaymentGroupCreateForm from './paymentgroup/PaymentGroup.createform';
+import PaymentGroupAssociateForm from './paymentgroup/PaymentGroup.associateform';
+import PaymentGroupTable from './paymentgroup/PaymentGroup.table';
+import PaymentGroupService from './paymentgroup/PaymentGroup.service';
+import PaymentGroupUpdateForm from './paymentgroup/PaymentGroup.updateform';
 import UserDomainBase from './userdomain/UserDomain.base';
 import UserDomainBizApp from './userdomain/UserDomain.app';
 import UserDomainModel from './userdomain/UserDomain.model';
@@ -123,6 +214,13 @@ import LoginHistoryUpdateForm from './loginhistory/LoginHistory.updateform';
 
 const BizModels = [
 	PlatformModel,
+	ProfileModel,
+	UserOrderModel,
+	LineItemModel,
+	OrderPromotionModel,
+	ManualAdjustmentModel,
+	ShippingGroupModel,
+	PaymentGroupModel,
 	UserDomainModel,
 	UserWhiteListModel,
 	SecUserModel,
@@ -149,6 +247,13 @@ const unbindBizModels = (app) =>{
 const menuLibrary = []
 
 menuLibrary['platform'] = PlatformBase.menuData
+menuLibrary['profile'] = ProfileBase.menuData
+menuLibrary['userOrder'] = UserOrderBase.menuData
+menuLibrary['lineItem'] = LineItemBase.menuData
+menuLibrary['orderPromotion'] = OrderPromotionBase.menuData
+menuLibrary['manualAdjustment'] = ManualAdjustmentBase.menuData
+menuLibrary['shippingGroup'] = ShippingGroupBase.menuData
+menuLibrary['paymentGroup'] = PaymentGroupBase.menuData
 menuLibrary['userDomain'] = UserDomainBase.menuData
 menuLibrary['userWhiteList'] = UserWhiteListBase.menuData
 menuLibrary['secUser'] = SecUserBase.menuData
@@ -178,6 +283,13 @@ const ViewMapping = {
 
 
   'com.doublechaintech.oms.platform.Platform': {name:'platform'},
+  'com.doublechaintech.oms.profile.Profile': {name:'profile'},
+  'com.doublechaintech.oms.userorder.UserOrder': {name:'userOrder'},
+  'com.doublechaintech.oms.lineitem.LineItem': {name:'lineItem'},
+  'com.doublechaintech.oms.orderpromotion.OrderPromotion': {name:'orderPromotion'},
+  'com.doublechaintech.oms.manualadjustment.ManualAdjustment': {name:'manualAdjustment'},
+  'com.doublechaintech.oms.shippinggroup.ShippingGroup': {name:'shippingGroup'},
+  'com.doublechaintech.oms.paymentgroup.PaymentGroup': {name:'paymentGroup'},
   'com.doublechaintech.oms.userdomain.UserDomain': {name:'userDomain'},
   'com.doublechaintech.oms.userwhitelist.UserWhiteList': {name:'userWhiteList'},
   'com.doublechaintech.oms.secuser.SecUser': {name:'secUser'},
@@ -244,6 +356,97 @@ const OOTBComponents={
     PlatformTable,
     PlatformService,
     PlatformUpdateForm,
+    ProfileBase,
+    ProfileBizApp,
+    ProfileModel,
+    ProfileDashboard,
+    ProfilePreference,
+    ProfileModalTable,
+    ProfileSearch,
+    ProfileSearchForm,
+    ProfileCreateForm,
+    ProfileAssociateForm,
+    ProfileTable,
+    ProfileService,
+    ProfileUpdateForm,
+    UserOrderBase,
+    UserOrderBizApp,
+    UserOrderModel,
+    UserOrderDashboard,
+    UserOrderPreference,
+    UserOrderModalTable,
+    UserOrderSearch,
+    UserOrderSearchForm,
+    UserOrderCreateForm,
+    UserOrderAssociateForm,
+    UserOrderTable,
+    UserOrderService,
+    UserOrderUpdateForm,
+    LineItemBase,
+    LineItemBizApp,
+    LineItemModel,
+    LineItemDashboard,
+    LineItemPreference,
+    LineItemModalTable,
+    LineItemSearch,
+    LineItemSearchForm,
+    LineItemCreateForm,
+    LineItemAssociateForm,
+    LineItemTable,
+    LineItemService,
+    LineItemUpdateForm,
+    OrderPromotionBase,
+    OrderPromotionBizApp,
+    OrderPromotionModel,
+    OrderPromotionDashboard,
+    OrderPromotionPreference,
+    OrderPromotionModalTable,
+    OrderPromotionSearch,
+    OrderPromotionSearchForm,
+    OrderPromotionCreateForm,
+    OrderPromotionAssociateForm,
+    OrderPromotionTable,
+    OrderPromotionService,
+    OrderPromotionUpdateForm,
+    ManualAdjustmentBase,
+    ManualAdjustmentBizApp,
+    ManualAdjustmentModel,
+    ManualAdjustmentDashboard,
+    ManualAdjustmentPreference,
+    ManualAdjustmentModalTable,
+    ManualAdjustmentSearch,
+    ManualAdjustmentSearchForm,
+    ManualAdjustmentCreateForm,
+    ManualAdjustmentAssociateForm,
+    ManualAdjustmentTable,
+    ManualAdjustmentService,
+    ManualAdjustmentUpdateForm,
+    ShippingGroupBase,
+    ShippingGroupBizApp,
+    ShippingGroupModel,
+    ShippingGroupDashboard,
+    ShippingGroupPreference,
+    ShippingGroupModalTable,
+    ShippingGroupSearch,
+    ShippingGroupSearchForm,
+    ShippingGroupCreateForm,
+    ShippingGroupAssociateForm,
+    ShippingGroupTable,
+    ShippingGroupService,
+    ShippingGroupUpdateForm,
+    PaymentGroupBase,
+    PaymentGroupBizApp,
+    PaymentGroupModel,
+    PaymentGroupDashboard,
+    PaymentGroupPreference,
+    PaymentGroupModalTable,
+    PaymentGroupSearch,
+    PaymentGroupSearchForm,
+    PaymentGroupCreateForm,
+    PaymentGroupAssociateForm,
+    PaymentGroupTable,
+    PaymentGroupService,
+    PaymentGroupUpdateForm,
     UserDomainBase,
     UserDomainBizApp,
     UserDomainModel,

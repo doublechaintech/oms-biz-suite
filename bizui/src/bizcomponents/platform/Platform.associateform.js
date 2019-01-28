@@ -74,6 +74,8 @@ class PlatformAssociateForm extends Component {
     const {PlatformService} = GlobalComponents
     const userContext = null
     
+ const {ProfileModalTable} = GlobalComponents;
+ const {UserOrderModalTable} = GlobalComponents;
 
 
     const { getFieldDecorator, validateFieldsAndScroll, getFieldsError } = form
@@ -185,6 +187,8 @@ class PlatformAssociateForm extends Component {
 			
         </Card>
         
+	<ProfileModalTable data={data.profileList} owner={owner} />
+	<UserOrderModalTable data={data.userOrderList} owner={owner} />
         
         
         

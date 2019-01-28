@@ -3,6 +3,13 @@ package com.doublechaintech.oms;
 import java.util.Map;
 
 import com.doublechaintech.oms.platform.Platform;
+import com.doublechaintech.oms.profile.Profile;
+import com.doublechaintech.oms.userorder.UserOrder;
+import com.doublechaintech.oms.lineitem.LineItem;
+import com.doublechaintech.oms.orderpromotion.OrderPromotion;
+import com.doublechaintech.oms.manualadjustment.ManualAdjustment;
+import com.doublechaintech.oms.shippinggroup.ShippingGroup;
+import com.doublechaintech.oms.paymentgroup.PaymentGroup;
 import com.doublechaintech.oms.userdomain.UserDomain;
 import com.doublechaintech.oms.userwhitelist.UserWhiteList;
 import com.doublechaintech.oms.secuser.SecUser;
@@ -22,6 +29,41 @@ public class BeanFactoryImpl{
 
 	public Platform createPlatform(Map<String,Object> options){
 		return new Platform();
+	}
+
+
+	public Profile createProfile(Map<String,Object> options){
+		return new Profile();
+	}
+
+
+	public UserOrder createUserOrder(Map<String,Object> options){
+		return new UserOrder();
+	}
+
+
+	public LineItem createLineItem(Map<String,Object> options){
+		return new LineItem();
+	}
+
+
+	public OrderPromotion createOrderPromotion(Map<String,Object> options){
+		return new OrderPromotion();
+	}
+
+
+	public ManualAdjustment createManualAdjustment(Map<String,Object> options){
+		return new ManualAdjustment();
+	}
+
+
+	public ShippingGroup createShippingGroup(Map<String,Object> options){
+		return new ShippingGroup();
+	}
+
+
+	public PaymentGroup createPaymentGroup(Map<String,Object> options){
+		return new PaymentGroup();
 	}
 
 

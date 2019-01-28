@@ -11,6 +11,8 @@ import com.doublechaintech.oms.SmartList;
 import com.doublechaintech.oms.KeyValuePair;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.doublechaintech.oms.userorder.UserOrder;
+import com.doublechaintech.oms.profile.Profile;
 
 @JsonSerialize(using = PlatformSerializer.class)
 public class Platform extends BaseEntity implements  java.io.Serializable{
@@ -22,6 +24,8 @@ public class Platform extends BaseEntity implements  java.io.Serializable{
 	public static final String CURRENT_VERSION_PROPERTY       = "currentVersion"    ;
 	public static final String VERSION_PROPERTY               = "version"           ;
 
+	public static final String PROFILE_LIST                             = "profileList"       ;
+	public static final String USER_ORDER_LIST                          = "userOrderList"     ;
 
 	public static final String INTERNAL_TYPE="Platform";
 	public String getInternalType(){
@@ -49,6 +53,8 @@ public class Platform extends BaseEntity implements  java.io.Serializable{
 	protected		int                 	mVersion            ;
 	
 	
+	protected		SmartList<Profile>  	mProfileList        ;
+	protected		SmartList<UserOrder>	mUserOrderList      ;
 	
 		
 	public 	Platform(){
@@ -65,7 +71,9 @@ public class Platform extends BaseEntity implements  java.io.Serializable{
 		setName(name);
 		setIntroduction(introduction);
 		setCurrentVersion(currentVersion);
-	
+
+		this.mProfileList = new SmartList<Profile>();
+		this.mUserOrderList = new SmartList<UserOrder>();	
 	}
 	
 	//Support for changing the property
@@ -202,6 +210,202 @@ public class Platform extends BaseEntity implements  java.io.Serializable{
 	
 	
 
+	public  SmartList<Profile> getProfileList(){
+		if(this.mProfileList == null){
+			this.mProfileList = new SmartList<Profile>();
+			this.mProfileList.setListInternalName (PROFILE_LIST );
+			//有名字，便于做权限控制
+		}
+		
+		return this.mProfileList;	
+	}
+	public  void setProfileList(SmartList<Profile> profileList){
+		for( Profile profile:profileList){
+			profile.setPlatform(this);
+		}
+
+		this.mProfileList = profileList;
+		this.mProfileList.setListInternalName (PROFILE_LIST );
+		
+	}
+	
+	public  void addProfile(Profile profile){
+		profile.setPlatform(this);
+		getProfileList().add(profile);
+	}
+	public  void addProfileList(SmartList<Profile> profileList){
+		for( Profile profile:profileList){
+			profile.setPlatform(this);
+		}
+		getProfileList().addAll(profileList);
+	}
+	
+	public  Profile removeProfile(Profile profileIndex){
+		
+		int index = getProfileList().indexOf(profileIndex);
+        if(index < 0){
+        	String message = "Profile("+profileIndex.getId()+") with version='"+profileIndex.getVersion()+"' NOT found!";
+            throw new IllegalStateException(message);
+        }
+        Profile profile = getProfileList().get(index);        
+        // profile.clearPlatform(); //disconnect with Platform
+        profile.clearFromAll(); //disconnect with Platform
+		
+		boolean result = getProfileList().planToRemove(profile);
+        if(!result){
+        	String message = "Profile("+profileIndex.getId()+") with version='"+profileIndex.getVersion()+"' NOT found!";
+            throw new IllegalStateException(message);
+        }
+        return profile;
+        
+	
+	}
+	//断舍离
+	public  void breakWithProfile(Profile profile){
+		
+		if(profile == null){
+			return;
+		}
+		profile.setPlatform(null);
+		//getProfileList().remove();
+	
+	}
+	
+	public  boolean hasProfile(Profile profile){
+	
+		return getProfileList().contains(profile);
+  
+	}
+	
+	public void copyProfileFrom(Profile profile) {
+
+		Profile profileInList = findTheProfile(profile);
+		Profile newProfile = new Profile();
+		profileInList.copyTo(newProfile);
+		newProfile.setVersion(0);//will trigger copy
+		getProfileList().add(newProfile);
+		addItemToFlexiableObject(COPIED_CHILD, newProfile);
+	}
+	
+	public  Profile findTheProfile(Profile profile){
+		
+		int index =  getProfileList().indexOf(profile);
+		//The input parameter must have the same id and version number.
+		if(index < 0){
+ 			String message = "Profile("+profile.getId()+") with version='"+profile.getVersion()+"' NOT found!";
+			throw new IllegalStateException(message);
+		}
+		
+		return  getProfileList().get(index);
+		//Performance issue when using LinkedList, but it is almost an ArrayList for sure!
+	}
+	
+	public  void cleanUpProfileList(){
+		getProfileList().clear();
+	}
+	
+	
+	
+
+
+	public  SmartList<UserOrder> getUserOrderList(){
+		if(this.mUserOrderList == null){
+			this.mUserOrderList = new SmartList<UserOrder>();
+			this.mUserOrderList.setListInternalName (USER_ORDER_LIST );
+			//有名字，便于做权限控制
+		}
+		
+		return this.mUserOrderList;	
+	}
+	public  void setUserOrderList(SmartList<UserOrder> userOrderList){
+		for( UserOrder userOrder:userOrderList){
+			userOrder.setPlatform(this);
+		}
+
+		this.mUserOrderList = userOrderList;
+		this.mUserOrderList.setListInternalName (USER_ORDER_LIST );
+		
+	}
+	
+	public  void addUserOrder(UserOrder userOrder){
+		userOrder.setPlatform(this);
+		getUserOrderList().add(userOrder);
+	}
+	public  void addUserOrderList(SmartList<UserOrder> userOrderList){
+		for( UserOrder userOrder:userOrderList){
+			userOrder.setPlatform(this);
+		}
+		getUserOrderList().addAll(userOrderList);
+	}
+	
+	public  UserOrder removeUserOrder(UserOrder userOrderIndex){
+		
+		int index = getUserOrderList().indexOf(userOrderIndex);
+        if(index < 0){
+        	String message = "UserOrder("+userOrderIndex.getId()+") with version='"+userOrderIndex.getVersion()+"' NOT found!";
+            throw new IllegalStateException(message);
+        }
+        UserOrder userOrder = getUserOrderList().get(index);        
+        // userOrder.clearPlatform(); //disconnect with Platform
+        userOrder.clearFromAll(); //disconnect with Platform
+		
+		boolean result = getUserOrderList().planToRemove(userOrder);
+        if(!result){
+        	String message = "UserOrder("+userOrderIndex.getId()+") with version='"+userOrderIndex.getVersion()+"' NOT found!";
+            throw new IllegalStateException(message);
+        }
+        return userOrder;
+        
+	
+	}
+	//断舍离
+	public  void breakWithUserOrder(UserOrder userOrder){
+		
+		if(userOrder == null){
+			return;
+		}
+		userOrder.setPlatform(null);
+		//getUserOrderList().remove();
+	
+	}
+	
+	public  boolean hasUserOrder(UserOrder userOrder){
+	
+		return getUserOrderList().contains(userOrder);
+  
+	}
+	
+	public void copyUserOrderFrom(UserOrder userOrder) {
+
+		UserOrder userOrderInList = findTheUserOrder(userOrder);
+		UserOrder newUserOrder = new UserOrder();
+		userOrderInList.copyTo(newUserOrder);
+		newUserOrder.setVersion(0);//will trigger copy
+		getUserOrderList().add(newUserOrder);
+		addItemToFlexiableObject(COPIED_CHILD, newUserOrder);
+	}
+	
+	public  UserOrder findTheUserOrder(UserOrder userOrder){
+		
+		int index =  getUserOrderList().indexOf(userOrder);
+		//The input parameter must have the same id and version number.
+		if(index < 0){
+ 			String message = "UserOrder("+userOrder.getId()+") with version='"+userOrder.getVersion()+"' NOT found!";
+			throw new IllegalStateException(message);
+		}
+		
+		return  getUserOrderList().get(index);
+		//Performance issue when using LinkedList, but it is almost an ArrayList for sure!
+	}
+	
+	public  void cleanUpUserOrderList(){
+		getUserOrderList().clear();
+	}
+	
+	
+	
+
+
 	public void collectRefercences(BaseEntity owner, List<BaseEntity> entityList, String internalType){
 
 
@@ -211,6 +415,8 @@ public class Platform extends BaseEntity implements  java.io.Serializable{
 	public List<BaseEntity>  collectRefercencesFromLists(String internalType){
 		
 		List<BaseEntity> entityList = new ArrayList<BaseEntity>();
+		collectFromList(this, entityList, getProfileList(), internalType);
+		collectFromList(this, entityList, getUserOrderList(), internalType);
 
 		return entityList;
 	}
@@ -218,6 +424,8 @@ public class Platform extends BaseEntity implements  java.io.Serializable{
 	public  List<SmartList<?>> getAllRelatedLists() {
 		List<SmartList<?>> listOfList = new ArrayList<SmartList<?>>();
 		
+		listOfList.add( getProfileList());
+		listOfList.add( getUserOrderList());
 			
 
 		return listOfList;
@@ -232,6 +440,16 @@ public class Platform extends BaseEntity implements  java.io.Serializable{
 		appendKeyValuePair(result, INTRODUCTION_PROPERTY, getIntroduction());
 		appendKeyValuePair(result, CURRENT_VERSION_PROPERTY, getCurrentVersion());
 		appendKeyValuePair(result, VERSION_PROPERTY, getVersion());
+		appendKeyValuePair(result, PROFILE_LIST, getProfileList());
+		if(!getProfileList().isEmpty()){
+			appendKeyValuePair(result, "profileCount", getProfileList().getTotalCount());
+			appendKeyValuePair(result, "profileCurrentPageNumber", getProfileList().getCurrentPageNumber());
+		}
+		appendKeyValuePair(result, USER_ORDER_LIST, getUserOrderList());
+		if(!getUserOrderList().isEmpty()){
+			appendKeyValuePair(result, "userOrderCount", getUserOrderList().getTotalCount());
+			appendKeyValuePair(result, "userOrderCurrentPageNumber", getUserOrderList().getCurrentPageNumber());
+		}
 
 		
 		return result;
@@ -251,6 +469,8 @@ public class Platform extends BaseEntity implements  java.io.Serializable{
 			dest.setIntroduction(getIntroduction());
 			dest.setCurrentVersion(getCurrentVersion());
 			dest.setVersion(getVersion());
+			dest.setProfileList(getProfileList());
+			dest.setUserOrderList(getUserOrderList());
 
 		}
 		super.copyTo(baseDest);

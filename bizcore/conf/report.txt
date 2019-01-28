@@ -1,11 +1,80 @@
 
 
 
-=================Execute Report (Model Time 190109T2341) @Sat Jan 26 00:01:13 CST 2019, 14 objects and 111 fields===========================
+=================Execute Report (Model Time 190128T1215) @Mon Jan 28 12:16:47 CST 2019, 21 objects and 163 fields===========================
 
 
 
  processing: platform
+
+
+ processing: profile
+
+
+ processing: profile.platform.platform
+
+Info: Add virtual field [profiles(es)] to <platform>
+	profile.platform
+
+
+ processing: user_order
+
+
+ processing: user_order.profile.user
+
+Info: Add virtual field [user_orders(es)] to <profile>
+	user_order.user
+
+
+ processing: user_order.platform.platform
+
+Info: Add virtual field [user_orders(es)] to <platform>
+	user_order.platform
+
+
+ processing: line_item
+
+
+ processing: line_item.user_order.user_order
+
+Info: Add virtual field [line_items(es)] to <user_order>
+	line_item.user_order
+
+
+ processing: order_promotion
+
+
+ processing: order_promotion.user_order.user_order
+
+Info: Add virtual field [order_promotions(es)] to <user_order>
+	order_promotion.user_order
+
+
+ processing: manual_adjustment
+
+
+ processing: manual_adjustment.user_order.user_order
+
+Info: Add virtual field [manual_adjustments(es)] to <user_order>
+	manual_adjustment.user_order
+
+
+ processing: shipping_group
+
+
+ processing: shipping_group.user_order.user_order
+
+Info: Add virtual field [shipping_groups(es)] to <user_order>
+	shipping_group.user_order
+
+
+ processing: payment_group
+
+
+ processing: payment_group.user_order.user_order
+
+Info: Add virtual field [payment_groups(es)] to <user_order>
+	payment_group.user_order
 
 
 **************************************************
@@ -18,9 +87,118 @@ platform{
 		string	current_version('V1.0'), verb: false, required: true;
 		int	version('2147483647'), verb: false, required: true;
 	}
-	references field(0){
+	references field(2){
+		profileList	platform(基本信息)--platform;
+		userOrderList	platform(基本信息)--platform;
 	}
 } depth=0; isRoot = true
+
+profile{
+	fields(7){
+		string	id('ABCDEFGIJK000001'), verb: false, required: true;
+		string	name('Philip Zhang|Naveen Kumar R |VENKATESH GADUPUTI'), verb: false, required: true;
+		int	age('40'), verb: false, required: true;
+		string_gender	gender('male|female'), verb: false, required: true;
+		date_time_update	last_update_time('updateTime()'), verb: false, required: true;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: profileList;
+		int	version('2147483647'), verb: false, required: true;
+	}
+	references field(1){
+		userOrderList	user(基本信息)--user;
+	}
+} depth=1; isRoot = false
+
+user_order{
+	fields(8){
+		string	id('ABCDEFGIJK000001'), verb: false, required: true;
+		string	title('a consumer order'), verb: false, required: true;
+		money	total_adjustment('$100.12'), verb: false, required: true;
+		money	total_amount('$10020.12'), verb: false, required: true;
+		profile	user('$(object)'), verb: false, required: true, referenceBy: userOrderList;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: userOrderList;
+		string	last_update_time('lastUpdateTime()'), verb: false, required: true;
+		int	version('2147483647'), verb: false, required: true;
+	}
+	references field(5){
+		lineItemList	user_order(基本信息)--user_order;
+		orderPromotionList	user_order(基本信息)--user_order;
+		manualAdjustmentList	user_order(基本信息)--user_order;
+		shippingGroupList	user_order(基本信息)--user_order;
+		paymentGroupList	user_order(基本信息)--user_order;
+	}
+} depth=2; isRoot = false
+
+line_item{
+	fields(7){
+		string	id('ABCDEFGIJK000001'), verb: false, required: true;
+		string	name('Jeans - Large'), verb: false, required: true;
+		int	quantity('12'), verb: false, required: true;
+		money	price('$102.99'), verb: false, required: true;
+		money	discount_price('$11.03'), verb: false, required: true;
+		user_order	user_order('$(object)'), verb: false, required: true, referenceBy: lineItemList;
+		int	version('2147483647'), verb: false, required: true;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+order_promotion{
+	fields(7){
+		string	id('ABCDEFGIJK000001'), verb: false, required: true;
+		string	name('Promo For Total'), verb: false, required: true;
+		int	amount('1231'), verb: false, required: true;
+		int	thread_hold('1230'), verb: false, required: true;
+		string	type('PERCENT_OFF|FIX_PRICE'), verb: false, required: true;
+		user_order	user_order('$(object)'), verb: false, required: true, referenceBy: orderPromotionList;
+		int	version('2147483647'), verb: false, required: true;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+manual_adjustment{
+	fields(7){
+		string	id('ABCDEFGIJK000001'), verb: false, required: true;
+		string	name('Promo For Total'), verb: false, required: true;
+		int	amount('1231'), verb: false, required: true;
+		int	thread_hold('1230'), verb: false, required: true;
+		string	type('OFF|FIX_PRICE'), verb: false, required: true;
+		user_order	user_order('$(object)'), verb: false, required: true, referenceBy: manualAdjustmentList;
+		int	version('2147483647'), verb: false, required: true;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+shipping_group{
+	fields(10){
+		string	id('ABCDEFGIJK000001'), verb: false, required: true;
+		string	name('Ship To Home'), verb: false, required: true;
+		string	line1('1900 AVE OF THE STARTS - '), verb: false, required: true;
+		string	line2('Suite 555 - '), verb: false, required: true;
+		string	city('Century City - '), verb: false, required: true;
+		string	state('CA|VA|MA|PA|WA|LA'), verb: false, required: true;
+		int	zip_code('980087'), verb: false, required: true;
+		string_country_code	country('US'), verb: false, required: true;
+		user_order	user_order('$(object)'), verb: false, required: true, referenceBy: shippingGroupList;
+		int	version('2147483647'), verb: false, required: true;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+payment_group{
+	fields(6){
+		string	id('ABCDEFGIJK000001'), verb: false, required: true;
+		string	name('Pay for order'), verb: false, required: true;
+		money	amount('$123.00'), verb: false, required: true;
+		user_order	user_order('$(object)'), verb: false, required: true, referenceBy: paymentGroupList;
+		string	status('PAID|PENDING|FAIL'), verb: false, required: true;
+		int	version('2147483647'), verb: false, required: true;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
 
 platform{
 	fields(5){
@@ -30,9 +208,118 @@ platform{
 		string	current_version('V1.0'), verb: false, required: true;
 		int	version('2147483647'), verb: false, required: true;
 	}
-	references field(0){
+	references field(2){
+		profileList	platform(基本信息)--platform;
+		userOrderList	platform(基本信息)--platform;
 	}
 } depth=0; isRoot = true
+
+profile{
+	fields(7){
+		string	id('ABCDEFGIJK000001'), verb: false, required: true;
+		string	name('Philip Zhang|Naveen Kumar R |VENKATESH GADUPUTI'), verb: false, required: true;
+		int	age('40'), verb: false, required: true;
+		string_gender	gender('male|female'), verb: false, required: true;
+		date_time_update	last_update_time('updateTime()'), verb: false, required: true;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: profileList;
+		int	version('2147483647'), verb: false, required: true;
+	}
+	references field(1){
+		userOrderList	user(基本信息)--user;
+	}
+} depth=1; isRoot = false
+
+user_order{
+	fields(8){
+		string	id('ABCDEFGIJK000001'), verb: false, required: true;
+		string	title('a consumer order'), verb: false, required: true;
+		money	total_adjustment('$100.12'), verb: false, required: true;
+		money	total_amount('$10020.12'), verb: false, required: true;
+		profile	user('$(object)'), verb: false, required: true, referenceBy: userOrderList;
+		platform	platform('$(object)'), verb: false, required: true, referenceBy: userOrderList;
+		string	last_update_time('lastUpdateTime()'), verb: false, required: true;
+		int	version('2147483647'), verb: false, required: true;
+	}
+	references field(5){
+		lineItemList	user_order(基本信息)--user_order;
+		orderPromotionList	user_order(基本信息)--user_order;
+		manualAdjustmentList	user_order(基本信息)--user_order;
+		shippingGroupList	user_order(基本信息)--user_order;
+		paymentGroupList	user_order(基本信息)--user_order;
+	}
+} depth=2; isRoot = false
+
+line_item{
+	fields(7){
+		string	id('ABCDEFGIJK000001'), verb: false, required: true;
+		string	name('Jeans - Large'), verb: false, required: true;
+		int	quantity('12'), verb: false, required: true;
+		money	price('$102.99'), verb: false, required: true;
+		money	discount_price('$11.03'), verb: false, required: true;
+		user_order	user_order('$(object)'), verb: false, required: true, referenceBy: lineItemList;
+		int	version('2147483647'), verb: false, required: true;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+order_promotion{
+	fields(7){
+		string	id('ABCDEFGIJK000001'), verb: false, required: true;
+		string	name('Promo For Total'), verb: false, required: true;
+		int	amount('1231'), verb: false, required: true;
+		int	thread_hold('1230'), verb: false, required: true;
+		string	type('PERCENT_OFF|FIX_PRICE'), verb: false, required: true;
+		user_order	user_order('$(object)'), verb: false, required: true, referenceBy: orderPromotionList;
+		int	version('2147483647'), verb: false, required: true;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+manual_adjustment{
+	fields(7){
+		string	id('ABCDEFGIJK000001'), verb: false, required: true;
+		string	name('Promo For Total'), verb: false, required: true;
+		int	amount('1231'), verb: false, required: true;
+		int	thread_hold('1230'), verb: false, required: true;
+		string	type('OFF|FIX_PRICE'), verb: false, required: true;
+		user_order	user_order('$(object)'), verb: false, required: true, referenceBy: manualAdjustmentList;
+		int	version('2147483647'), verb: false, required: true;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+shipping_group{
+	fields(10){
+		string	id('ABCDEFGIJK000001'), verb: false, required: true;
+		string	name('Ship To Home'), verb: false, required: true;
+		string	line1('1900 AVE OF THE STARTS - '), verb: false, required: true;
+		string	line2('Suite 555 - '), verb: false, required: true;
+		string	city('Century City - '), verb: false, required: true;
+		string	state('CA|VA|MA|PA|WA|LA'), verb: false, required: true;
+		int	zip_code('980087'), verb: false, required: true;
+		string_country_code	country('US'), verb: false, required: true;
+		user_order	user_order('$(object)'), verb: false, required: true, referenceBy: shippingGroupList;
+		int	version('2147483647'), verb: false, required: true;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
+
+payment_group{
+	fields(6){
+		string	id('ABCDEFGIJK000001'), verb: false, required: true;
+		string	name('Pay for order'), verb: false, required: true;
+		money	amount('$123.00'), verb: false, required: true;
+		user_order	user_order('$(object)'), verb: false, required: true, referenceBy: paymentGroupList;
+		string	status('PAID|PENDING|FAIL'), verb: false, required: true;
+		int	version('2147483647'), verb: false, required: true;
+	}
+	references field(0){
+	}
+} depth=3; isRoot = false
 
 user_domain{
 	fields(3){
@@ -246,11 +533,3 @@ form_action{
 
 
 =================================End Report=================================
-
-
-
-
-
-
-
-

@@ -14,6 +14,13 @@ import GlobalComponents from './'
 function RouterConfig({ history }) {
 
 	const {PlatformBizApp} = GlobalComponents
+	const {ProfileBizApp} = GlobalComponents
+	const {UserOrderBizApp} = GlobalComponents
+	const {LineItemBizApp} = GlobalComponents
+	const {OrderPromotionBizApp} = GlobalComponents
+	const {ManualAdjustmentBizApp} = GlobalComponents
+	const {ShippingGroupBizApp} = GlobalComponents
+	const {PaymentGroupBizApp} = GlobalComponents
 	const {UserDomainBizApp} = GlobalComponents
 	const {UserWhiteListBizApp} = GlobalComponents
 	const {SecUserBizApp} = GlobalComponents
@@ -32,6 +39,13 @@ function RouterConfig({ history }) {
          <Route path="/home" component={Launcher} />
          <Route path="/forgetpass" component={ForgetPasswordForm} />
           <Route path="/platform/" component={PlatformBizApp} />
+          <Route path="/profile/" component={ProfileBizApp} />
+          <Route path="/userOrder/" component={UserOrderBizApp} />
+          <Route path="/lineItem/" component={LineItemBizApp} />
+          <Route path="/orderPromotion/" component={OrderPromotionBizApp} />
+          <Route path="/manualAdjustment/" component={ManualAdjustmentBizApp} />
+          <Route path="/shippingGroup/" component={ShippingGroupBizApp} />
+          <Route path="/paymentGroup/" component={PaymentGroupBizApp} />
           <Route path="/userDomain/" component={UserDomainBizApp} />
           <Route path="/userWhiteList/" component={UserWhiteListBizApp} />
           <Route path="/secUser/" component={SecUserBizApp} />

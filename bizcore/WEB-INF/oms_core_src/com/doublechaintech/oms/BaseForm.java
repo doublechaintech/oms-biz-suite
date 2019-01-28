@@ -131,6 +131,591 @@ public class BaseForm extends GenericForm{
 		return field;
 	}
 
+	protected FormField idFromProfile(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Id");
+		field.setLocaleKey("profile.id");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("text");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Id");
+		return field;
+	}
+
+	protected FormField nameFromProfile(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Name");
+		field.setLocaleKey("profile.name");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("text");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Name");
+		return field;
+	}
+
+	protected FormField ageFromProfile(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Age");
+		field.setLocaleKey("profile.age");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("number");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Age");
+		return field;
+	}
+
+	protected FormField genderFromProfile(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Gender");
+		field.setLocaleKey("profile.gender");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("text");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Gender");
+		return field;
+	}
+
+	protected FormField lastUpdateTimeFromProfile(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Last Update Time");
+		field.setLocaleKey("profile.last_update_time");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("date_time");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Last Update Time");
+		return field;
+	}
+
+	protected FormField platformIdFromProfile(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Platform");
+		field.setLocaleKey("profile.platform");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("Platform");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Platform");
+		return field;
+	}
+
+	protected FormField idFromUserOrder(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Id");
+		field.setLocaleKey("user_order.id");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("text");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Id");
+		return field;
+	}
+
+	protected FormField titleFromUserOrder(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Title");
+		field.setLocaleKey("user_order.title");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("text");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Title");
+		return field;
+	}
+
+	protected FormField totalAdjustmentFromUserOrder(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Total Adjustment");
+		field.setLocaleKey("user_order.total_adjustment");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("money");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Total Adjustment");
+		return field;
+	}
+
+	protected FormField totalAmountFromUserOrder(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Total Amount");
+		field.setLocaleKey("user_order.total_amount");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("money");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Total Amount");
+		return field;
+	}
+
+	protected FormField userIdFromUserOrder(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("User");
+		field.setLocaleKey("user_order.user");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("Profile");
+		field.setRequired(true);
+		field.setPlaceholder("请填写User");
+		return field;
+	}
+
+	protected FormField platformIdFromUserOrder(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Platform");
+		field.setLocaleKey("user_order.platform");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("Platform");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Platform");
+		return field;
+	}
+
+	protected FormField lastUpdateTimeFromUserOrder(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Last Update Time");
+		field.setLocaleKey("user_order.last_update_time");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("text");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Last Update Time");
+		return field;
+	}
+
+	protected FormField idFromLineItem(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Id");
+		field.setLocaleKey("line_item.id");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("text");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Id");
+		return field;
+	}
+
+	protected FormField nameFromLineItem(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Name");
+		field.setLocaleKey("line_item.name");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("text");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Name");
+		return field;
+	}
+
+	protected FormField quantityFromLineItem(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Quantity");
+		field.setLocaleKey("line_item.quantity");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("number");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Quantity");
+		return field;
+	}
+
+	protected FormField priceFromLineItem(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Price");
+		field.setLocaleKey("line_item.price");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("money");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Price");
+		return field;
+	}
+
+	protected FormField discountPriceFromLineItem(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Discount Price");
+		field.setLocaleKey("line_item.discount_price");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("money");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Discount Price");
+		return field;
+	}
+
+	protected FormField userOrderIdFromLineItem(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("User Order");
+		field.setLocaleKey("line_item.user_order");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("UserOrder");
+		field.setRequired(true);
+		field.setPlaceholder("请填写User Order");
+		return field;
+	}
+
+	protected FormField idFromOrderPromotion(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Id");
+		field.setLocaleKey("order_promotion.id");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("text");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Id");
+		return field;
+	}
+
+	protected FormField nameFromOrderPromotion(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Name");
+		field.setLocaleKey("order_promotion.name");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("text");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Name");
+		return field;
+	}
+
+	protected FormField amountFromOrderPromotion(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Amount");
+		field.setLocaleKey("order_promotion.amount");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("number");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Amount");
+		return field;
+	}
+
+	protected FormField threadHoldFromOrderPromotion(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Thread Hold");
+		field.setLocaleKey("order_promotion.thread_hold");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("number");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Thread Hold");
+		return field;
+	}
+
+	protected FormField typeFromOrderPromotion(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Type");
+		field.setLocaleKey("order_promotion.type");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("text");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Type");
+		return field;
+	}
+
+	protected FormField userOrderIdFromOrderPromotion(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("User Order");
+		field.setLocaleKey("order_promotion.user_order");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("UserOrder");
+		field.setRequired(true);
+		field.setPlaceholder("请填写User Order");
+		return field;
+	}
+
+	protected FormField idFromManualAdjustment(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Id");
+		field.setLocaleKey("manual_adjustment.id");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("text");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Id");
+		return field;
+	}
+
+	protected FormField nameFromManualAdjustment(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Name");
+		field.setLocaleKey("manual_adjustment.name");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("text");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Name");
+		return field;
+	}
+
+	protected FormField amountFromManualAdjustment(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Amount");
+		field.setLocaleKey("manual_adjustment.amount");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("number");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Amount");
+		return field;
+	}
+
+	protected FormField threadHoldFromManualAdjustment(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Thread Hold");
+		field.setLocaleKey("manual_adjustment.thread_hold");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("number");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Thread Hold");
+		return field;
+	}
+
+	protected FormField typeFromManualAdjustment(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Type");
+		field.setLocaleKey("manual_adjustment.type");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("text");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Type");
+		return field;
+	}
+
+	protected FormField userOrderIdFromManualAdjustment(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("User Order");
+		field.setLocaleKey("manual_adjustment.user_order");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("UserOrder");
+		field.setRequired(true);
+		field.setPlaceholder("请填写User Order");
+		return field;
+	}
+
+	protected FormField idFromShippingGroup(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Id");
+		field.setLocaleKey("shipping_group.id");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("text");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Id");
+		return field;
+	}
+
+	protected FormField nameFromShippingGroup(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Name");
+		field.setLocaleKey("shipping_group.name");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("text");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Name");
+		return field;
+	}
+
+	protected FormField line1FromShippingGroup(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Line1");
+		field.setLocaleKey("shipping_group.line1");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("text");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Line1");
+		return field;
+	}
+
+	protected FormField line2FromShippingGroup(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Line2");
+		field.setLocaleKey("shipping_group.line2");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("text");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Line2");
+		return field;
+	}
+
+	protected FormField cityFromShippingGroup(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("City");
+		field.setLocaleKey("shipping_group.city");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("text");
+		field.setRequired(true);
+		field.setPlaceholder("请填写City");
+		return field;
+	}
+
+	protected FormField stateFromShippingGroup(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("State");
+		field.setLocaleKey("shipping_group.state");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("text");
+		field.setRequired(true);
+		field.setPlaceholder("请填写State");
+		return field;
+	}
+
+	protected FormField zipCodeFromShippingGroup(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Zip Code");
+		field.setLocaleKey("shipping_group.zip_code");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("number");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Zip Code");
+		return field;
+	}
+
+	protected FormField countryFromShippingGroup(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Country");
+		field.setLocaleKey("shipping_group.country");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("text");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Country");
+		return field;
+	}
+
+	protected FormField userOrderIdFromShippingGroup(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("User Order");
+		field.setLocaleKey("shipping_group.user_order");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("UserOrder");
+		field.setRequired(true);
+		field.setPlaceholder("请填写User Order");
+		return field;
+	}
+
+	protected FormField idFromPaymentGroup(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Id");
+		field.setLocaleKey("payment_group.id");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("text");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Id");
+		return field;
+	}
+
+	protected FormField nameFromPaymentGroup(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Name");
+		field.setLocaleKey("payment_group.name");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("text");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Name");
+		return field;
+	}
+
+	protected FormField amountFromPaymentGroup(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Amount");
+		field.setLocaleKey("payment_group.amount");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("money");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Amount");
+		return field;
+	}
+
+	protected FormField userOrderIdFromPaymentGroup(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("User Order");
+		field.setLocaleKey("payment_group.user_order");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("UserOrder");
+		field.setRequired(true);
+		field.setPlaceholder("请填写User Order");
+		return field;
+	}
+
+	protected FormField statusFromPaymentGroup(String parameterName, String initValue){
+		FormField field = new FormField();
+		field.setLabel("Status");
+		field.setLocaleKey("payment_group.status");
+		field.setParameterName(parameterName);
+		field.setDefaultValue(initValue);
+		field.setFieldGroup("基本信息");
+		field.setType("text");
+		field.setRequired(true);
+		field.setPlaceholder("请填写Status");
+		return field;
+	}
+
 	protected FormField idFromUserDomain(String parameterName, String initValue){
 		FormField field = new FormField();
 		field.setLabel("Id");

@@ -18,7 +18,11 @@ import com.doublechaintech.oms.MultipleAccessKey;
 import com.doublechaintech.oms.OmsUserContext;
 
 
+import com.doublechaintech.oms.userorder.UserOrder;
+import com.doublechaintech.oms.profile.Profile;
 
+import com.doublechaintech.oms.profile.ProfileDAO;
+import com.doublechaintech.oms.userorder.UserOrderDAO;
 
 
 
@@ -27,6 +31,44 @@ import org.springframework.dao.EmptyResultDataAccessException;
 public class PlatformJDBCTemplateDAO extends OmsNamingServiceDAO implements PlatformDAO{
 
 
+			
+		
+	
+  	private  ProfileDAO  profileDAO;
+ 	public void setProfileDAO(ProfileDAO pProfileDAO){
+ 	
+ 		if(pProfileDAO == null){
+ 			throw new IllegalStateException("Do not try to set profileDAO to null.");
+ 		}
+	 	this.profileDAO = pProfileDAO;
+ 	}
+ 	public ProfileDAO getProfileDAO(){
+ 		if(this.profileDAO == null){
+ 			throw new IllegalStateException("The profileDAO is not configured yet, please config it some where.");
+ 		}
+ 		
+	 	return this.profileDAO;
+ 	}	
+ 	
+			
+		
+	
+  	private  UserOrderDAO  userOrderDAO;
+ 	public void setUserOrderDAO(UserOrderDAO pUserOrderDAO){
+ 	
+ 		if(pUserOrderDAO == null){
+ 			throw new IllegalStateException("Do not try to set userOrderDAO to null.");
+ 		}
+	 	this.userOrderDAO = pUserOrderDAO;
+ 	}
+ 	public UserOrderDAO getUserOrderDAO(){
+ 		if(this.userOrderDAO == null){
+ 			throw new IllegalStateException("The userOrderDAO is not configured yet, please config it some where.");
+ 		}
+ 		
+	 	return this.userOrderDAO;
+ 	}	
+ 	
 			
 		
 
@@ -72,6 +114,20 @@ public class PlatformJDBCTemplateDAO extends OmsNamingServiceDAO implements Plat
 		Platform newPlatform = loadInternalPlatform(accessKey, options);
 		newPlatform.setVersion(0);
 		
+		
+ 		
+ 		if(isSaveProfileListEnabled(options)){
+ 			for(Profile item: newPlatform.getProfileList()){
+ 				item.setVersion(0);
+ 			}
+ 		}
+		
+ 		
+ 		if(isSaveUserOrderListEnabled(options)){
+ 			for(UserOrder item: newPlatform.getUserOrderList()){
+ 				item.setVersion(0);
+ 			}
+ 		}
 		
 
 		
@@ -164,6 +220,36 @@ public class PlatformJDBCTemplateDAO extends OmsNamingServiceDAO implements Plat
 
 
 		
+	
+	protected boolean isExtractProfileListEnabled(Map<String,Object> options){		
+ 		return checkOptions(options,PlatformTokens.PROFILE_LIST);
+ 	}
+ 	protected boolean isAnalyzeProfileListEnabled(Map<String,Object> options){		
+ 		return true;
+ 		//return checkOptions(options,PlatformTokens.PROFILE_LIST+".analyze");
+ 	}
+	
+	protected boolean isSaveProfileListEnabled(Map<String,Object> options){
+		return checkOptions(options, PlatformTokens.PROFILE_LIST);
+		
+ 	}
+ 	
+		
+	
+	protected boolean isExtractUserOrderListEnabled(Map<String,Object> options){		
+ 		return checkOptions(options,PlatformTokens.USER_ORDER_LIST);
+ 	}
+ 	protected boolean isAnalyzeUserOrderListEnabled(Map<String,Object> options){		
+ 		return true;
+ 		//return checkOptions(options,PlatformTokens.USER_ORDER_LIST+".analyze");
+ 	}
+	
+	protected boolean isSaveUserOrderListEnabled(Map<String,Object> options){
+		return checkOptions(options, PlatformTokens.USER_ORDER_LIST);
+		
+ 	}
+ 	
+		
 
 	
 
@@ -191,10 +277,126 @@ public class PlatformJDBCTemplateDAO extends OmsNamingServiceDAO implements Plat
 		Platform platform = extractPlatform(accessKey, loadOptions);
 
 		
+		if(isExtractProfileListEnabled(loadOptions)){
+	 		extractProfileList(platform, loadOptions);
+ 		}	
+ 		if(isAnalyzeProfileListEnabled(loadOptions)){
+	 		analyzeProfileList(platform, loadOptions);
+ 		}
+ 		
+		
+		if(isExtractUserOrderListEnabled(loadOptions)){
+	 		extractUserOrderList(platform, loadOptions);
+ 		}	
+ 		if(isAnalyzeUserOrderListEnabled(loadOptions)){
+	 		analyzeUserOrderList(platform, loadOptions);
+ 		}
+ 		
+		
 		return platform;
 		
 	}
 
+	
+		
+	protected void enhanceProfileList(SmartList<Profile> profileList,Map<String,Object> options){
+		//extract multiple list from difference sources
+		//Trying to use a single SQL to extract all data from database and do the work in java side, java is easier to scale to N ndoes;
+	}
+	
+	protected Platform extractProfileList(Platform platform, Map<String,Object> options){
+		
+		
+		if(platform == null){
+			return null;
+		}
+		if(platform.getId() == null){
+			return platform;
+		}
+
+		
+		
+		SmartList<Profile> profileList = getProfileDAO().findProfileByPlatform(platform.getId(),options);
+		if(profileList != null){
+			enhanceProfileList(profileList,options);
+			platform.setProfileList(profileList);
+		}
+		
+		return platform;
+	
+	}	
+	
+	protected Platform analyzeProfileList(Platform platform, Map<String,Object> options){
+		
+		
+		if(platform == null){
+			return null;
+		}
+		if(platform.getId() == null){
+			return platform;
+		}
+
+		
+		
+		SmartList<Profile> profileList = platform.getProfileList();
+		if(profileList != null){
+			getProfileDAO().analyzeProfileByPlatform(profileList, platform.getId(), options);
+			
+		}
+		
+		return platform;
+	
+	}	
+	
+		
+	protected void enhanceUserOrderList(SmartList<UserOrder> userOrderList,Map<String,Object> options){
+		//extract multiple list from difference sources
+		//Trying to use a single SQL to extract all data from database and do the work in java side, java is easier to scale to N ndoes;
+	}
+	
+	protected Platform extractUserOrderList(Platform platform, Map<String,Object> options){
+		
+		
+		if(platform == null){
+			return null;
+		}
+		if(platform.getId() == null){
+			return platform;
+		}
+
+		
+		
+		SmartList<UserOrder> userOrderList = getUserOrderDAO().findUserOrderByPlatform(platform.getId(),options);
+		if(userOrderList != null){
+			enhanceUserOrderList(userOrderList,options);
+			platform.setUserOrderList(userOrderList);
+		}
+		
+		return platform;
+	
+	}	
+	
+	protected Platform analyzeUserOrderList(Platform platform, Map<String,Object> options){
+		
+		
+		if(platform == null){
+			return null;
+		}
+		if(platform.getId() == null){
+			return platform;
+		}
+
+		
+		
+		SmartList<UserOrder> userOrderList = platform.getUserOrderList();
+		if(userOrderList != null){
+			getUserOrderDAO().analyzeUserOrderByPlatform(userOrderList, platform.getId(), options);
+			
+		}
+		
+		return platform;
+	
+	}	
 	
 		
 		
@@ -369,6 +571,20 @@ public class PlatformJDBCTemplateDAO extends OmsNamingServiceDAO implements Plat
 		savePlatform(platform);
 
 		
+		if(isSaveProfileListEnabled(options)){
+	 		saveProfileList(platform, options);
+	 		//removeProfileList(platform, options);
+	 		//Not delete the record
+	 		
+ 		}		
+		
+		if(isSaveUserOrderListEnabled(options)){
+	 		saveUserOrderList(platform, options);
+	 		//removeUserOrderList(platform, options);
+	 		//Not delete the record
+	 		
+ 		}		
+		
 		return platform;
 		
 	}
@@ -379,18 +595,304 @@ public class PlatformJDBCTemplateDAO extends OmsNamingServiceDAO implements Plat
 	
 
 	
+	public Platform planToRemoveProfileList(Platform platform, String profileIds[], Map<String,Object> options)throws Exception{
+	
+		MultipleAccessKey key = new MultipleAccessKey();
+		key.put(Profile.PLATFORM_PROPERTY, platform.getId());
+		key.put(Profile.ID_PROPERTY, profileIds);
+		
+		SmartList<Profile> externalProfileList = getProfileDAO().
+				findProfileWithKey(key, options);
+		if(externalProfileList == null){
+			return platform;
+		}
+		if(externalProfileList.isEmpty()){
+			return platform;
+		}
+		
+		for(Profile profile: externalProfileList){
 
+			profile.clearFromAll();
+		}
+		
+		
+		SmartList<Profile> profileList = platform.getProfileList();		
+		profileList.addAllToRemoveList(externalProfileList);
+		return platform;	
+	
+	}
+
+
+	public Platform planToRemoveUserOrderList(Platform platform, String userOrderIds[], Map<String,Object> options)throws Exception{
+	
+		MultipleAccessKey key = new MultipleAccessKey();
+		key.put(UserOrder.PLATFORM_PROPERTY, platform.getId());
+		key.put(UserOrder.ID_PROPERTY, userOrderIds);
+		
+		SmartList<UserOrder> externalUserOrderList = getUserOrderDAO().
+				findUserOrderWithKey(key, options);
+		if(externalUserOrderList == null){
+			return platform;
+		}
+		if(externalUserOrderList.isEmpty()){
+			return platform;
+		}
+		
+		for(UserOrder userOrder: externalUserOrderList){
+
+			userOrder.clearFromAll();
+		}
+		
+		
+		SmartList<UserOrder> userOrderList = platform.getUserOrderList();		
+		userOrderList.addAllToRemoveList(externalUserOrderList);
+		return platform;	
+	
+	}
+
+
+	//disconnect Platform with user in UserOrder
+	public Platform planToRemoveUserOrderListWithUser(Platform platform, String userId, Map<String,Object> options)throws Exception{
+				//SmartList<ThreadLike> toRemoveThreadLikeList = threadLikeList.getToRemoveList();
+		//the list will not be null here, empty, maybe
+		//getThreadLikeDAO().removeThreadLikeList(toRemoveThreadLikeList,options);
+		
+		MultipleAccessKey key = new MultipleAccessKey();
+		key.put(UserOrder.PLATFORM_PROPERTY, platform.getId());
+		key.put(UserOrder.USER_PROPERTY, userId);
+		
+		SmartList<UserOrder> externalUserOrderList = getUserOrderDAO().
+				findUserOrderWithKey(key, options);
+		if(externalUserOrderList == null){
+			return platform;
+		}
+		if(externalUserOrderList.isEmpty()){
+			return platform;
+		}
+		
+		for(UserOrder userOrder: externalUserOrderList){
+			userOrder.clearUser();
+			userOrder.clearPlatform();
+			
+		}
+		
+		
+		SmartList<UserOrder> userOrderList = platform.getUserOrderList();		
+		userOrderList.addAllToRemoveList(externalUserOrderList);
+		return platform;
+	}
+	
+	public int countUserOrderListWithUser(String platformId, String userId, Map<String,Object> options)throws Exception{
+				//SmartList<ThreadLike> toRemoveThreadLikeList = threadLikeList.getToRemoveList();
+		//the list will not be null here, empty, maybe
+		//getThreadLikeDAO().removeThreadLikeList(toRemoveThreadLikeList,options);
+
+		MultipleAccessKey key = new MultipleAccessKey();
+		key.put(UserOrder.PLATFORM_PROPERTY, platformId);
+		key.put(UserOrder.USER_PROPERTY, userId);
+		
+		int count = getUserOrderDAO().countUserOrderWithKey(key, options);
+		return count;
+	}
+	
+
+		
+	protected Platform saveProfileList(Platform platform, Map<String,Object> options){
+		
+		
+		
+		
+		SmartList<Profile> profileList = platform.getProfileList();
+		if(profileList == null){
+			//null list means nothing
+			return platform;
+		}
+		SmartList<Profile> mergedUpdateProfileList = new SmartList<Profile>();
+		
+		
+		mergedUpdateProfileList.addAll(profileList); 
+		if(profileList.getToRemoveList() != null){
+			//ensures the toRemoveList is not null
+			mergedUpdateProfileList.addAll(profileList.getToRemoveList());
+			profileList.removeAll(profileList.getToRemoveList());
+			//OK for now, need fix later
+		}
+
+		//adding new size can improve performance
+	
+		getProfileDAO().saveProfileList(mergedUpdateProfileList,options);
+		
+		if(profileList.getToRemoveList() != null){
+			profileList.removeAll(profileList.getToRemoveList());
+		}
+		
+		
+		return platform;
+	
+	}
+	
+	protected Platform removeProfileList(Platform platform, Map<String,Object> options){
+	
+	
+		SmartList<Profile> profileList = platform.getProfileList();
+		if(profileList == null){
+			return platform;
+		}	
+	
+		SmartList<Profile> toRemoveProfileList = profileList.getToRemoveList();
+		
+		if(toRemoveProfileList == null){
+			return platform;
+		}
+		if(toRemoveProfileList.isEmpty()){
+			return platform;// Does this mean delete all from the parent object?
+		}
+		//Call DAO to remove the list
+		
+		getProfileDAO().removeProfileList(toRemoveProfileList,options);
+		
+		return platform;
+	
+	}
+	
+	
+
+ 	
+ 	
+	
+	
+	
+		
+	protected Platform saveUserOrderList(Platform platform, Map<String,Object> options){
+		
+		
+		
+		
+		SmartList<UserOrder> userOrderList = platform.getUserOrderList();
+		if(userOrderList == null){
+			//null list means nothing
+			return platform;
+		}
+		SmartList<UserOrder> mergedUpdateUserOrderList = new SmartList<UserOrder>();
+		
+		
+		mergedUpdateUserOrderList.addAll(userOrderList); 
+		if(userOrderList.getToRemoveList() != null){
+			//ensures the toRemoveList is not null
+			mergedUpdateUserOrderList.addAll(userOrderList.getToRemoveList());
+			userOrderList.removeAll(userOrderList.getToRemoveList());
+			//OK for now, need fix later
+		}
+
+		//adding new size can improve performance
+	
+		getUserOrderDAO().saveUserOrderList(mergedUpdateUserOrderList,options);
+		
+		if(userOrderList.getToRemoveList() != null){
+			userOrderList.removeAll(userOrderList.getToRemoveList());
+		}
+		
+		
+		return platform;
+	
+	}
+	
+	protected Platform removeUserOrderList(Platform platform, Map<String,Object> options){
+	
+	
+		SmartList<UserOrder> userOrderList = platform.getUserOrderList();
+		if(userOrderList == null){
+			return platform;
+		}	
+	
+		SmartList<UserOrder> toRemoveUserOrderList = userOrderList.getToRemoveList();
+		
+		if(toRemoveUserOrderList == null){
+			return platform;
+		}
+		if(toRemoveUserOrderList.isEmpty()){
+			return platform;// Does this mean delete all from the parent object?
+		}
+		//Call DAO to remove the list
+		
+		getUserOrderDAO().removeUserOrderList(toRemoveUserOrderList,options);
+		
+		return platform;
+	
+	}
+	
+	
+
+ 	
+ 	
+	
+	
+	
 		
 
 	public Platform present(Platform platform,Map<String, Object> options){
 	
+		presentProfileList(platform,options);
+		presentUserOrderList(platform,options);
 
 		return platform;
 	
 	}
 		
+	//Using java8 feature to reduce the code significantly
+ 	protected Platform presentProfileList(
+			Platform platform,
+			Map<String, Object> options) {
+
+		SmartList<Profile> profileList = platform.getProfileList();		
+				SmartList<Profile> newList= presentSubList(platform.getId(),
+				profileList,
+				options,
+				getProfileDAO()::countProfileByPlatform,
+				getProfileDAO()::findProfileByPlatform
+				);
+
+		
+		platform.setProfileList(newList);
+		
+
+		return platform;
+	}			
+		
+	//Using java8 feature to reduce the code significantly
+ 	protected Platform presentUserOrderList(
+			Platform platform,
+			Map<String, Object> options) {
+
+		SmartList<UserOrder> userOrderList = platform.getUserOrderList();		
+				SmartList<UserOrder> newList= presentSubList(platform.getId(),
+				userOrderList,
+				options,
+				getUserOrderDAO()::countUserOrderByPlatform,
+				getUserOrderDAO()::findUserOrderByPlatform
+				);
+
+		
+		platform.setUserOrderList(newList);
+		
+
+		return platform;
+	}			
+		
 
 	
+    public SmartList<Platform> requestCandidatePlatformForProfile(OmsUserContext userContext, String ownerClass, String id, String filterKey, int pageNo, int pageSize) throws Exception {
+        // NOTE: by default, ignore owner info, just return all by filter key.
+		// You need override this method if you have different candidate-logic
+		return findAllCandidateByFilter(PlatformTable.COLUMN_NAME, filterKey, pageNo, pageSize, getPlatformMapper());
+    }
+		
+    public SmartList<Platform> requestCandidatePlatformForUserOrder(OmsUserContext userContext, String ownerClass, String id, String filterKey, int pageNo, int pageSize) throws Exception {
+        // NOTE: by default, ignore owner info, just return all by filter key.
+		// You need override this method if you have different candidate-logic
+		return findAllCandidateByFilter(PlatformTable.COLUMN_NAME, filterKey, pageNo, pageSize, getPlatformMapper());
+    }
+		
 
 	protected String getTableName(){
 		return PlatformTable.TABLE_NAME;

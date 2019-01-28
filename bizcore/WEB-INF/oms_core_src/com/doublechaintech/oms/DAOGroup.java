@@ -6,6 +6,27 @@ import java.util.Map;
 import com.doublechaintech.oms.platform.Platform;
 import com.doublechaintech.oms.platform.PlatformDAO;
 import com.doublechaintech.oms.platform.PlatformTokens;
+import com.doublechaintech.oms.profile.Profile;
+import com.doublechaintech.oms.profile.ProfileDAO;
+import com.doublechaintech.oms.profile.ProfileTokens;
+import com.doublechaintech.oms.userorder.UserOrder;
+import com.doublechaintech.oms.userorder.UserOrderDAO;
+import com.doublechaintech.oms.userorder.UserOrderTokens;
+import com.doublechaintech.oms.lineitem.LineItem;
+import com.doublechaintech.oms.lineitem.LineItemDAO;
+import com.doublechaintech.oms.lineitem.LineItemTokens;
+import com.doublechaintech.oms.orderpromotion.OrderPromotion;
+import com.doublechaintech.oms.orderpromotion.OrderPromotionDAO;
+import com.doublechaintech.oms.orderpromotion.OrderPromotionTokens;
+import com.doublechaintech.oms.manualadjustment.ManualAdjustment;
+import com.doublechaintech.oms.manualadjustment.ManualAdjustmentDAO;
+import com.doublechaintech.oms.manualadjustment.ManualAdjustmentTokens;
+import com.doublechaintech.oms.shippinggroup.ShippingGroup;
+import com.doublechaintech.oms.shippinggroup.ShippingGroupDAO;
+import com.doublechaintech.oms.shippinggroup.ShippingGroupTokens;
+import com.doublechaintech.oms.paymentgroup.PaymentGroup;
+import com.doublechaintech.oms.paymentgroup.PaymentGroupDAO;
+import com.doublechaintech.oms.paymentgroup.PaymentGroupTokens;
 import com.doublechaintech.oms.userdomain.UserDomain;
 import com.doublechaintech.oms.userdomain.UserDomainDAO;
 import com.doublechaintech.oms.userdomain.UserDomainTokens;
@@ -50,6 +71,20 @@ public class DAOGroup {
 
 	protected PlatformDAO platformDAO;
 
+	protected ProfileDAO profileDAO;
+
+	protected UserOrderDAO userOrderDAO;
+
+	protected LineItemDAO lineItemDAO;
+
+	protected OrderPromotionDAO orderPromotionDAO;
+
+	protected ManualAdjustmentDAO manualAdjustmentDAO;
+
+	protected ShippingGroupDAO shippingGroupDAO;
+
+	protected PaymentGroupDAO paymentGroupDAO;
+
 	protected UserDomainDAO userDomainDAO;
 
 	protected UserWhiteListDAO userWhiteListDAO;
@@ -83,6 +118,62 @@ public class DAOGroup {
 	}
 	public void setPlatformDAO(PlatformDAO dao){
 		this.platformDAO = dao;
+	}
+
+
+	public ProfileDAO getProfileDAO(){
+		return this.profileDAO;
+	}
+	public void setProfileDAO(ProfileDAO dao){
+		this.profileDAO = dao;
+	}
+
+
+	public UserOrderDAO getUserOrderDAO(){
+		return this.userOrderDAO;
+	}
+	public void setUserOrderDAO(UserOrderDAO dao){
+		this.userOrderDAO = dao;
+	}
+
+
+	public LineItemDAO getLineItemDAO(){
+		return this.lineItemDAO;
+	}
+	public void setLineItemDAO(LineItemDAO dao){
+		this.lineItemDAO = dao;
+	}
+
+
+	public OrderPromotionDAO getOrderPromotionDAO(){
+		return this.orderPromotionDAO;
+	}
+	public void setOrderPromotionDAO(OrderPromotionDAO dao){
+		this.orderPromotionDAO = dao;
+	}
+
+
+	public ManualAdjustmentDAO getManualAdjustmentDAO(){
+		return this.manualAdjustmentDAO;
+	}
+	public void setManualAdjustmentDAO(ManualAdjustmentDAO dao){
+		this.manualAdjustmentDAO = dao;
+	}
+
+
+	public ShippingGroupDAO getShippingGroupDAO(){
+		return this.shippingGroupDAO;
+	}
+	public void setShippingGroupDAO(ShippingGroupDAO dao){
+		this.shippingGroupDAO = dao;
+	}
+
+
+	public PaymentGroupDAO getPaymentGroupDAO(){
+		return this.paymentGroupDAO;
+	}
+	public void setPaymentGroupDAO(PaymentGroupDAO dao){
+		this.paymentGroupDAO = dao;
 	}
 
 
@@ -211,6 +302,111 @@ public class DAOGroup {
 			@Override
 			public BaseEntity present(DAOGroup daoGoup, BaseEntity data, Map<String, Object> tokens) throws Exception {
 				return daoGoup.getPlatformDAO().present((Platform)data, tokens);
+			}
+		});
+
+		internalLoaderMap.put("Profile", new BasicLoader() {
+			@Override
+			public BaseEntity loadBasicData(DAOGroup daoGoup, String id) throws Exception {
+				return daoGoup.getProfileDAO().load(id, ProfileTokens.withoutLists());
+			}
+			@Override
+			public BaseEntity loadBasicDataWithToken(DAOGroup daoGoup, String id, Map<String, Object> tokens) throws Exception {
+				return daoGoup.getProfileDAO().load(id, tokens);
+			}
+			@Override
+			public BaseEntity present(DAOGroup daoGoup, BaseEntity data, Map<String, Object> tokens) throws Exception {
+				return daoGoup.getProfileDAO().present((Profile)data, tokens);
+			}
+		});
+
+		internalLoaderMap.put("UserOrder", new BasicLoader() {
+			@Override
+			public BaseEntity loadBasicData(DAOGroup daoGoup, String id) throws Exception {
+				return daoGoup.getUserOrderDAO().load(id, UserOrderTokens.withoutLists());
+			}
+			@Override
+			public BaseEntity loadBasicDataWithToken(DAOGroup daoGoup, String id, Map<String, Object> tokens) throws Exception {
+				return daoGoup.getUserOrderDAO().load(id, tokens);
+			}
+			@Override
+			public BaseEntity present(DAOGroup daoGoup, BaseEntity data, Map<String, Object> tokens) throws Exception {
+				return daoGoup.getUserOrderDAO().present((UserOrder)data, tokens);
+			}
+		});
+
+		internalLoaderMap.put("LineItem", new BasicLoader() {
+			@Override
+			public BaseEntity loadBasicData(DAOGroup daoGoup, String id) throws Exception {
+				return daoGoup.getLineItemDAO().load(id, LineItemTokens.withoutLists());
+			}
+			@Override
+			public BaseEntity loadBasicDataWithToken(DAOGroup daoGoup, String id, Map<String, Object> tokens) throws Exception {
+				return daoGoup.getLineItemDAO().load(id, tokens);
+			}
+			@Override
+			public BaseEntity present(DAOGroup daoGoup, BaseEntity data, Map<String, Object> tokens) throws Exception {
+				return daoGoup.getLineItemDAO().present((LineItem)data, tokens);
+			}
+		});
+
+		internalLoaderMap.put("OrderPromotion", new BasicLoader() {
+			@Override
+			public BaseEntity loadBasicData(DAOGroup daoGoup, String id) throws Exception {
+				return daoGoup.getOrderPromotionDAO().load(id, OrderPromotionTokens.withoutLists());
+			}
+			@Override
+			public BaseEntity loadBasicDataWithToken(DAOGroup daoGoup, String id, Map<String, Object> tokens) throws Exception {
+				return daoGoup.getOrderPromotionDAO().load(id, tokens);
+			}
+			@Override
+			public BaseEntity present(DAOGroup daoGoup, BaseEntity data, Map<String, Object> tokens) throws Exception {
+				return daoGoup.getOrderPromotionDAO().present((OrderPromotion)data, tokens);
+			}
+		});
+
+		internalLoaderMap.put("ManualAdjustment", new BasicLoader() {
+			@Override
+			public BaseEntity loadBasicData(DAOGroup daoGoup, String id) throws Exception {
+				return daoGoup.getManualAdjustmentDAO().load(id, ManualAdjustmentTokens.withoutLists());
+			}
+			@Override
+			public BaseEntity loadBasicDataWithToken(DAOGroup daoGoup, String id, Map<String, Object> tokens) throws Exception {
+				return daoGoup.getManualAdjustmentDAO().load(id, tokens);
+			}
+			@Override
+			public BaseEntity present(DAOGroup daoGoup, BaseEntity data, Map<String, Object> tokens) throws Exception {
+				return daoGoup.getManualAdjustmentDAO().present((ManualAdjustment)data, tokens);
+			}
+		});
+
+		internalLoaderMap.put("ShippingGroup", new BasicLoader() {
+			@Override
+			public BaseEntity loadBasicData(DAOGroup daoGoup, String id) throws Exception {
+				return daoGoup.getShippingGroupDAO().load(id, ShippingGroupTokens.withoutLists());
+			}
+			@Override
+			public BaseEntity loadBasicDataWithToken(DAOGroup daoGoup, String id, Map<String, Object> tokens) throws Exception {
+				return daoGoup.getShippingGroupDAO().load(id, tokens);
+			}
+			@Override
+			public BaseEntity present(DAOGroup daoGoup, BaseEntity data, Map<String, Object> tokens) throws Exception {
+				return daoGoup.getShippingGroupDAO().present((ShippingGroup)data, tokens);
+			}
+		});
+
+		internalLoaderMap.put("PaymentGroup", new BasicLoader() {
+			@Override
+			public BaseEntity loadBasicData(DAOGroup daoGoup, String id) throws Exception {
+				return daoGoup.getPaymentGroupDAO().load(id, PaymentGroupTokens.withoutLists());
+			}
+			@Override
+			public BaseEntity loadBasicDataWithToken(DAOGroup daoGoup, String id, Map<String, Object> tokens) throws Exception {
+				return daoGoup.getPaymentGroupDAO().load(id, tokens);
+			}
+			@Override
+			public BaseEntity present(DAOGroup daoGoup, BaseEntity data, Map<String, Object> tokens) throws Exception {
+				return daoGoup.getPaymentGroupDAO().present((PaymentGroup)data, tokens);
 			}
 		});
 

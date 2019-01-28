@@ -1,0 +1,19 @@
+package com.doublechaintech.oms.orderpromotion;
+import java.io.IOException;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.doublechaintech.oms.OmsObjectPlainCustomSerializer;
+public class OrderPromotionSerializer extends OmsObjectPlainCustomSerializer<OrderPromotion>{
+
+	@Override
+	public void serialize(OrderPromotion orderPromotion, JsonGenerator jgen,
+			SerializerProvider provider) throws IOException,
+			JsonProcessingException {
+			
+		this.writeBaseEntityField(jgen, null, orderPromotion, provider);
+		
+	}
+}
+
+

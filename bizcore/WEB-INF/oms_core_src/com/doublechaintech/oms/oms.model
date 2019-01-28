@@ -9,8 +9,62 @@
 	
 	/>
 	 <!-- Multiple site support -->
+	<profile
+		name="Philip Zhang|Naveen Kumar R |VENKATESH GADUPUTI"
+		age="40"
+		gender="male|female"
+		last_update_time="updateTime()"
+		platform="$(platform)"
+	/>
+	<user_order
+		title="a consumer order"
+		total_adjustment="$100.12"
+		total_amount="$10020.12"
+		user="$(profile)"
+		platform="$(platform)"
+		last_update_time="lastUpdateTime()"
+	/>
+	<line_item
+		name="Jeans - Large"
+		quantity="12"
+		price="$102.99"
+		discount_price="$11.03"
+		user_order="$(user_order)"
+	/>
+	<order_promotion
+		name="Promo For Total"
+		amount="1231"
+		thread_hold="1230"
+		type="PERCENT_OFF|FIX_PRICE"
+		user_order="$(user_order)"
+	/>
+	<manual_adjustment
+		name="Promo For Total"
+		amount="1231"
+		thread_hold="1230"
+		type="OFF|FIX_PRICE"
+		user_order="$(user_order)"
+		
+	/>
+	<shipping_group
+		name="Ship To Home"
+		line1="1900 AVE OF THE STARTS - " 
+		line2="Suite 555 - " 
+		city="Century City - " 
+		state="CA|VA|MA|PA|WA|LA"
+		zip_code="980087"
+		country="US"
+		
+		user_order="$(user_order)"
 	
-	
+	/>
+	<payment_group
+		name="Pay for order"
+		amount="$123.00"
+		user_order="$(user_order)"
+		status="PAID|PENDING|FAIL"
+		
+	/>
 	
 	
 </root>
