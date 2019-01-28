@@ -116,13 +116,13 @@ public class UserOrderMapper extends BaseRowMapper<UserOrder>{
 	protected void setLastUpdateTime(UserOrder userOrder, ResultSet rs, int rowNumber) throws SQLException{
 	
 		//there will be issue when the type is double/int/long
-		String lastUpdateTime = rs.getString(UserOrderTable.COLUMN_LAST_UPDATE_TIME);
+		Date lastUpdateTime = rs.getTimestamp(UserOrderTable.COLUMN_LAST_UPDATE_TIME);
 		if(lastUpdateTime == null){
 			//do nothing when nothing found in database
 			return;
 		}
 		
-		userOrder.setLastUpdateTime(lastUpdateTime);
+		userOrder.setLastUpdateTime(convertToDateTime(lastUpdateTime));
 	}
 		
 	protected void setVersion(UserOrder userOrder, ResultSet rs, int rowNumber) throws SQLException{

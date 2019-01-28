@@ -190,7 +190,7 @@ public class UserOrderManagerImpl extends CustomOmsCheckerManager implements Use
  	
 
 
-	public UserOrder createUserOrder(OmsUserContext userContext,String title, BigDecimal totalAdjustment, BigDecimal totalAmount, String userId, String platformId, String lastUpdateTime) throws Exception
+	public UserOrder createUserOrder(OmsUserContext userContext,String title, BigDecimal totalAdjustment, BigDecimal totalAmount, String userId, String platformId) throws Exception
 	{
 		
 		
@@ -200,7 +200,6 @@ public class UserOrderManagerImpl extends CustomOmsCheckerManager implements Use
 		userContext.getChecker().checkTitleOfUserOrder(title);
 		userContext.getChecker().checkTotalAdjustmentOfUserOrder(totalAdjustment);
 		userContext.getChecker().checkTotalAmountOfUserOrder(totalAmount);
-		userContext.getChecker().checkLastUpdateTimeOfUserOrder(lastUpdateTime);
 	
 		userContext.getChecker().throwExceptionIfHasErrors(UserOrderManagerException.class);
 
@@ -220,7 +219,7 @@ public class UserOrderManagerImpl extends CustomOmsCheckerManager implements Use
 		userOrder.setPlatform(platform);
 		
 		
-		userOrder.setLastUpdateTime(lastUpdateTime);
+		userOrder.setLastUpdateTime(userContext.now());
 
 		userOrder = saveUserOrder(userContext, userOrder, emptyOptions());
 		
@@ -258,9 +257,6 @@ public class UserOrderManagerImpl extends CustomOmsCheckerManager implements Use
 				
 
 		
-		if(UserOrder.LAST_UPDATE_TIME_PROPERTY.equals(property)){
-			userContext.getChecker().checkLastUpdateTimeOfUserOrder(parseString(newValueExpr));
-		}
 	
 		userContext.getChecker().throwExceptionIfHasErrors(UserOrderManagerException.class);
 	
@@ -312,7 +308,7 @@ public class UserOrderManagerImpl extends CustomOmsCheckerManager implements Use
 			//will be good when the userOrder loaded from this JVM process cache.
 			//also good when there is a ram based DAO implementation
 			//make changes to UserOrder.
-			
+			userOrder.updateLastUpdateTime(userContext.now());
 			userOrder.changeProperty(property, newValueExpr);
 			userOrder = saveUserOrder(userContext, userOrder, tokens().done());
 			return present(userContext,userOrder, mergedAllTokens(tokensExpr));
@@ -336,7 +332,7 @@ public class UserOrderManagerImpl extends CustomOmsCheckerManager implements Use
 			//make changes to UserOrder.
 			
 			userOrder.changeProperty(property, newValueExpr);
-			
+			userOrder.updateLastUpdateTime(userContext.now());
 			userOrder = saveUserOrder(userContext, userOrder, tokens().done());
 			return present(userContext,userOrder, mergedAllTokens(tokensExpr));
 			//return saveUserOrder(userContext, userOrder, tokens().done());

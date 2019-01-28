@@ -22,7 +22,7 @@
 		total_amount="$10020.12"
 		user="$(profile)"
 		platform="$(platform)"
-		last_update_time="lastUpdateTime()"
+		last_update_time="updateTime()"
 	/>
 	<line_item
 		name="Jeans - Large"

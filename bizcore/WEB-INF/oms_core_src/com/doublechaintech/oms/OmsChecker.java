@@ -176,15 +176,6 @@ public class OmsChecker extends BaseChecker{
 		return this;
 	}	 			
 
-	public static final String  LAST_UPDATE_TIME_OF_USER_ORDER ="user_order.last_update_time";
-	public OmsChecker checkLastUpdateTimeOfUserOrder(String lastUpdateTime)
-	{
-		
-	 	checkStringLengthRange(lastUpdateTime,5, 64,LAST_UPDATE_TIME_OF_USER_ORDER ); 		
-		
-		return this;
-	}	 			
-
 	public static final String  VERSION_OF_USER_ORDER ="user_order.version";
 	public OmsChecker checkVersionOfUserOrder(int version)
 	{

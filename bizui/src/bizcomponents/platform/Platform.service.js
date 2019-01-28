@@ -45,14 +45,14 @@ const removeProfileList = (targetObjectId, parameters) => {
 
 
 const addUserOrder = (targetObjectId, parameters) => {
-  const url = `${PREFIX}platformManager/addUserOrder/platformId/title/totalAdjustment/totalAmount/userId/lastUpdateTime/tokensExpr/`
+  const url = `${PREFIX}platformManager/addUserOrder/platformId/title/totalAdjustment/totalAmount/userId/tokensExpr/`
   const platformId = targetObjectId
   const requestParameters = { ...parameters, platformId, tokensExpr: 'none' }
   return postForm({ url,requestParameters})
 }
 
 const updateUserOrder = (targetObjectId, parameters) => {
-  const url = `${PREFIX}platformManager/updateUserOrderProperties/platformId/id/title/totalAdjustment/totalAmount/lastUpdateTime/tokensExpr/`
+  const url = `${PREFIX}platformManager/updateUserOrderProperties/platformId/id/title/totalAdjustment/totalAmount/tokensExpr/`
   const platformId = targetObjectId
   const requestParameters = { ...parameters, platformId, tokensExpr: 'none' }
   return postForm({ url,requestParameters})

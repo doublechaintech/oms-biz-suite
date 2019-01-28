@@ -80,7 +80,7 @@ const displayColumns = [
   { title: 'Total Amount', dataIndex: 'totalAmount', className:'money', render: (text, record) => renderMoneyCell(text, record) },
   { title: 'User', dataIndex: 'user', render: (text, record) => renderReferenceCell(text, record)},
   { title: 'Platform', dataIndex: 'platform', render: (text, record) => renderReferenceCell(text, record)},
-  { title: 'Last Update Time', debugtype: 'string', dataIndex: 'lastUpdateTime', width: '20',render: (text, record)=>renderTextCell(text,record) },
+  { title: 'Last Update Time', dataIndex: 'lastUpdateTime', render: (text, record) =>renderDateTimeCell(text,record)  },
 
 ]
 

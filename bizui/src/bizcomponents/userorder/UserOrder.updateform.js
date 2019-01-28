@@ -59,6 +59,7 @@ class UserOrderUpdateForm extends Component {
     const convertiedValues = selectedRows.map((item) => {
       return {
         ...item,
+        lastUpdateTime: moment(item.lastUpdateTime),
 
       }
     })
@@ -298,18 +299,6 @@ class UserOrderUpdateForm extends Component {
                     rules: [{ required: true, message: appLocaleName(userContext,"PleaseInput") }],
                   })(
                     <Input placeholder="请输入Total Amount" />
-                    
-                  )}
-                </Form.Item>
-              </Col>
-
-              <Col lg={12} md={12} sm={24}>
-                <Form.Item label={fieldLabels.lastUpdateTime} {...formItemLayout}>
-                  {getFieldDecorator('lastUpdateTime', {
-                    initialValue: selectedRow.lastUpdateTime,
-                    rules: [{ required: true, message: appLocaleName(userContext,"PleaseInput") }],
-                  })(
-                    <Input placeholder="请输入Last Update Time" />
                     
                   )}
                 </Form.Item>

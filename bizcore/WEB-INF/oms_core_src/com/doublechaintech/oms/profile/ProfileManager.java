@@ -28,9 +28,9 @@ public interface ProfileManager{
 	/*======================================================DATA MAINTENANCE===========================================================*/
 	
 
-	//public  UserOrderManager getUserOrderManager(OmsUserContext userContext, String profileId, String title, BigDecimal totalAdjustment, BigDecimal totalAmount, String platformId, String lastUpdateTime ,String [] tokensExpr)  throws Exception;
+	//public  UserOrderManager getUserOrderManager(OmsUserContext userContext, String profileId, String title, BigDecimal totalAdjustment, BigDecimal totalAmount, String platformId ,String [] tokensExpr)  throws Exception;
 	
-	public  Profile addUserOrder(OmsUserContext userContext, String profileId, String title, BigDecimal totalAdjustment, BigDecimal totalAmount, String platformId, String lastUpdateTime , String [] tokensExpr)  throws Exception;
+	public  Profile addUserOrder(OmsUserContext userContext, String profileId, String title, BigDecimal totalAdjustment, BigDecimal totalAmount, String platformId , String [] tokensExpr)  throws Exception;
 	public  Profile removeUserOrder(OmsUserContext userContext, String profileId, String userOrderId, int userOrderVersion,String [] tokensExpr)  throws Exception;
 	public  Profile updateUserOrder(OmsUserContext userContext, String profileId, String userOrderId, int userOrderVersion, String property, String newValueExpr,String [] tokensExpr)  throws Exception;
 

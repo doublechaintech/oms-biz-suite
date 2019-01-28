@@ -31,7 +31,7 @@
 			<field name="total_amount" type="money" checkType="MoneyAmount" min="0.0" max="10020.12" description="Total Amount" />
 			<field name="user" type="reference" checkType="exist(profile)" description="User" />
 			<field name="platform" type="reference" checkType="exist(platform)" description="Platform" />
-			<field name="last_update_time" type="string" checkType="StringLengthRange" min="5" max="64" description="Last Update Time" />
+			<field name="last_update_time" type="date_time_update" checkType="DateTimeUpdate" min="1900-01-01T00:00:00" max="updateTime()" description="Last Update Time" />
 			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="Version" />
 		</fields>
 	</table>

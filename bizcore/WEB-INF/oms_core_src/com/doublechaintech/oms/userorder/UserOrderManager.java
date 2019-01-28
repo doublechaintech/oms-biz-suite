@@ -12,7 +12,7 @@ public interface UserOrderManager{
 
 		
 
-	public UserOrder createUserOrder(OmsUserContext userContext, String title, BigDecimal totalAdjustment, BigDecimal totalAmount, String userId, String platformId, String lastUpdateTime) throws Exception;	
+	public UserOrder createUserOrder(OmsUserContext userContext, String title, BigDecimal totalAdjustment, BigDecimal totalAmount, String userId, String platformId) throws Exception;	
 	public UserOrder updateUserOrder(OmsUserContext userContext,String userOrderId, int userOrderVersion, String property, String newValueExpr,String [] tokensExpr) throws Exception;
 	public UserOrder loadUserOrder(OmsUserContext userContext, String userOrderId, String [] tokensExpr) throws Exception;
 	public UserOrder internalSaveUserOrder(OmsUserContext userContext, UserOrder userOrder) throws Exception;

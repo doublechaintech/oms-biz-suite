@@ -133,7 +133,6 @@ componentDidMount() {
 		pushIfNotNull(paramList,this.buildStringSearchParameters(fieldsValue,'contains', 'title'))
 		pushIfNotNull(paramList,this.buildStringSearchParameters(fieldsValue,'eq', 'user'))
 		pushIfNotNull(paramList,this.buildStringSearchParameters(fieldsValue,'eq', 'platform'))
-		pushIfNotNull(paramList,this.buildStringSearchParameters(fieldsValue,'contains', 'lastUpdateTime'))
 
      
       console.log("the final parameter", paramList)
@@ -290,14 +289,6 @@ componentDidMount() {
                  
                   )}
                 </Form.Item></Col>
-
-          <Col md={8} sm={24}>
-            <FormItem label="Last Update Time">
-              {getFieldDecorator('lastUpdateTime')(
-                <Input placeholder={appLocaleName(userContext,"PleaseInput")} />
-              )}
-            </FormItem>
-          </Col>
 
         </Row>
         <div style={{ overflow: 'hidden' }}>

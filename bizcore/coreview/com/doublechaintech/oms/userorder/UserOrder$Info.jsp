@@ -23,7 +23,7 @@
 <li><span>${userContext.localeMap['user_order.title']}</span> ${userOrder.title}</li>
 <li><span>${userContext.localeMap['user_order.total_adjustment']}</span> <fmt:formatNumber type="currency"  value="${userOrder.totalAdjustment}" /></li>
 <li><span>${userContext.localeMap['user_order.total_amount']}</span> <fmt:formatNumber type="currency"  value="${userOrder.totalAmount}" /></li>
-<li><span>${userContext.localeMap['user_order.last_update_time']}</span> ${userOrder.lastUpdateTime}</li>
+<li><span>${userContext.localeMap['user_order.last_update_time']}</span> <fmt:formatDate pattern="yyyy-MM-dd" value="${userOrder.lastUpdateTime}" /></li>
 
 	
 	</ul>

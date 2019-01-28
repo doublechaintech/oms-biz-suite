@@ -294,7 +294,7 @@ public class BaseForm extends GenericForm{
 		field.setParameterName(parameterName);
 		field.setDefaultValue(initValue);
 		field.setFieldGroup("基本信息");
-		field.setType("text");
+		field.setType("date_time");
 		field.setRequired(true);
 		field.setPlaceholder("请填写Last Update Time");
 		return field;

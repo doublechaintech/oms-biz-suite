@@ -130,7 +130,7 @@ public class ProfileTokens extends CommonTokens{
 	}
 	
 	public ProfileTokens searchAllTextOfUserOrderList(String verb, String value){	
-		String field = "id|title|lastUpdateTime";
+		String field = "id|title";
 		addSearchMoreOptions(USER_ORDER_LIST,userOrderListSearchCounter++, field, verb, value);
 		return this;
 	}

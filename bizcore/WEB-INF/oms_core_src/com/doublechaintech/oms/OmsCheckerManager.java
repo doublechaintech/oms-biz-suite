@@ -145,14 +145,6 @@ public class OmsCheckerManager extends BaseManagerImpl {
 		
 	}	 			
 	
-	public static final String  LAST_UPDATE_TIME_OF_USER_ORDER ="user_order.last_update_time";
-	protected void checkLastUpdateTimeOfUserOrder(OmsUserContext userContext, String lastUpdateTime, List<Message> messageList)
-	{
-		
-	 	checkStringLengthRange(lastUpdateTime,5, 64,LAST_UPDATE_TIME_OF_USER_ORDER, messageList); 		
-		
-	}	 			
-	
 	public static final String  VERSION_OF_USER_ORDER ="user_order.version";
 	protected void checkVersionOfUserOrder(OmsUserContext userContext, int version, List<Message> messageList)
 	{
