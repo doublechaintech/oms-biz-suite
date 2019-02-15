@@ -9,7 +9,7 @@
 	<bean id="checker" class="com.doublechaintech.oms.OmsChecker" scope="prototype"></bean>
 
 	<bean id="platformManagerBase" class="com.doublechaintech.oms.platform.PlatformManagerImpl"/>
-	<bean id="platformManager" class="com.doublechaintech.oms.platform.PlatformManagerImpl" parent="platformManagerBase" ></bean>
+	<bean id="platformManager" class="com.doublechaintech.oms.platform.PlatformCustomManagerImpl" parent="platformManagerBase" ></bean>
 	
 	<bean id="profileManagerBase" class="com.doublechaintech.oms.profile.ProfileManagerImpl"/>
 	<bean id="profileManager" class="com.doublechaintech.oms.profile.ProfileManagerImpl" parent="profileManagerBase" ></bean>
@@ -33,19 +33,19 @@
 	<bean id="paymentGroupManager" class="com.doublechaintech.oms.paymentgroup.PaymentGroupManagerImpl" parent="paymentGroupManagerBase" ></bean>
 	
 	<bean id="userDomainManagerBase" class="com.doublechaintech.oms.userdomain.UserDomainManagerImpl"/>
-	<bean id="userDomainManager" class="com.doublechaintech.oms.userdomain.UserDomainManagerImpl" parent="userDomainManagerBase" ></bean>
+	<bean id="userDomainManager" class="com.doublechaintech.oms.userdomain.UserDomainCustomManagerImpl" parent="userDomainManagerBase" ></bean>
 	
 	<bean id="userWhiteListManagerBase" class="com.doublechaintech.oms.userwhitelist.UserWhiteListManagerImpl"/>
 	<bean id="userWhiteListManager" class="com.doublechaintech.oms.userwhitelist.UserWhiteListManagerImpl" parent="userWhiteListManagerBase" ></bean>
 	
 	<bean id="secUserManagerBase" class="com.doublechaintech.oms.secuser.SecUserManagerImpl"/>
-	<bean id="secUserManager" class="com.doublechaintech.oms.secuser.SecUserManagerImpl" parent="secUserManagerBase" ></bean>
+	<bean id="secUserManager" class="com.doublechaintech.oms.secuser.SecUserCustomManagerImpl" parent="secUserManagerBase" ></bean>
 	
 	<bean id="secUserBlockingManagerBase" class="com.doublechaintech.oms.secuserblocking.SecUserBlockingManagerImpl"/>
-	<bean id="secUserBlockingManager" class="com.doublechaintech.oms.secuserblocking.SecUserBlockingManagerImpl" parent="secUserBlockingManagerBase" ></bean>
+	<bean id="secUserBlockingManager" class="com.doublechaintech.oms.secuserblocking.SecUserBlockingCustomManagerImpl" parent="secUserBlockingManagerBase" ></bean>
 	
 	<bean id="userAppManagerBase" class="com.doublechaintech.oms.userapp.UserAppManagerImpl"/>
-	<bean id="userAppManager" class="com.doublechaintech.oms.userapp.UserAppManagerImpl" parent="userAppManagerBase" ></bean>
+	<bean id="userAppManager" class="com.doublechaintech.oms.userapp.UserAppCustomManagerImpl" parent="userAppManagerBase" ></bean>
 	
 	<bean id="listAccessManagerBase" class="com.doublechaintech.oms.listaccess.ListAccessManagerImpl"/>
 	<bean id="listAccessManager" class="com.doublechaintech.oms.listaccess.ListAccessManagerImpl" parent="listAccessManagerBase" ></bean>

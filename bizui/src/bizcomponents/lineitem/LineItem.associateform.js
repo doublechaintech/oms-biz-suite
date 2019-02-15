@@ -19,9 +19,9 @@ const testValues = {};
 /*
 const testValues = {
   name: 'Jeans - Large',
-  quantity: '11',
-  price: '75.80',
-  discountPrice: '8.76',
+  quantity: '9',
+  price: '72.28',
+  discountPrice: '10.47',
   userOrderId: 'UO000001',
 }
 */

@@ -19,7 +19,7 @@ const testValues = {};
 /*
 const testValues = {
   name: 'Pay for order',
-  amount: '113.45',
+  amount: '113.05',
   status: 'PAID',
   userOrderId: 'UO000001',
 }
