@@ -26,4 +26,5 @@ bin/*
 output/*
 lib/*
 WEB-INF/lib/*
-
+.history
+.gradle

@@ -18,7 +18,7 @@ const testValues = {};
 /*
 const testValues = {
   name: 'Philip Zhang',
-  age: '38',
+  age: '36',
   gender: 'male',
   platformId: 'P000001',
 }
