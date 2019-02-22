@@ -198,6 +198,9 @@ public class UserOrder extends BaseEntity implements  java.io.Serializable{
 		this.changed = true;
 		return this;
 	}
+	public void mergeId(String id){
+		if(id != null) { setId(id);}
+	}
 	
 	
 	public void setTitle(String title){
@@ -210,6 +213,9 @@ public class UserOrder extends BaseEntity implements  java.io.Serializable{
 		this.mTitle = trimString(title);;
 		this.changed = true;
 		return this;
+	}
+	public void mergeTitle(String title){
+		if(title != null) { setTitle(title);}
 	}
 	
 	
@@ -224,6 +230,9 @@ public class UserOrder extends BaseEntity implements  java.io.Serializable{
 		this.changed = true;
 		return this;
 	}
+	public void mergeTotalAdjustment(BigDecimal totalAdjustment){
+		setTotalAdjustment(totalAdjustment);
+	}
 	
 	
 	public void setTotalAmount(BigDecimal totalAmount){
@@ -237,6 +246,9 @@ public class UserOrder extends BaseEntity implements  java.io.Serializable{
 		this.changed = true;
 		return this;
 	}
+	public void mergeTotalAmount(BigDecimal totalAmount){
+		setTotalAmount(totalAmount);
+	}
 	
 	
 	public void setUser(Profile user){
@@ -249,6 +261,9 @@ public class UserOrder extends BaseEntity implements  java.io.Serializable{
 		this.mUser = user;;
 		this.changed = true;
 		return this;
+	}
+	public void mergeUser(Profile user){
+		if(user != null) { setUser(user);}
 	}
 	
 	
@@ -268,6 +283,9 @@ public class UserOrder extends BaseEntity implements  java.io.Serializable{
 		this.changed = true;
 		return this;
 	}
+	public void mergePlatform(Platform platform){
+		if(platform != null) { setPlatform(platform);}
+	}
 	
 	
 	public void clearPlatform(){
@@ -286,6 +304,9 @@ public class UserOrder extends BaseEntity implements  java.io.Serializable{
 		this.changed = true;
 		return this;
 	}
+	public void mergeLastUpdateTime(DateTime lastUpdateTime){
+		setLastUpdateTime(lastUpdateTime);
+	}
 	
 	
 	public void setVersion(int version){
@@ -298,6 +319,9 @@ public class UserOrder extends BaseEntity implements  java.io.Serializable{
 		this.mVersion = version;;
 		this.changed = true;
 		return this;
+	}
+	public void mergeVersion(int version){
+		setVersion(version);
 	}
 	
 	
@@ -331,7 +355,16 @@ public class UserOrder extends BaseEntity implements  java.io.Serializable{
 		}
 		getLineItemList().addAll(lineItemList);
 	}
-	
+	public  void mergeLineItemList(SmartList<LineItem> lineItemList){
+		if(lineItemList==null){
+			return;
+		}
+		if(lineItemList.isEmpty()){
+			return;
+		}
+		addLineItemList( lineItemList );
+		
+	}
 	public  LineItem removeLineItem(LineItem lineItemIndex){
 		
 		int index = getLineItemList().indexOf(lineItemIndex);
@@ -429,7 +462,16 @@ public class UserOrder extends BaseEntity implements  java.io.Serializable{
 		}
 		getOrderPromotionList().addAll(orderPromotionList);
 	}
-	
+	public  void mergeOrderPromotionList(SmartList<OrderPromotion> orderPromotionList){
+		if(orderPromotionList==null){
+			return;
+		}
+		if(orderPromotionList.isEmpty()){
+			return;
+		}
+		addOrderPromotionList( orderPromotionList );
+		
+	}
 	public  OrderPromotion removeOrderPromotion(OrderPromotion orderPromotionIndex){
 		
 		int index = getOrderPromotionList().indexOf(orderPromotionIndex);
@@ -527,7 +569,16 @@ public class UserOrder extends BaseEntity implements  java.io.Serializable{
 		}
 		getManualAdjustmentList().addAll(manualAdjustmentList);
 	}
-	
+	public  void mergeManualAdjustmentList(SmartList<ManualAdjustment> manualAdjustmentList){
+		if(manualAdjustmentList==null){
+			return;
+		}
+		if(manualAdjustmentList.isEmpty()){
+			return;
+		}
+		addManualAdjustmentList( manualAdjustmentList );
+		
+	}
 	public  ManualAdjustment removeManualAdjustment(ManualAdjustment manualAdjustmentIndex){
 		
 		int index = getManualAdjustmentList().indexOf(manualAdjustmentIndex);
@@ -625,7 +676,16 @@ public class UserOrder extends BaseEntity implements  java.io.Serializable{
 		}
 		getShippingGroupList().addAll(shippingGroupList);
 	}
-	
+	public  void mergeShippingGroupList(SmartList<ShippingGroup> shippingGroupList){
+		if(shippingGroupList==null){
+			return;
+		}
+		if(shippingGroupList.isEmpty()){
+			return;
+		}
+		addShippingGroupList( shippingGroupList );
+		
+	}
 	public  ShippingGroup removeShippingGroup(ShippingGroup shippingGroupIndex){
 		
 		int index = getShippingGroupList().indexOf(shippingGroupIndex);
@@ -723,7 +783,16 @@ public class UserOrder extends BaseEntity implements  java.io.Serializable{
 		}
 		getPaymentGroupList().addAll(paymentGroupList);
 	}
-	
+	public  void mergePaymentGroupList(SmartList<PaymentGroup> paymentGroupList){
+		if(paymentGroupList==null){
+			return;
+		}
+		if(paymentGroupList.isEmpty()){
+			return;
+		}
+		addPaymentGroupList( paymentGroupList );
+		
+	}
 	public  PaymentGroup removePaymentGroup(PaymentGroup paymentGroupIndex){
 		
 		int index = getPaymentGroupList().indexOf(paymentGroupIndex);
@@ -889,6 +958,32 @@ public class UserOrder extends BaseEntity implements  java.io.Serializable{
 			dest.setManualAdjustmentList(getManualAdjustmentList());
 			dest.setShippingGroupList(getShippingGroupList());
 			dest.setPaymentGroupList(getPaymentGroupList());
+
+		}
+		super.copyTo(baseDest);
+		return baseDest;
+	}
+	public BaseEntity mergeDataTo(BaseEntity baseDest){
+		
+		
+		if(baseDest instanceof UserOrder){
+		
+			
+			UserOrder dest =(UserOrder)baseDest;
+		
+			dest.mergeId(getId());
+			dest.mergeTitle(getTitle());
+			dest.mergeTotalAdjustment(getTotalAdjustment());
+			dest.mergeTotalAmount(getTotalAmount());
+			dest.mergeUser(getUser());
+			dest.mergePlatform(getPlatform());
+			dest.mergeLastUpdateTime(getLastUpdateTime());
+			dest.mergeVersion(getVersion());
+			dest.mergeLineItemList(getLineItemList());
+			dest.mergeOrderPromotionList(getOrderPromotionList());
+			dest.mergeManualAdjustmentList(getManualAdjustmentList());
+			dest.mergeShippingGroupList(getShippingGroupList());
+			dest.mergePaymentGroupList(getPaymentGroupList());
 
 		}
 		super.copyTo(baseDest);

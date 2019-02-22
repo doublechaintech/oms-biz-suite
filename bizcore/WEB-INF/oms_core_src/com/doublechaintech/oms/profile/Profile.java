@@ -177,6 +177,9 @@ public class Profile extends BaseEntity implements  java.io.Serializable{
 		this.changed = true;
 		return this;
 	}
+	public void mergeId(String id){
+		if(id != null) { setId(id);}
+	}
 	
 	
 	public void setName(String name){
@@ -189,6 +192,9 @@ public class Profile extends BaseEntity implements  java.io.Serializable{
 		this.mName = trimString(name);;
 		this.changed = true;
 		return this;
+	}
+	public void mergeName(String name){
+		if(name != null) { setName(name);}
 	}
 	
 	
@@ -203,6 +209,9 @@ public class Profile extends BaseEntity implements  java.io.Serializable{
 		this.changed = true;
 		return this;
 	}
+	public void mergeAge(int age){
+		setAge(age);
+	}
 	
 	
 	public void setGender(String gender){
@@ -215,6 +224,9 @@ public class Profile extends BaseEntity implements  java.io.Serializable{
 		this.mGender = trimString(gender);;
 		this.changed = true;
 		return this;
+	}
+	public void mergeGender(String gender){
+		if(gender != null) { setGender(gender);}
 	}
 	
 	
@@ -229,6 +241,9 @@ public class Profile extends BaseEntity implements  java.io.Serializable{
 		this.changed = true;
 		return this;
 	}
+	public void mergeLastUpdateTime(DateTime lastUpdateTime){
+		setLastUpdateTime(lastUpdateTime);
+	}
 	
 	
 	public void setPlatform(Platform platform){
@@ -241,6 +256,9 @@ public class Profile extends BaseEntity implements  java.io.Serializable{
 		this.mPlatform = platform;;
 		this.changed = true;
 		return this;
+	}
+	public void mergePlatform(Platform platform){
+		if(platform != null) { setPlatform(platform);}
 	}
 	
 	
@@ -259,6 +277,9 @@ public class Profile extends BaseEntity implements  java.io.Serializable{
 		this.mVersion = version;;
 		this.changed = true;
 		return this;
+	}
+	public void mergeVersion(int version){
+		setVersion(version);
 	}
 	
 	
@@ -292,7 +313,16 @@ public class Profile extends BaseEntity implements  java.io.Serializable{
 		}
 		getUserOrderList().addAll(userOrderList);
 	}
-	
+	public  void mergeUserOrderList(SmartList<UserOrder> userOrderList){
+		if(userOrderList==null){
+			return;
+		}
+		if(userOrderList.isEmpty()){
+			return;
+		}
+		addUserOrderList( userOrderList );
+		
+	}
 	public  UserOrder removeUserOrder(UserOrder userOrderIndex){
 		
 		int index = getUserOrderList().indexOf(userOrderIndex);
@@ -423,6 +453,27 @@ public class Profile extends BaseEntity implements  java.io.Serializable{
 			dest.setPlatform(getPlatform());
 			dest.setVersion(getVersion());
 			dest.setUserOrderList(getUserOrderList());
+
+		}
+		super.copyTo(baseDest);
+		return baseDest;
+	}
+	public BaseEntity mergeDataTo(BaseEntity baseDest){
+		
+		
+		if(baseDest instanceof Profile){
+		
+			
+			Profile dest =(Profile)baseDest;
+		
+			dest.mergeId(getId());
+			dest.mergeName(getName());
+			dest.mergeAge(getAge());
+			dest.mergeGender(getGender());
+			dest.mergeLastUpdateTime(getLastUpdateTime());
+			dest.mergePlatform(getPlatform());
+			dest.mergeVersion(getVersion());
+			dest.mergeUserOrderList(getUserOrderList());
 
 		}
 		super.copyTo(baseDest);
