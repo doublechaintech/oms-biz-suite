@@ -103,7 +103,7 @@ public class DateTimeUtil {
 		return (int) duration.toDays();
 	}
 
-	public static int calcDifferHours(DateTime startTime, DateTime endTime) {
+	public static int calcDifferHours(Date startTime, Date endTime) {
 		LocalDateTime d1 = toLocalDateTime(startTime);
 		LocalDateTime d2 = toLocalDateTime(endTime);
 		Duration duration = Duration.between(d1, d2);

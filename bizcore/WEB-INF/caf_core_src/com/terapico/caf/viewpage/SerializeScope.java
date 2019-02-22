@@ -17,8 +17,35 @@ public class SerializeScope {
 	protected String aliasName;
 	protected String forceWhenEmpty;
 	protected boolean noListMeta = false;
+	protected boolean revers = false;
+	protected boolean showWhenNotEmpty = false;
+	protected boolean putInDataContainer = false;
 	
 	
+	public boolean isPutInDataContainer() {
+		return putInDataContainer;
+	}
+
+	public void setPutInDataContainer(boolean putInDataContainer) {
+		this.putInDataContainer = putInDataContainer;
+	}
+
+	public boolean isShowWhenNotEmpty() {
+		return showWhenNotEmpty;
+	}
+
+	public void setShowWhenNotEmpty(boolean showWhenNotEmpty) {
+		this.showWhenNotEmpty = showWhenNotEmpty;
+	}
+
+	public boolean isRevers() {
+		return revers;
+	}
+
+	public void setRevers(boolean revers) {
+		this.revers = revers;
+	}
+
 	protected SerializeScope curNode = null;
 	
 	private SerializeScope() {
@@ -97,7 +124,14 @@ public class SerializeScope {
 		curNode.setAliasName(alias);
 		return this;
 	}
-
+	public SerializeScope not_empty() {
+		if (curNode == null) {
+			throw new RuntimeException("method 'not_zero()' must be invoked only after method 'field(xxx)'");
+		}
+		curNode.setShowWhenNotEmpty(true);
+		return this;
+	}
+	
 	public String getAliasName() {
 		return aliasName;
 	}
@@ -109,14 +143,14 @@ public class SerializeScope {
 	
 	public SerializeScope forceList() {
 		if (curNode == null) {
-			throw new RuntimeException("method 'forceList(String)' must be invoked only after method 'field(xxx)'");
+			throw new RuntimeException("method 'forceList()' must be invoked only after method 'field(xxx)'");
 		}
 		curNode.setForceWhenEmpty("list");
 		return this;
 	}
 	public SerializeScope forceObject() {
 		if (curNode == null) {
-			throw new RuntimeException("method 'forceObject(String)' must be invoked only after method 'field(xxx)'");
+			throw new RuntimeException("method 'forceObject()' must be invoked only after method 'field(xxx)'");
 		}
 		curNode.setForceWhenEmpty("object");
 		return this;
@@ -132,12 +166,26 @@ public class SerializeScope {
 
 	public SerializeScope noListMeta() {
 		if (curNode == null) {
-			throw new RuntimeException("method 'noListMeta(String)' must be invoked only after method 'field(xxx)'");
+			throw new RuntimeException("method 'noListMeta()' must be invoked only after method 'field(xxx)'");
 		}
 		curNode.setNoListMeta(true);
 		return this;
 	}
-
+	public SerializeScope in_data_container() {
+		if (curNode == null) {
+			throw new RuntimeException("method 'in_data_container()' must be invoked only after method 'field(xxx)'");
+		}
+		curNode.setPutInDataContainer(true);
+		return this;
+	}
+	
+	public SerializeScope revers() {
+		if (curNode == null) {
+			throw new RuntimeException("method 'revers()' must be invoked only after method 'field(xxx)'");
+		}
+		curNode.setRevers(true);
+		return this;
+	}
 	public boolean isNoListMeta() {
 		return noListMeta;
 	}

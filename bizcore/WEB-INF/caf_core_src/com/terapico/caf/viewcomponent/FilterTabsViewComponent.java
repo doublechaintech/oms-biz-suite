@@ -67,6 +67,7 @@ public class FilterTabsViewComponent extends BaseViewComponent {
 
     public FilterTabsViewComponent() {
         super();
+        this.setLinkToUrl("");
         this.setComponentType("filter-tabs");
     }
 
