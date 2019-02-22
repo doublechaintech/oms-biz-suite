@@ -24,11 +24,29 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 @SuppressWarnings("rawtypes")
 public class ServletResultRenderer {
-
+	
+	protected void renderMimeObjectResult(HttpServlet servlet, InvocationResult result, HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		
+		Object actualResult = result.getActualResult();
+		if(!(actualResult instanceof BlobObject)) {
+			throw new IllegalArgumentException("The return object is not a blob");
+		}
+		BlobObject blob=(BlobObject)actualResult;
+		
+		response.setCharacterEncoding(null);
+		response.setContentType(blob.getMimeType());
+		response.getOutputStream().write(blob.getData());
+		
+	}
 	public void render(HttpServlet servlet, HttpServletRequest request, HttpServletResponse response,
 			InvocationResult result) throws ServletException, IOException {
 		// When integrate with WeiXin, some special request has accept:*/* , and must render as plainText
 		// so decide render way by result.isRenderByXXX first
+		if(result.getActualResult() instanceof BlobObject) {
+			renderMimeObjectResult(servlet, result, request, response);
+			return;
+		}
 		if (result.isAssignedRenderingWay()){
 			if (result.isRenderAsHtml()){
 				renderHTMLPage(servlet, result, request, response);
