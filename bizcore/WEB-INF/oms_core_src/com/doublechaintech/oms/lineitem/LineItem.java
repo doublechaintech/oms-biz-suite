@@ -173,6 +173,9 @@ public class LineItem extends BaseEntity implements  java.io.Serializable{
 		this.changed = true;
 		return this;
 	}
+	public void mergeId(String id){
+		if(id != null) { setId(id);}
+	}
 	
 	
 	public void setName(String name){
@@ -185,6 +188,9 @@ public class LineItem extends BaseEntity implements  java.io.Serializable{
 		this.mName = trimString(name);;
 		this.changed = true;
 		return this;
+	}
+	public void mergeName(String name){
+		if(name != null) { setName(name);}
 	}
 	
 	
@@ -199,6 +205,9 @@ public class LineItem extends BaseEntity implements  java.io.Serializable{
 		this.changed = true;
 		return this;
 	}
+	public void mergeQuantity(int quantity){
+		setQuantity(quantity);
+	}
 	
 	
 	public void setPrice(BigDecimal price){
@@ -211,6 +220,9 @@ public class LineItem extends BaseEntity implements  java.io.Serializable{
 		this.mPrice = price;;
 		this.changed = true;
 		return this;
+	}
+	public void mergePrice(BigDecimal price){
+		setPrice(price);
 	}
 	
 	
@@ -225,6 +237,9 @@ public class LineItem extends BaseEntity implements  java.io.Serializable{
 		this.changed = true;
 		return this;
 	}
+	public void mergeDiscountPrice(BigDecimal discountPrice){
+		setDiscountPrice(discountPrice);
+	}
 	
 	
 	public void setUserOrder(UserOrder userOrder){
@@ -237,6 +252,9 @@ public class LineItem extends BaseEntity implements  java.io.Serializable{
 		this.mUserOrder = userOrder;;
 		this.changed = true;
 		return this;
+	}
+	public void mergeUserOrder(UserOrder userOrder){
+		if(userOrder != null) { setUserOrder(userOrder);}
 	}
 	
 	
@@ -255,6 +273,9 @@ public class LineItem extends BaseEntity implements  java.io.Serializable{
 		this.mVersion = version;;
 		this.changed = true;
 		return this;
+	}
+	public void mergeVersion(int version){
+		setVersion(version);
 	}
 	
 	
@@ -313,6 +334,26 @@ public class LineItem extends BaseEntity implements  java.io.Serializable{
 			dest.setDiscountPrice(getDiscountPrice());
 			dest.setUserOrder(getUserOrder());
 			dest.setVersion(getVersion());
+
+		}
+		super.copyTo(baseDest);
+		return baseDest;
+	}
+	public BaseEntity mergeDataTo(BaseEntity baseDest){
+		
+		
+		if(baseDest instanceof LineItem){
+		
+			
+			LineItem dest =(LineItem)baseDest;
+		
+			dest.mergeId(getId());
+			dest.mergeName(getName());
+			dest.mergeQuantity(getQuantity());
+			dest.mergePrice(getPrice());
+			dest.mergeDiscountPrice(getDiscountPrice());
+			dest.mergeUserOrder(getUserOrder());
+			dest.mergeVersion(getVersion());
 
 		}
 		super.copyTo(baseDest);

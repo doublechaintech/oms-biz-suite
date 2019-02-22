@@ -236,6 +236,9 @@ public class ShippingGroup extends BaseEntity implements  java.io.Serializable{
 		this.changed = true;
 		return this;
 	}
+	public void mergeId(String id){
+		if(id != null) { setId(id);}
+	}
 	
 	
 	public void setName(String name){
@@ -248,6 +251,9 @@ public class ShippingGroup extends BaseEntity implements  java.io.Serializable{
 		this.mName = trimString(name);;
 		this.changed = true;
 		return this;
+	}
+	public void mergeName(String name){
+		if(name != null) { setName(name);}
 	}
 	
 	
@@ -262,6 +268,9 @@ public class ShippingGroup extends BaseEntity implements  java.io.Serializable{
 		this.changed = true;
 		return this;
 	}
+	public void mergeLine1(String line1){
+		if(line1 != null) { setLine1(line1);}
+	}
 	
 	
 	public void setLine2(String line2){
@@ -274,6 +283,9 @@ public class ShippingGroup extends BaseEntity implements  java.io.Serializable{
 		this.mLine2 = trimString(line2);;
 		this.changed = true;
 		return this;
+	}
+	public void mergeLine2(String line2){
+		if(line2 != null) { setLine2(line2);}
 	}
 	
 	
@@ -288,6 +300,9 @@ public class ShippingGroup extends BaseEntity implements  java.io.Serializable{
 		this.changed = true;
 		return this;
 	}
+	public void mergeCity(String city){
+		if(city != null) { setCity(city);}
+	}
 	
 	
 	public void setState(String state){
@@ -300,6 +315,9 @@ public class ShippingGroup extends BaseEntity implements  java.io.Serializable{
 		this.mState = trimString(state);;
 		this.changed = true;
 		return this;
+	}
+	public void mergeState(String state){
+		if(state != null) { setState(state);}
 	}
 	
 	
@@ -314,6 +332,9 @@ public class ShippingGroup extends BaseEntity implements  java.io.Serializable{
 		this.changed = true;
 		return this;
 	}
+	public void mergeZipCode(int zipCode){
+		setZipCode(zipCode);
+	}
 	
 	
 	public void setCountry(String country){
@@ -327,6 +348,9 @@ public class ShippingGroup extends BaseEntity implements  java.io.Serializable{
 		this.changed = true;
 		return this;
 	}
+	public void mergeCountry(String country){
+		if(country != null) { setCountry(country);}
+	}
 	
 	
 	public void setUserOrder(UserOrder userOrder){
@@ -339,6 +363,9 @@ public class ShippingGroup extends BaseEntity implements  java.io.Serializable{
 		this.mUserOrder = userOrder;;
 		this.changed = true;
 		return this;
+	}
+	public void mergeUserOrder(UserOrder userOrder){
+		if(userOrder != null) { setUserOrder(userOrder);}
 	}
 	
 	
@@ -357,6 +384,9 @@ public class ShippingGroup extends BaseEntity implements  java.io.Serializable{
 		this.mVersion = version;;
 		this.changed = true;
 		return this;
+	}
+	public void mergeVersion(int version){
+		setVersion(version);
 	}
 	
 	
@@ -421,6 +451,29 @@ public class ShippingGroup extends BaseEntity implements  java.io.Serializable{
 			dest.setCountry(getCountry());
 			dest.setUserOrder(getUserOrder());
 			dest.setVersion(getVersion());
+
+		}
+		super.copyTo(baseDest);
+		return baseDest;
+	}
+	public BaseEntity mergeDataTo(BaseEntity baseDest){
+		
+		
+		if(baseDest instanceof ShippingGroup){
+		
+			
+			ShippingGroup dest =(ShippingGroup)baseDest;
+		
+			dest.mergeId(getId());
+			dest.mergeName(getName());
+			dest.mergeLine1(getLine1());
+			dest.mergeLine2(getLine2());
+			dest.mergeCity(getCity());
+			dest.mergeState(getState());
+			dest.mergeZipCode(getZipCode());
+			dest.mergeCountry(getCountry());
+			dest.mergeUserOrder(getUserOrder());
+			dest.mergeVersion(getVersion());
 
 		}
 		super.copyTo(baseDest);
