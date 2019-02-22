@@ -28,3 +28,6 @@ lib/*
 WEB-INF/lib/*
 .history
 .gradle
+classes/*
+
+

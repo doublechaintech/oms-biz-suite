@@ -223,7 +223,7 @@ public class BaseChecker {
 	 		
 			return;
 		}
-		String prefixes[]= {"13","14","15","17","18","166","199"};
+		String prefixes[]= {"13","15","16","17","18","19"};
 		
 		
 		
