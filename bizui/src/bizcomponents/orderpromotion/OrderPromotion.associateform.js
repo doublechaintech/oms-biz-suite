@@ -19,8 +19,8 @@ const testValues = {};
 /*
 const testValues = {
   name: 'Promo For Total',
-  amount: '867',
-  threadHold: '873',
+  amount: '969',
+  threadHold: '1026',
   type: 'PERCENT_OFF',
   userOrderId: 'UO000001',
 }
