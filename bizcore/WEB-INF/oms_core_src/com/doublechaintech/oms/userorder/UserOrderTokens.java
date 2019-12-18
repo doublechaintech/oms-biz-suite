@@ -38,6 +38,15 @@ public class UserOrderTokens extends CommonTokens{
 	protected UserOrderTokens(){
 		//ensure not initialized outside the class
 	}
+	public  static  UserOrderTokens of(Map<String,Object> options){
+		//ensure not initialized outside the class
+		UserOrderTokens tokens = new UserOrderTokens(options);
+		return tokens;
+		
+	}
+	protected UserOrderTokens(Map<String,Object> options){
+		this.options = options;
+	}
 	
 	public UserOrderTokens merge(String [] tokens){
 		this.parseTokens(tokens);
@@ -89,6 +98,11 @@ public class UserOrderTokens extends CommonTokens{
 	public static Map <String,Object> empty(){
 		return start().done();
 	}
+	
+	public UserOrderTokens analyzeAllLists(){		
+		addSimpleOptions(ALL_LISTS_ANALYZE);
+		return this;
+	}
 
 	protected static final String USER = "user";
 	public String getUser(){
@@ -124,7 +138,11 @@ public class UserOrderTokens extends CommonTokens{
 	}
 	public boolean analyzeLineItemListEnabled(){		
 		
-		return checkOptions(this.options(), LINE_ITEM_LIST+".anaylze");
+		if(checkOptions(this.options(), LINE_ITEM_LIST+".anaylze")){
+			return true; //most of the case, should call here
+		}
+		//if not true, then query for global setting
+		return checkOptions(this.options(), ALL_LISTS_ANALYZE);
 	}
 	public UserOrderTokens extractMoreFromLineItemList(String idsSeperatedWithComma){		
 		addSimpleOptions(LINE_ITEM_LIST+".extractIds", idsSeperatedWithComma);
@@ -186,7 +204,11 @@ public class UserOrderTokens extends CommonTokens{
 	}
 	public boolean analyzeOrderPromotionListEnabled(){		
 		
-		return checkOptions(this.options(), ORDER_PROMOTION_LIST+".anaylze");
+		if(checkOptions(this.options(), ORDER_PROMOTION_LIST+".anaylze")){
+			return true; //most of the case, should call here
+		}
+		//if not true, then query for global setting
+		return checkOptions(this.options(), ALL_LISTS_ANALYZE);
 	}
 	public UserOrderTokens extractMoreFromOrderPromotionList(String idsSeperatedWithComma){		
 		addSimpleOptions(ORDER_PROMOTION_LIST+".extractIds", idsSeperatedWithComma);
@@ -248,7 +270,11 @@ public class UserOrderTokens extends CommonTokens{
 	}
 	public boolean analyzeManualAdjustmentListEnabled(){		
 		
-		return checkOptions(this.options(), MANUAL_ADJUSTMENT_LIST+".anaylze");
+		if(checkOptions(this.options(), MANUAL_ADJUSTMENT_LIST+".anaylze")){
+			return true; //most of the case, should call here
+		}
+		//if not true, then query for global setting
+		return checkOptions(this.options(), ALL_LISTS_ANALYZE);
 	}
 	public UserOrderTokens extractMoreFromManualAdjustmentList(String idsSeperatedWithComma){		
 		addSimpleOptions(MANUAL_ADJUSTMENT_LIST+".extractIds", idsSeperatedWithComma);
@@ -310,7 +336,11 @@ public class UserOrderTokens extends CommonTokens{
 	}
 	public boolean analyzeShippingGroupListEnabled(){		
 		
-		return checkOptions(this.options(), SHIPPING_GROUP_LIST+".anaylze");
+		if(checkOptions(this.options(), SHIPPING_GROUP_LIST+".anaylze")){
+			return true; //most of the case, should call here
+		}
+		//if not true, then query for global setting
+		return checkOptions(this.options(), ALL_LISTS_ANALYZE);
 	}
 	public UserOrderTokens extractMoreFromShippingGroupList(String idsSeperatedWithComma){		
 		addSimpleOptions(SHIPPING_GROUP_LIST+".extractIds", idsSeperatedWithComma);
@@ -372,7 +402,11 @@ public class UserOrderTokens extends CommonTokens{
 	}
 	public boolean analyzePaymentGroupListEnabled(){		
 		
-		return checkOptions(this.options(), PAYMENT_GROUP_LIST+".anaylze");
+		if(checkOptions(this.options(), PAYMENT_GROUP_LIST+".anaylze")){
+			return true; //most of the case, should call here
+		}
+		//if not true, then query for global setting
+		return checkOptions(this.options(), ALL_LISTS_ANALYZE);
 	}
 	public UserOrderTokens extractMoreFromPaymentGroupList(String idsSeperatedWithComma){		
 		addSimpleOptions(PAYMENT_GROUP_LIST+".extractIds", idsSeperatedWithComma);

@@ -358,9 +358,8 @@ public class UserOrderJDBCTemplateDAO extends OmsNamingServiceDAO implements Use
 	protected boolean isExtractLineItemListEnabled(Map<String,Object> options){		
  		return checkOptions(options,UserOrderTokens.LINE_ITEM_LIST);
  	}
- 	protected boolean isAnalyzeLineItemListEnabled(Map<String,Object> options){		
- 		return true;
- 		//return checkOptions(options,UserOrderTokens.LINE_ITEM_LIST+".analyze");
+ 	protected boolean isAnalyzeLineItemListEnabled(Map<String,Object> options){		 		
+ 		return UserOrderTokens.of(options).analyzeLineItemListEnabled();
  	}
 	
 	protected boolean isSaveLineItemListEnabled(Map<String,Object> options){
@@ -373,9 +372,8 @@ public class UserOrderJDBCTemplateDAO extends OmsNamingServiceDAO implements Use
 	protected boolean isExtractOrderPromotionListEnabled(Map<String,Object> options){		
  		return checkOptions(options,UserOrderTokens.ORDER_PROMOTION_LIST);
  	}
- 	protected boolean isAnalyzeOrderPromotionListEnabled(Map<String,Object> options){		
- 		return true;
- 		//return checkOptions(options,UserOrderTokens.ORDER_PROMOTION_LIST+".analyze");
+ 	protected boolean isAnalyzeOrderPromotionListEnabled(Map<String,Object> options){		 		
+ 		return UserOrderTokens.of(options).analyzeOrderPromotionListEnabled();
  	}
 	
 	protected boolean isSaveOrderPromotionListEnabled(Map<String,Object> options){
@@ -388,9 +386,8 @@ public class UserOrderJDBCTemplateDAO extends OmsNamingServiceDAO implements Use
 	protected boolean isExtractManualAdjustmentListEnabled(Map<String,Object> options){		
  		return checkOptions(options,UserOrderTokens.MANUAL_ADJUSTMENT_LIST);
  	}
- 	protected boolean isAnalyzeManualAdjustmentListEnabled(Map<String,Object> options){		
- 		return true;
- 		//return checkOptions(options,UserOrderTokens.MANUAL_ADJUSTMENT_LIST+".analyze");
+ 	protected boolean isAnalyzeManualAdjustmentListEnabled(Map<String,Object> options){		 		
+ 		return UserOrderTokens.of(options).analyzeManualAdjustmentListEnabled();
  	}
 	
 	protected boolean isSaveManualAdjustmentListEnabled(Map<String,Object> options){
@@ -403,9 +400,8 @@ public class UserOrderJDBCTemplateDAO extends OmsNamingServiceDAO implements Use
 	protected boolean isExtractShippingGroupListEnabled(Map<String,Object> options){		
  		return checkOptions(options,UserOrderTokens.SHIPPING_GROUP_LIST);
  	}
- 	protected boolean isAnalyzeShippingGroupListEnabled(Map<String,Object> options){		
- 		return true;
- 		//return checkOptions(options,UserOrderTokens.SHIPPING_GROUP_LIST+".analyze");
+ 	protected boolean isAnalyzeShippingGroupListEnabled(Map<String,Object> options){		 		
+ 		return UserOrderTokens.of(options).analyzeShippingGroupListEnabled();
  	}
 	
 	protected boolean isSaveShippingGroupListEnabled(Map<String,Object> options){
@@ -418,9 +414,8 @@ public class UserOrderJDBCTemplateDAO extends OmsNamingServiceDAO implements Use
 	protected boolean isExtractPaymentGroupListEnabled(Map<String,Object> options){		
  		return checkOptions(options,UserOrderTokens.PAYMENT_GROUP_LIST);
  	}
- 	protected boolean isAnalyzePaymentGroupListEnabled(Map<String,Object> options){		
- 		return true;
- 		//return checkOptions(options,UserOrderTokens.PAYMENT_GROUP_LIST+".analyze");
+ 	protected boolean isAnalyzePaymentGroupListEnabled(Map<String,Object> options){		 		
+ 		return UserOrderTokens.of(options).analyzePaymentGroupListEnabled();
  	}
 	
 	protected boolean isSavePaymentGroupListEnabled(Map<String,Object> options){

@@ -38,6 +38,15 @@ public class OrderPromotionTokens extends CommonTokens{
 	protected OrderPromotionTokens(){
 		//ensure not initialized outside the class
 	}
+	public  static  OrderPromotionTokens of(Map<String,Object> options){
+		//ensure not initialized outside the class
+		OrderPromotionTokens tokens = new OrderPromotionTokens(options);
+		return tokens;
+		
+	}
+	protected OrderPromotionTokens(Map<String,Object> options){
+		this.options = options;
+	}
 	
 	public OrderPromotionTokens merge(String [] tokens){
 		this.parseTokens(tokens);
@@ -81,6 +90,11 @@ public class OrderPromotionTokens extends CommonTokens{
 	}
 	public static Map <String,Object> empty(){
 		return start().done();
+	}
+	
+	public OrderPromotionTokens analyzeAllLists(){		
+		addSimpleOptions(ALL_LISTS_ANALYZE);
+		return this;
 	}
 
 	protected static final String USERORDER = "userOrder";

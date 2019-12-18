@@ -38,6 +38,15 @@ public class ManualAdjustmentTokens extends CommonTokens{
 	protected ManualAdjustmentTokens(){
 		//ensure not initialized outside the class
 	}
+	public  static  ManualAdjustmentTokens of(Map<String,Object> options){
+		//ensure not initialized outside the class
+		ManualAdjustmentTokens tokens = new ManualAdjustmentTokens(options);
+		return tokens;
+		
+	}
+	protected ManualAdjustmentTokens(Map<String,Object> options){
+		this.options = options;
+	}
 	
 	public ManualAdjustmentTokens merge(String [] tokens){
 		this.parseTokens(tokens);
@@ -81,6 +90,11 @@ public class ManualAdjustmentTokens extends CommonTokens{
 	}
 	public static Map <String,Object> empty(){
 		return start().done();
+	}
+	
+	public ManualAdjustmentTokens analyzeAllLists(){		
+		addSimpleOptions(ALL_LISTS_ANALYZE);
+		return this;
 	}
 
 	protected static final String USERORDER = "userOrder";

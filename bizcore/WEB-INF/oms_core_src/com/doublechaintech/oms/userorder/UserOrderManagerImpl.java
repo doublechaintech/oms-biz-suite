@@ -359,7 +359,7 @@ public class UserOrderManagerImpl extends CustomOmsCheckerManager implements Use
 		.sortManualAdjustmentListWith("id","desc")
 		.sortShippingGroupListWith("id","desc")
 		.sortPaymentGroupListWith("id","desc")
-		.done();
+		.analyzeAllLists().done();
 
 	}
 	protected Map<String,Object> mergedAllTokens(String []tokens){

@@ -311,7 +311,7 @@ public class UserDomainManagerImpl extends CustomOmsCheckerManager implements Us
 		return tokens().allTokens()
 		.sortUserWhiteListListWith("id","desc")
 		.sortSecUserListWith("id","desc")
-		.done();
+		.analyzeAllLists().done();
 
 	}
 	protected Map<String,Object> mergedAllTokens(String []tokens){

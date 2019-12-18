@@ -321,7 +321,7 @@ public class PlatformManagerImpl extends CustomOmsCheckerManager implements Plat
 		return tokens().allTokens()
 		.sortProfileListWith("id","desc")
 		.sortUserOrderListWith("id","desc")
-		.done();
+		.analyzeAllLists().done();
 
 	}
 	protected Map<String,Object> mergedAllTokens(String []tokens){

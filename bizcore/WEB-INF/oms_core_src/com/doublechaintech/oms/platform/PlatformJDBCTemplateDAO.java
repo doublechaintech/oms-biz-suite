@@ -224,9 +224,8 @@ public class PlatformJDBCTemplateDAO extends OmsNamingServiceDAO implements Plat
 	protected boolean isExtractProfileListEnabled(Map<String,Object> options){		
  		return checkOptions(options,PlatformTokens.PROFILE_LIST);
  	}
- 	protected boolean isAnalyzeProfileListEnabled(Map<String,Object> options){		
- 		return true;
- 		//return checkOptions(options,PlatformTokens.PROFILE_LIST+".analyze");
+ 	protected boolean isAnalyzeProfileListEnabled(Map<String,Object> options){		 		
+ 		return PlatformTokens.of(options).analyzeProfileListEnabled();
  	}
 	
 	protected boolean isSaveProfileListEnabled(Map<String,Object> options){
@@ -239,9 +238,8 @@ public class PlatformJDBCTemplateDAO extends OmsNamingServiceDAO implements Plat
 	protected boolean isExtractUserOrderListEnabled(Map<String,Object> options){		
  		return checkOptions(options,PlatformTokens.USER_ORDER_LIST);
  	}
- 	protected boolean isAnalyzeUserOrderListEnabled(Map<String,Object> options){		
- 		return true;
- 		//return checkOptions(options,PlatformTokens.USER_ORDER_LIST+".analyze");
+ 	protected boolean isAnalyzeUserOrderListEnabled(Map<String,Object> options){		 		
+ 		return PlatformTokens.of(options).analyzeUserOrderListEnabled();
  	}
 	
 	protected boolean isSaveUserOrderListEnabled(Map<String,Object> options){
