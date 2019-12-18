@@ -221,9 +221,8 @@ public class ProfileJDBCTemplateDAO extends OmsNamingServiceDAO implements Profi
 	protected boolean isExtractUserOrderListEnabled(Map<String,Object> options){		
  		return checkOptions(options,ProfileTokens.USER_ORDER_LIST);
  	}
- 	protected boolean isAnalyzeUserOrderListEnabled(Map<String,Object> options){		
- 		return true;
- 		//return checkOptions(options,ProfileTokens.USER_ORDER_LIST+".analyze");
+ 	protected boolean isAnalyzeUserOrderListEnabled(Map<String,Object> options){		 		
+ 		return ProfileTokens.of(options).analyzeUserOrderListEnabled();
  	}
 	
 	protected boolean isSaveUserOrderListEnabled(Map<String,Object> options){

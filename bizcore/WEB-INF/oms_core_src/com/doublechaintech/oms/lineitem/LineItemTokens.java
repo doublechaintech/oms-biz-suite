@@ -38,6 +38,15 @@ public class LineItemTokens extends CommonTokens{
 	protected LineItemTokens(){
 		//ensure not initialized outside the class
 	}
+	public  static  LineItemTokens of(Map<String,Object> options){
+		//ensure not initialized outside the class
+		LineItemTokens tokens = new LineItemTokens(options);
+		return tokens;
+		
+	}
+	protected LineItemTokens(Map<String,Object> options){
+		this.options = options;
+	}
 	
 	public LineItemTokens merge(String [] tokens){
 		this.parseTokens(tokens);
@@ -81,6 +90,11 @@ public class LineItemTokens extends CommonTokens{
 	}
 	public static Map <String,Object> empty(){
 		return start().done();
+	}
+	
+	public LineItemTokens analyzeAllLists(){		
+		addSimpleOptions(ALL_LISTS_ANALYZE);
+		return this;
 	}
 
 	protected static final String USERORDER = "userOrder";

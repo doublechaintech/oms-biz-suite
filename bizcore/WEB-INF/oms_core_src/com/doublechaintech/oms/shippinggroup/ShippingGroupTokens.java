@@ -38,6 +38,15 @@ public class ShippingGroupTokens extends CommonTokens{
 	protected ShippingGroupTokens(){
 		//ensure not initialized outside the class
 	}
+	public  static  ShippingGroupTokens of(Map<String,Object> options){
+		//ensure not initialized outside the class
+		ShippingGroupTokens tokens = new ShippingGroupTokens(options);
+		return tokens;
+		
+	}
+	protected ShippingGroupTokens(Map<String,Object> options){
+		this.options = options;
+	}
 	
 	public ShippingGroupTokens merge(String [] tokens){
 		this.parseTokens(tokens);
@@ -81,6 +90,11 @@ public class ShippingGroupTokens extends CommonTokens{
 	}
 	public static Map <String,Object> empty(){
 		return start().done();
+	}
+	
+	public ShippingGroupTokens analyzeAllLists(){		
+		addSimpleOptions(ALL_LISTS_ANALYZE);
+		return this;
 	}
 
 	protected static final String USERORDER = "userOrder";

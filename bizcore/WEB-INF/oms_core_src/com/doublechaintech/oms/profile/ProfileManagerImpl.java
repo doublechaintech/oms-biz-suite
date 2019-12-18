@@ -326,7 +326,7 @@ public class ProfileManagerImpl extends CustomOmsCheckerManager implements Profi
 	protected Map<String,Object> viewTokens(){
 		return tokens().allTokens()
 		.sortUserOrderListWith("id","desc")
-		.done();
+		.analyzeAllLists().done();
 
 	}
 	protected Map<String,Object> mergedAllTokens(String []tokens){

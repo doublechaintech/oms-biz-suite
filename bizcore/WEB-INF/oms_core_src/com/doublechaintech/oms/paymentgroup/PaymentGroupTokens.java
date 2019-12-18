@@ -38,6 +38,15 @@ public class PaymentGroupTokens extends CommonTokens{
 	protected PaymentGroupTokens(){
 		//ensure not initialized outside the class
 	}
+	public  static  PaymentGroupTokens of(Map<String,Object> options){
+		//ensure not initialized outside the class
+		PaymentGroupTokens tokens = new PaymentGroupTokens(options);
+		return tokens;
+		
+	}
+	protected PaymentGroupTokens(Map<String,Object> options){
+		this.options = options;
+	}
 	
 	public PaymentGroupTokens merge(String [] tokens){
 		this.parseTokens(tokens);
@@ -81,6 +90,11 @@ public class PaymentGroupTokens extends CommonTokens{
 	}
 	public static Map <String,Object> empty(){
 		return start().done();
+	}
+	
+	public PaymentGroupTokens analyzeAllLists(){		
+		addSimpleOptions(ALL_LISTS_ANALYZE);
+		return this;
 	}
 
 	protected static final String USERORDER = "userOrder";
